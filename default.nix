@@ -7,7 +7,7 @@
 #
 # TODO: Put home-manager dependency in this file.
 #
-# TODO: No XFCE status panel
+# TODO: XFCE stop session autosave. Fully manage session configuration. XFCE start xmonad.
 #
 # TODO: Integrate all other dotfiles.
 {
@@ -25,7 +25,10 @@
   # The `<nixpkgs>` set to work off. Should be `nixos-unstable`.
   pkgs,
   config,
-}: {
+}: let
+  util = import ./util.nix;
+  userCfg = config.home-manager.users.rraval;
+in {
   nixpkgs.config.allowUnfree = true;
   networking.hostName = hostName;
   time.timeZone = "America/Toronto";
@@ -133,9 +136,37 @@
 
       xsession = {
         enable = true;
-        initExtra = ''
-          ${pkgs.runtimeShell} ${pkgs.xfce.xfce4-session.xinitrc} &
+
+        # There's some spooky action at a distance here.
+        #
+        # The login manager is going to launch the script at `~/.xsession`.
+        #
+        # We want `~/.xsession` to launch `xfce4-session`, which in turn
+        # launches `xfdesktop`, `xmonad`, `xfce4-panel` etc.
+        #
+        # However, we also want to use the home-manager xmonad derivation
+        # instead of writing our own, since it wraps up the installation in
+        # nice configuration options and sets up recompilation when `xmonad.hs`
+        # changes on reconciliation.
+        # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/xmonad.nix
+        #
+        # The home-manager xmonad derivation explicitly sets up
+        # `windowManager.command`, which is what is launched by `.xsession`, so
+        # we have to juggle things to get the configuration we want.
+
+        initExtra = let
+          xmonad = util.findPackage userCfg.home.packages "xmonad-with-packages";
+        in ''
+          # We only really need to run this once.
+          xfconf-query -c xfce4-session -p /general/SaveOnExit -s false
+
+          # ${xmonad}/bin/xmonad
         '';
+
+        # Override (with `mkForce`) to make `~/.xsession` launch xfce4-session
+        # instead of xmonad directly
+        windowManager.command = pkgs.lib.mkForce "${pkgs.runtimeShell} ${pkgs.xfce.xfce4-session.xinitrc}";
+
         windowManager.xmonad = {
           enable = true;
           enableContribAndExtras = true;
