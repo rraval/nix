@@ -176,6 +176,10 @@ in {
         useGlobalPkgs = true;
 
         users.${cfg.user.name} = {
+          home.packages = with pkgs; [
+            qrencode
+          ];
+
           programs = {
             firefox = {
               enable = true;
@@ -201,6 +205,10 @@ in {
               plugins = with pkgs.vimPlugins; [
                 vim-nix
               ];
+            };
+
+            password-store = {
+              enable = true;
             };
           };
 
