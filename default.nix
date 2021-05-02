@@ -162,6 +162,7 @@ in {
           fish
           git
           neovim
+          unzip
         ];
 
         variables = {
@@ -190,6 +191,8 @@ in {
               userEmail = cfg.user.email;
             };
 
+            gpg.enable = true;
+
             neovim = {
               enable = true;
               extraConfig = ''
@@ -198,6 +201,15 @@ in {
               plugins = with pkgs.vimPlugins; [
                 vim-nix
               ];
+            };
+          };
+
+          services = {
+            dropbox.enable = true;
+
+            gpg-agent = {
+              enable = true;
+              pinentryFlavor = "gtk2";
             };
           };
 
@@ -257,6 +269,23 @@ in {
                 fi
               }
               sshKeygen
+            '';
+
+            # From https://logs.nix.samueldr.com/home-manager/2020-11-12
+            #
+            # 08:17 <coco> For gpg, I get "gpg: WARNING: unsafe permissions on
+            # homedir '/home/<user>/.gnupg'". I can perform a `chmod go-rwx`
+            # to fix this, but is there a declarative way to do that?
+            #
+            # 11:22 <hexa-> chmod 700 ~/.gnupg
+            #
+            # 11:22 <hexa-> and be done
+            #
+            # 11:28 <piegames1> coco: As the folder itself is not really part
+            # of any declarativeness, you only need to run the command once
+            # and be done.
+            gpgPermissions = hmLib.dag.entryAfter ["writeBoundary"] ''
+                $DRY_RUN_CMD chmod 700 ${hmCfg.programs.gpg.homedir}
             '';
           };
         };
