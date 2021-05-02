@@ -18,6 +18,7 @@
     types
   ;
   util = import ./util.nix;
+  hmLib = pkgs.callPackage <home-manager/modules/lib> {};
   cfg = config.rravalBox;
   hmCfg = config.home-manager.users.${cfg.user.name};
 in {
@@ -245,6 +246,17 @@ in {
               Type=Application
               Name=Disable XFCE Session Save on Exit
               Exec=${pkgs.xfce.xfconf}/bin/xfconf-query -c xfce4-session -p /general/SaveOnExit -s false
+            '';
+          };
+
+          home.activation = {
+            sshKeygen = hmLib.dag.entryAfter ["writeBoundary"] ''
+              sshKeygen() {
+                if [[ ! -f "$HOME"/.ssh/id_rsa ]]; then
+                  $DRY_RUN_CMD ssh-keygen -b 4096 -f "$HOME"/.ssh/id_rsa -N ""
+                fi
+              }
+              sshKeygen
             '';
           };
         };
