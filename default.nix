@@ -2,6 +2,8 @@
 #
 # Setup to use UEFI with a single LUKS encrypted disk with LVM on the inside.
 #
+# TODO: Turn on sysrq
+#
 # TODO: Turn this into a nix flake.
 #
 # TODO: Put home-manager dependency in this file.
@@ -19,6 +21,7 @@
   ;
   util = import ./util.nix;
   cfg = config.rravalBox;
+  hmCfg = config.home-manager.users.${cfg.user.name};
 in {
   options.rravalBox = {
     enable = mkEnableOption "Configure this machine for rraval";
@@ -199,7 +202,7 @@ in {
             };
           };
 
-          xsession = let userCfg = config.home-manager.users.${cfg.user.name}; in {
+          xsession = {
             enable = true;
 
             # There's some spooky action at a distance here.
@@ -220,7 +223,7 @@ in {
             # we have to juggle things to get the configuration we want.
 
             initExtra = let
-              xmonad = util.findPackage userCfg.home.packages "xmonad-with-packages";
+              xmonad = util.findPackage hmCfg.home.packages "xmonad-with-packages";
             in ''
               # We only really need to run this once.
               xfconf-query -c xfce4-session -p /general/SaveOnExit -s false
