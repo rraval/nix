@@ -184,6 +184,7 @@ in {
           home.packages = with pkgs; [
             qrencode
             slack
+            spotify
           ];
 
           programs = {
