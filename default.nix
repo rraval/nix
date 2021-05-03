@@ -131,6 +131,7 @@ in {
 
       i18n.defaultLocale = cfg.system.locale;
       console.useXkbConfig = true;
+      hardware.pulseaudio.enable = true;
 
       users = {
         mutableUsers = false;
@@ -143,7 +144,7 @@ in {
           isNormalUser = true;
           uid = 1000;
           group = cfg.user.name;
-          extraGroups = [ "wheel" ];
+          extraGroups = [ "wheel" "audio" ];
           hashedPassword = cfg.user.sha256Password;
           createHome = true;
           home = "/home/${cfg.user.name}";
