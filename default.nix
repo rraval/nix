@@ -183,6 +183,7 @@ in {
         users.${cfg.user.name} = {
           home.packages = with pkgs; [
             qrencode
+            slack
           ];
 
           programs = {
