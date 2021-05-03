@@ -189,6 +189,22 @@ in {
           programs = {
             firefox = {
               enable = true;
+              profiles.rraval = {
+                name = "rraval";
+                settings = {
+                  "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+                  "signon.rememberSignons" = false;
+                };
+                userChrome = ''
+                  #TabsToolbar {
+                    visibility: collapse;
+                  }
+
+                  #sidebar-box[sidebarcommand^="treestyletab"] > #sidebar-header {
+                    visibility: collapse;
+                  }
+                '';
+              };
             };
 
             fish = {
