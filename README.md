@@ -34,4 +34,4 @@ And finally, modify `/etc/nixos/configuration.nix`:
 }
 ```
 
-The bootstrapping process may require progressive enhancement, for example, the first go around will generate ssh keys for the machine. Then, if you add those keys to your GitHub account, then `rravalBox.cloneRepositoriesFrom.github = true;` will start cloning private repos to setup encrypted passwords.
+The `rravalBox.toil` options require manual work and progressive enhancement. For example, the first run will generate SSH keys for the machine. Then if you manually modify your GitHub account to trust that SSH key, you can enable `rravalBox.toil.sshKeyTrustedByGitHub` and progressively make your way to the ideal fixed point.

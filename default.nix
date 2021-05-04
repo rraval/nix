@@ -90,8 +90,8 @@ in {
       };
     };
 
-    cloneRepositoriesFrom = {
-      github = mkEnableOption "cloning repos from GitHub";
+    toil = {
+      sshKeyTrustedByGitHub = mkEnableOption "cloning private repos from GitHub";
     };
   };
 
@@ -294,42 +294,57 @@ in {
             '';
           };
 
-          home.activation = mkMerge [
-            {
-              sshKeygen = hmLib.dag.entryAfter ["writeBoundary"] ''
-                if [[ ! -f "$HOME"/.ssh/id_rsa ]]; then
-                  $DRY_RUN_CMD ssh-keygen -b 4096 -f "$HOME"/.ssh/id_rsa -N ""
-                fi
-              '';
+          home.activation = {
+            sshKeygen = hmLib.dag.entryAfter ["writeBoundary"] ''
+              if [[ ! -f "$HOME"/.ssh/id_rsa ]]; then
+                $DRY_RUN_CMD ssh-keygen -b 4096 -f "$HOME"/.ssh/id_rsa -N ""
+              fi
+            '';
 
-              # From https://logs.nix.samueldr.com/home-manager/2020-11-12
-              #
-              # 08:17 <coco> For gpg, I get "gpg: WARNING: unsafe permissions on
-              # homedir '/home/<user>/.gnupg'". I can perform a `chmod go-rwx`
-              # to fix this, but is there a declarative way to do that?
-              #
-              # 11:22 <hexa-> chmod 700 ~/.gnupg
-              #
-              # 11:22 <hexa-> and be done
-              #
-              # 11:28 <piegames1> coco: As the folder itself is not really part
-              # of any declarativeness, you only need to run the command once
-              # and be done.
-              gpgPermissions = hmLib.dag.entryAfter ["writeBoundary"] ''
-                $DRY_RUN_CMD chmod 700 ${hmCfg.programs.gpg.homedir}
-              '';
-            }
+            # From https://logs.nix.samueldr.com/home-manager/2020-11-12
+            #
+            # 08:17 <coco> For gpg, I get "gpg: WARNING: unsafe permissions on
+            # homedir '/home/<user>/.gnupg'". I can perform a `chmod go-rwx`
+            # to fix this, but is there a declarative way to do that?
+            #
+            # 11:22 <hexa-> chmod 700 ~/.gnupg
+            #
+            # 11:22 <hexa-> and be done
+            #
+            # 11:28 <piegames1> coco: As the folder itself is not really part
+            # of any declarativeness, you only need to run the command once
+            # and be done.
+            gpgPermissions = hmLib.dag.entryAfter ["writeBoundary"] ''
+              $DRY_RUN_CMD chmod 700 ${hmCfg.programs.gpg.homedir}
+            '';
+          };
 
-            (mkIf cfg.cloneRepositoriesFrom.github {
-              clonePasswordStore = let
-                passwordStoreDir = hmCfg.programs.password-store.settings.PASSWORD_STORE_DIR;
-              in hmLib.dag.entryAfter ["writeBoundary"] ''
-                if [[ ! -d "${passwordStoreDir}" ]]; then
-                  $DRY_RUN_CMD git clone git@github.com:rraval/pass.git "${passwordStoreDir}"
-                fi
-              '';
-            })
-          ];
+          systemd.user = {
+            startServices = "sd-switch";
+            services = mkMerge [
+              (mkIf cfg.toil.sshKeyTrustedByGitHub {
+                clone-rraval-pass = {
+                  Unit = {
+                    Description = "Clone rraval/pass from GitHub";
+                    After = [ "network-online.target" ];
+                  };
+                  Install = {
+                    WantedBy = [ "basic.target" ];
+                  };
+                  Service = {
+                    Type = "oneshot";
+                    ExecStart = let
+                      passwordStoreDir = hmCfg.programs.password-store.settings.PASSWORD_STORE_DIR;
+                    in toString (pkgs.writeShellScript "clone-rraval-pass" ''
+                      if [[ ! -d "${passwordStoreDir}" ]]; then
+                        ${pkgs.git} clone git@github.com:rraval/pass.git "${passwordStoreDir}"
+                      fi
+                    '');
+                  };
+                };
+              })
+            ];
+          };
         };
       };
     }
