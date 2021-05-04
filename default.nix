@@ -92,6 +92,29 @@ in {
 
     toil = {
       sshKeyTrustedByGitHub = mkEnableOption "cloning private repos from GitHub";
+
+      encircle = {
+        vpn = mkOption {
+          description = "OpenVPN configuration to connect to Encircle intranet";
+          default = null;
+          type = with types; nullOr (submodule {
+            options = {
+              config = mkOption {
+                description = "Path to OpenVPN config file including inline certificates";
+                type = path;
+              };
+
+              # We could extract this from the DHCP options OpenVPN pushes down
+              # on connect, but that would require writing even more custom
+              # code to hook it up to dnsmasq
+              dnsIp = mkOption {
+                description = "IP address for DNS lookups on intranet domains";
+                type = str;
+              };
+            };
+          });
+        };
+      };
     };
   };
 
@@ -152,15 +175,37 @@ in {
         };
       };
 
-      services.xserver = {
-        enable = true;
-        xkbOptions = "ctrl:nocaps";
-        displayManager.defaultSession = "xfce";
-        desktopManager.xfce = {
-          enable = true;
-          enableXfwm = false;
-        };
-      };
+      services = let
+        encircleVpn = cfg.toil.encircle.vpn;
+      in mkMerge [
+        {
+          dnsmasq = {
+            enable = true;
+            extraConfig = ''
+              ${lib.optionalString (encircleVpn != null) ''
+                server=/encirclestaging.com/${encircleVpn.dnsIp}
+                server=/encircleproduction.com/${encircleVpn.dnsIp}
+              ''}
+            '';
+          };
+
+          xserver = {
+            enable = true;
+            xkbOptions = "ctrl:nocaps";
+            displayManager.defaultSession = "xfce";
+            desktopManager.xfce = {
+              enable = true;
+              enableXfwm = false;
+            };
+          };
+        }
+
+        (mkIf (encircleVpn != null) {
+          openvpn.servers.encircle = {
+            config = "config ${toString encircleVpn.config}";
+          };
+        })
+      ];
 
       environment = {
         systemPackages = with pkgs; [
