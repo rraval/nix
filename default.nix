@@ -182,6 +182,7 @@ in {
 
         users.${cfg.user.name} = {
           home.packages = with pkgs; [
+            libreoffice
             qrencode
             slack
             spotify
