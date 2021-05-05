@@ -268,6 +268,11 @@ in {
               enable = true;
               package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
             };
+
+            ssh = {
+              enable = true;
+              userKnownHostsFile = "${homeDir}/.ssh/known_hosts ${./known_hosts}";
+            };
           };
 
           services = {
