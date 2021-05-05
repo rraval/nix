@@ -23,13 +23,46 @@ And finally, modify `/etc/nixos/configuration.nix`:
   imports = [
     <home-manager/nixos>
     ./hardware-configuration.nix
-    /path/to/rraval-nix
+    /path/to/rraval-nix  # Modify this to point to a checkout
   ];
 
   rravalBox = {
     enable = true;
 
-    # ... more configuration
+    system = {
+      locale = "en_CA.UTF-8";
+      timeZone = "America/Toronto";
+    };
+
+    user = {
+      name = "rraval";
+      sha256Password = "...";
+      realName = "Ronuk Raval";
+      email = "ronuk.raval@gmail.com";
+    };
+
+    networking = {
+      hostName = "apollo";
+      wiredEthernet = "enp6s0";
+    };
+
+    rootDevice = {
+      encryptedDisk = "/dev/disk/by-uuid/...";
+      isSolidState = true;
+    };
+
+    bluetooth = true;
+
+    toil = {
+      sshKeyTrustedByGitHub = true;
+      encircle = {
+        sshKeyTrustedByPhabricator = true;
+        vpn = {
+          config = "/home/rraval/.encircle/vpn.conf";
+          dnsIp = "...";
+        };
+      };
+    };
   };
 }
 ```
