@@ -73,6 +73,8 @@ in {
       };
     };
 
+    bluetooth = mkEnableOption "bluetooth support";
+
     rootDevice = {
       encryptedDisk = mkOption {
         description = ''
@@ -154,7 +156,15 @@ in {
 
       i18n.defaultLocale = cfg.system.locale;
       console.useXkbConfig = true;
-      hardware.pulseaudio.enable = true;
+      hardware = mkMerge [
+        {
+          pulseaudio.enable = true;
+        }
+
+        (mkIf cfg.bluetooth {
+          bluetooth.enable = true;
+        })
+      ];
 
       users = {
         mutableUsers = false;
@@ -199,6 +209,10 @@ in {
             };
           };
         }
+
+        (mkIf cfg.bluetooth {
+          blueman.enable = true;
+        })
 
         (mkIf (encircleVpn != null) {
           openvpn.servers.encircle = {
