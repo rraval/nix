@@ -1,5 +1,7 @@
 # rraval's standardized productive machine
 
+I seriously doubt anybody else would want to use this whole sale, but it's a useful place to point people to when flexing on optimizing a process I do at most once per 18 months.
+
 ## Usage
 
 To set up a new box, first get the right channels (someday we'll use flakes and this part will go away):
@@ -53,8 +55,14 @@ And finally, modify `/etc/nixos/configuration.nix`:
 
     bluetooth = true;
 
+    # These require manual work and progressive enhancement.
     toil = {
+      # For example, the first run will generate SSH keys for the machine.
+      # Then if you manually modify your GitHub account to trust that key, you
+      # can enable this option and progressively make your way to the ideal
+      # fixed point.
       sshKeyTrustedByGitHub = true;
+
       encircle = {
         sshKeyTrustedByPhabricator = true;
         vpn = {
@@ -66,5 +74,3 @@ And finally, modify `/etc/nixos/configuration.nix`:
   };
 }
 ```
-
-The `rravalBox.toil` options require manual work and progressive enhancement. For example, the first run will generate SSH keys for the machine. Then if you manually modify your GitHub account to trust that SSH key, you can enable `rravalBox.toil.sshKeyTrustedByGitHub` and progressively make your way to the ideal fixed point.
