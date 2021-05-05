@@ -18,7 +18,7 @@ $ git clone https://github.com/rraval/nix.git rraval-nix
 
 And finally, modify `/etc/nixos/configuration.nix`:
 
-```
+```nix
 { ... }: {
   imports = [
     <home-manager/nixos>
