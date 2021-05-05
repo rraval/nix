@@ -125,10 +125,14 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
+      nix = {
+        allowedUsers = [ cfg.user.name ];
+        package = pkgs.nixUnstable;
+        extraOptions = "experimental-features = nix-command flakes";
+      };
       nixpkgs.config.allowUnfree = true;
       time.timeZone = cfg.system.timeZone;
       system.stateVersion = "20.09";
-      nix.allowedUsers = [ cfg.user.name ];
 
       networking = mkMerge [
         {
