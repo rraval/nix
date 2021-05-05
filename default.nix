@@ -245,6 +245,11 @@ in {
           home.packages = import ./home-packages.nix pkgs;
 
           programs = {
+            direnv = {
+              enable = true;
+              enableNixDirenvIntegration = true;
+            };
+
             firefox = import ./firefox.nix { name = cfg.user.name; };
 
             fish = {
