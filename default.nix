@@ -106,7 +106,7 @@ in {
             options = {
               config = mkOption {
                 description = "Path to OpenVPN config file including inline certificates";
-                type = path;
+                type = str;
               };
 
               # We could extract this from the DHCP options OpenVPN pushes down
@@ -219,7 +219,7 @@ in {
 
         (mkIf (encircleVpn != null) {
           openvpn.servers.encircle = {
-            config = "config ${toString encircleVpn.config}";
+            config = "config ${encircleVpn.config}";
           };
         })
       ];
