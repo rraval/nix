@@ -227,10 +227,12 @@ in {
 
         users.${cfg.user.name} = {
           home.packages = with pkgs; [
+            dig
             libreoffice
             qrencode
             slack
             spotify
+            xclip
           ];
 
           programs = {
