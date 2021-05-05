@@ -21,6 +21,7 @@
   hmLib = pkgs.callPackage <home-manager/modules/lib> {};
   cfg = config.rravalBox;
   hmCfg = config.home-manager.users.${cfg.user.name};
+  homeDir = hmCfg.home.homeDirectory;
 in {
   options.rravalBox = {
     enable = mkEnableOption "Configure this machine for rraval";
@@ -96,6 +97,8 @@ in {
       sshKeyTrustedByGitHub = mkEnableOption "cloning private repos from GitHub";
 
       encircle = {
+        sshKeyTrustedByPhabricator = mkEnableOption "cloning repos from Phabricator";
+
         vpn = mkOption {
           description = "OpenVPN configuration to connect to Encircle intranet";
           default = null;
@@ -349,28 +352,22 @@ in {
             '';
           };
 
-          systemd.user = {
+          systemd.user = let
+            mkGitCloneOneshot = import ./git-clone.nix pkgs;
+          in {
             startServices = "sd-switch";
             services = mkMerge [
               (mkIf cfg.toil.sshKeyTrustedByGitHub {
-                clone-rraval-pass = {
-                  Unit = {
-                    Description = "Clone rraval/pass from GitHub";
-                    After = [ "network-online.target" ];
-                  };
-                  Install = {
-                    WantedBy = [ "basic.target" ];
-                  };
-                  Service = {
-                    Type = "oneshot";
-                    ExecStart = let
-                      passwordStoreDir = hmCfg.programs.password-store.settings.PASSWORD_STORE_DIR;
-                    in toString (pkgs.writeShellScript "clone-rraval-pass" ''
-                      if [[ ! -d "${passwordStoreDir}" ]]; then
-                        ${pkgs.git} clone git@github.com:rraval/pass.git "${passwordStoreDir}"
-                      fi
-                    '');
-                  };
+                clone-rraval-pass = mkGitCloneOneshot {
+                  url = "git@github.com:rraval/pass.git";
+                  dest = hmCfg.programs.password-store.settings.PASSWORD_STORE_DIR;
+                };
+              })
+
+              (mkIf cfg.toil.encircle.sshKeyTrustedByPhabricator {
+                clone-rraval-encircle = mkGitCloneOneshot {
+                  url = "ssh://phabricator-vcs@phabricator.internal.encircleapp.com:2222/diffusion/2/encircle.git";
+                  dest = homeDir + "/encircle";
                 };
               })
             ];
