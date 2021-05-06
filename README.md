@@ -65,6 +65,7 @@ And finally, modify `/etc/nixos/configuration.nix`:
 
       encircle = {
         sshKeyTrustedByPhabricator = true;
+        postgresql = true;
         vpn = {
           config = "/home/rraval/.encircle/vpn.conf";
           dnsIp = "...";

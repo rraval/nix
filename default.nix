@@ -11,10 +11,11 @@
 # TODO: Integrate all other dotfiles.
 { pkgs, lib, config, ... }: let
   inherit (lib)
-    mkOption
     mkEnableOption
     mkIf
     mkMerge
+    mkOption
+    optional
     types
   ;
   util = import ./util.nix;
@@ -22,6 +23,7 @@
   cfg = config.rravalBox;
   hmCfg = config.home-manager.users.${cfg.user.name};
   homeDir = hmCfg.home.homeDirectory;
+  encircleRepoDir = "${homeDir}/encircle";
 in {
   options.rravalBox = {
     enable = mkEnableOption "Configure this machine for rraval";
@@ -98,6 +100,8 @@ in {
 
       encircle = {
         sshKeyTrustedByPhabricator = mkEnableOption "cloning repos from Phabricator";
+
+        postgresql = mkEnableOption "setup Postgres with encircle user and DB extensions";
 
         vpn = mkOption {
           description = "OpenVPN configuration to connect to Encircle intranet";
@@ -205,6 +209,33 @@ in {
               ''}
             '';
           };
+
+          postgresql = let
+            postgresqlPkg = pkgs.postgresql_13;
+            hasEncircle = cfg.toil.encircle.postgresql;
+          in mkMerge [
+            {
+              enable = true;
+              package = postgresqlPkg;
+              initdbArgs = [ "--locale" "C" "-E" "UTF8" ];
+              settings = {
+                TimeZone = "UTC";
+              };
+              authentication = "local all all trust";
+              ensureUsers = optional hasEncircle {
+                name = "encircle";
+                # FIXME: no way to grant CREATEDB
+                # https://github.com/NixOS/nixpkgs/blob/39e6bf76474ce742eb027a88c4da6331f0a1526f/nixos/modules/services/databases/postgresql.nix#L381
+              };
+            }
+
+            (mkIf hasEncircle {
+              extraPlugins = import (/. + "${encircleRepoDir}/db_extensions") {
+                stdenv = pkgs.stdenv;
+                postgresql = postgresqlPkg;
+              };
+            })
+          ];
 
           xserver = {
             enable = true;
@@ -381,7 +412,7 @@ in {
               (mkIf cfg.toil.encircle.sshKeyTrustedByPhabricator {
                 clone-rraval-encircle = mkGitCloneOneshot {
                   url = "ssh://phabricator-vcs@phabricator.internal.encircleapp.com:2222/diffusion/2/encircle.git";
-                  dest = homeDir + "/encircle";
+                  dest = encircleRepoDir;
                 };
               })
             ];
