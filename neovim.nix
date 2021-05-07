@@ -1,5 +1,16 @@
 pkgs: {
   enable = true;
+  plugins = with pkgs.vimPlugins; [
+    camelcasemotion
+    coffee-script
+    fugitive
+    fzf-vim
+    solarized
+    splice-vim
+    typescript-vim
+    vim-nix
+    vim-startify
+  ];
   extraConfig = ''
     syntax enable
     set background=dark
@@ -92,8 +103,4 @@ pkgs: {
         \ }
     \ }
   '';
-  plugins = with pkgs.vimPlugins; [
-    vim-nix
-    solarized
-  ];
 }
