@@ -283,9 +283,7 @@ in {
 
             firefox = import ./firefox.nix { name = cfg.user.name; };
 
-            fish = {
-              enable = true;
-            };
+            fish = import ./fish.nix;
 
             git = import ./git.nix {
               name = cfg.user.realName;
