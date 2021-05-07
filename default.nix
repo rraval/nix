@@ -316,12 +316,27 @@ in {
           };
 
           services = {
-            dropbox.enable = true;
+            dropbox = {
+              enable = true;
+              path = "${homeDir}/dropbox";
+            };
 
             gpg-agent = {
               enable = true;
               pinentryFlavor = "gtk2";
             };
+          };
+
+          xdg.userDirs = {
+            enable = true;
+            desktop = "$HOME";
+            documents = "$HOME";
+            download = "$HOME/download";
+            music = "$HOME";
+            pictures = "$HOME";
+            publicShare = "$HOME";
+            templates = "$HOME";
+            videos = "$HOME";
           };
 
           xsession = {
