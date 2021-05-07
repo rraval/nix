@@ -1,5 +1,15 @@
-{
+pkgs: {
   enable = true;
+  plugins = [
+    {
+      name = "fzf-fish";
+      src = pkgs.runCommand "fzf-fish" {} ''
+        mkdir -p $out
+        cp ${pkgs.fzf}/share/fish/vendor_functions.d/fzf_key_bindings.fish $out/key_bindings.fish
+        cp ${pkgs.fzf}/share/fish/vendor_conf.d/load-fzf-key-bindings.fish $out/init.fish
+      '';
+    }
+  ];
   interactiveShellInit = ''
     # BEGIN SOLARIZED
     # https://github.com/ithinkihaveacat/dotfiles/blob/master/fish/solarized.fish
