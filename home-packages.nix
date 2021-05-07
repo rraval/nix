@@ -1,4 +1,5 @@
 pkgs: with pkgs; [
+  alacritty
   dig
   discord
   imagemagick

@@ -294,15 +294,7 @@ in {
 
             gpg.enable = true;
 
-            neovim = {
-              enable = true;
-              extraConfig = ''
-                " mandatory to get plugins to generate
-              '';
-              plugins = with pkgs.vimPlugins; [
-                vim-nix
-              ];
-            };
+            neovim = import ./neovim.nix pkgs;
 
             password-store = {
               enable = true;
@@ -327,16 +319,22 @@ in {
             };
           };
 
-          xdg.userDirs = {
-            enable = true;
-            desktop = "$HOME";
-            documents = "$HOME";
-            download = "$HOME/download";
-            music = "$HOME";
-            pictures = "$HOME";
-            publicShare = "$HOME";
-            templates = "$HOME";
-            videos = "$HOME";
+          xdg = {
+            userDirs = {
+              enable = true;
+              desktop = "$HOME";
+              documents = "$HOME";
+              download = "$HOME/download";
+              music = "$HOME";
+              pictures = "$HOME";
+              publicShare = "$HOME";
+              templates = "$HOME";
+              videos = "$HOME";
+            };
+
+            configFile = {
+              "alacritty.yml".source = ./alacritty.yml;
+            };
           };
 
           xsession = {

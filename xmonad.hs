@@ -51,7 +51,7 @@ tallLayout = Tall 1 (3/100) (1/2)
 keys' conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm, xK_q), kill)
     , ((modm .|. shiftMask, xK_c), spawn "xmonad --recompile && xmonad --restart")
-    , ((modm .|. shiftMask, xK_Return), spawn "xfce4-terminal")
+    , ((modm .|. shiftMask, xK_Return), spawn "alacritty")
     , ((modm, xK_r), spawn "xflock4")
     -- xinerama movements
     , ((modm, xK_w), nextScreen)
