@@ -6,6 +6,7 @@ pkgs: with pkgs; [
   gimp
   imagemagick
   libreoffice
+  playerctl
   qrencode
   ripgrep
   slack
