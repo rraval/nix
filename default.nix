@@ -368,12 +368,12 @@ in {
             # This requires some gymnastics to extract the correct xmonad
             # package from the home-manager configuration.
             ".config/autostart/xmonad.desktop".text = let
-              xmonad = util.findPackage hmCfg.home.packages "xmonad-with-packages";
+              xmonad = hmCfg.home.file.".xmonad/xmonad-${pkgs.hostPlatform.system}".source;
             in ''
               [Desktop Entry]
               Type=Application
               Name=xmonad
-              Exec=${xmonad}/bin/xmonad
+              Exec=${xmonad}
             '';
 
             ".config/autostart/DisableXfceSessionSaveOnExit.desktop".text = ''
