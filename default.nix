@@ -300,6 +300,16 @@ in {
               package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
             };
 
+            rofi = {
+              enable = true;
+              package = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+              terminal = "${pkgs.alacritty}/bin/alacritty";
+              theme = "glue_pro_blue";
+              extraConfig = {
+                modi = "drun,window,ssh,emoji";
+              };
+            };
+
             ssh = {
               enable = true;
               userKnownHostsFile = "${homeDir}/.ssh/known_hosts ${./known_hosts}";

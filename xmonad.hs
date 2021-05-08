@@ -34,6 +34,8 @@ keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) =
     , ((modm .|. shiftMask, xK_q), spawn "xfce4-session-logout")
     , ((modm .|. shiftMask, xK_Return), spawn terminal)
     , ((modm, xK_space ), sendMessage NextLayout)
+    , ((modm, xK_p ), spawn "rofi -show drun")
+    , ((modm, xK_i ), spawn "rofi -show ssh")
     -- xinerama movements
     , ((modm, xK_w), nextScreen)
     , ((modm, xK_e), swapNextScreen)
