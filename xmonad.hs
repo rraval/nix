@@ -38,6 +38,7 @@ keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) =
     , ((modm, xK_space), sendMessage NextLayout)
     , ((modm, xK_p), spawn "rofi -show drun")
     , ((modm, xK_i), spawn "rofi -show ssh")
+    , ((modm, xK_u), spawn "rofimoji --files all --copy-only")
     -- xinerama movements
     , ((modm, xK_w), nextScreen)
     , ((modm, xK_e), swapNextScreen)

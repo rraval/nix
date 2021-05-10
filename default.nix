@@ -302,11 +302,10 @@ in {
 
             rofi = {
               enable = true;
-              package = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
               terminal = "${pkgs.alacritty}/bin/alacritty";
               theme = "glue_pro_blue";
               extraConfig = {
-                modi = "drun,window,ssh,emoji";
+                modi = "drun,window,ssh";
               };
             };
 

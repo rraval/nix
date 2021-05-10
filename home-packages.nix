@@ -10,6 +10,7 @@ pkgs: with pkgs; [
   playerctl
   qrencode
   ripgrep
+  rofimoji
   slack
   spotify
   xclip
