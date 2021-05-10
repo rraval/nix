@@ -33,6 +33,7 @@ tallLayout = Tall 1 (3/100) (1/2)
 keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) = M.fromList $
     [ ((modm, xK_q), kill)
     , ((modm .|. shiftMask, xK_q), io $ exitWith ExitSuccess)
+    , ((modm .|. shiftMask, xK_w), spawn "systemctl suspend")
     , ((modm .|. shiftMask, xK_Return), spawn terminal)
     , ((modm, xK_space), sendMessage NextLayout)
     , ((modm, xK_p), spawn "rofi -show drun")
