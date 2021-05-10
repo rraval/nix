@@ -357,8 +357,8 @@ in {
                     position = "right";
                   };
                   modules = {
-                    left = "date";
-                    right = "workspaces volume";
+                    left = "workspaces";
+                    right = "date volume";
                   };
                   module.margin = {
                     left = 1;
@@ -367,7 +367,9 @@ in {
                 };
                 "module/date" = {
                   type = "internal/date";
-                  date = "%Y-%m-%d";
+                  date = "%b %d";
+                  time = "%H:%M";
+                  label = "%time% %date%";
                 };
                 "module/volume" = {
                   type = "internal/pulseaudio";
