@@ -5,8 +5,9 @@ pkgs: {
   settings = {
     "bar/rail" = {
       font = [
-        "Liberation Mono:style=Regular;2"
+        "DejaVu Sans:style=Book;2"
         "Noto Emoji:style=Regular:scale=10;2"
+        "Liberation Mono:style=Regular;2"
       ];
       tray = {
         position = "right";
@@ -36,15 +37,18 @@ pkgs: {
     };
     "module/window" = {
       type = "internal/xwindow";
-      label-maxlen = 64;
+      label-maxlen = 160;
       label-empty = "";
     };
     "module/workspaces" = {
       type = "internal/xworkspaces";
       label = {
         active = "[%name%]";
+        active-font = 3;
         occupied = "%name%";
+        occupied-font = 3;
         urgent = "{%name%}";
+        urgent-font = 3;
         empty = "";
       };
     };
