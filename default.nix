@@ -439,6 +439,11 @@ in {
                   url = "git@github.com:rraval/pass.git";
                   dest = hmCfg.programs.password-store.settings.PASSWORD_STORE_DIR;
                 };
+
+                clone-rraval-zeroindexed = mkGitCloneOneshot {
+                  url = "git@github.com:rraval/zeroindexed.git";
+                  dest = "${homeDir}/zeroindexed";
+                };
               })
 
               (mkIf cfg.toil.encircle.sshKeyTrustedByPhabricator {
