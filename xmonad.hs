@@ -55,9 +55,9 @@ keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) =
     , ((modm, xK_m), sendMessage Expand)
     , ((modm, xK_n), sendMessage Shrink)
     -- media keys
-    , ((modm, xK_bracketright), spawn "playerctl next")
-    , ((modm, xK_bracketleft), spawn "playerctl previous")
-    , ((modm, xK_backslash), spawn "playerctl play-pause")
+    , ((modm, xK_bracketright), spawn "playerctl -p spotify next")
+    , ((modm, xK_bracketleft), spawn "playerctl -p spotify previous")
+    , ((modm, xK_backslash), spawn "playerctl -p spotify play-pause")
     ]
     ++
     -- workspace navigation
