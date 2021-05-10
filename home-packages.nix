@@ -3,6 +3,7 @@ pkgs: with pkgs; [
   dig
   discord
   fzf
+  ghostwriter
   gimp
   imagemagick
   libreoffice
