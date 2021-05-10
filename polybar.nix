@@ -5,14 +5,14 @@ pkgs: {
   settings = {
     "bar/rail" = {
       font = [
-        "DejaVu Sans:style=Book;2"
+        "Liberation Mono:style=Regular;2"
         "Noto Emoji:style=Regular:scale=10;2"
       ];
       tray = {
         position = "right";
       };
       modules = {
-        left = "workspaces";
+        left = "workspaces window";
         right = "date volume";
       };
       module.margin = {
@@ -34,8 +34,19 @@ pkgs: {
       };
       click.right = "pavucontrol";
     };
+    "module/window" = {
+      type = "internal/xwindow";
+      label-maxlen = 64;
+      label-empty = "";
+    };
     "module/workspaces" = {
       type = "internal/xworkspaces";
+      label = {
+        active = "[%name%]";
+        occupied = "%name%";
+        urgent = "{%name%}";
+        empty = "";
+      };
     };
   };
 }
