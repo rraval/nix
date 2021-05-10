@@ -1,6 +1,7 @@
 import qualified Data.Map as M
 import Data.Monoid
 
+import System.Exit(ExitCode(ExitSuccess), exitWith)
 import XMonad
 import XMonad.Actions.CycleWS(nextScreen, swapNextScreen)
 import XMonad.Actions.Navigation2D
@@ -31,11 +32,11 @@ tallLayout = Tall 1 (3/100) (1/2)
 
 keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) = M.fromList $
     [ ((modm, xK_q), kill)
-    , ((modm .|. shiftMask, xK_q), spawn "xfce4-session-logout")
+    , ((modm .|. shiftMask, xK_q), io $ exitWith ExitSuccess)
     , ((modm .|. shiftMask, xK_Return), spawn terminal)
-    , ((modm, xK_space ), sendMessage NextLayout)
-    , ((modm, xK_p ), spawn "rofi -show drun")
-    , ((modm, xK_i ), spawn "rofi -show ssh")
+    , ((modm, xK_space), sendMessage NextLayout)
+    , ((modm, xK_p), spawn "rofi -show drun")
+    , ((modm, xK_i), spawn "rofi -show ssh")
     -- xinerama movements
     , ((modm, xK_w), nextScreen)
     , ((modm, xK_e), swapNextScreen)

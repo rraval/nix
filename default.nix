@@ -398,39 +398,9 @@ in {
               config = ./xmonad.hs;
             };
 
-            # Enabling `windowManager.xmonad` above replaces
-            # `windowManager.command` to launch xmonad directly.
-            #
-            # Instead, we want to launch `xfce4-session`, which will properly
-            # launch the desktop environment, but we want to keep using the
-            # home-manager xmonad package since it exposes nice configuration
-            # options and sets up auto recompilation on file change.
-            #
-            # Start by using `mkForce` to override the command to launch
-            # `xfce4-session` directly.
-            windowManager.command = pkgs.lib.mkForce "${pkgs.runtimeShell} ${pkgs.xfce.xfce4-session.xinitrc}";
-          };
-
-          home.file = {
-            # We launch `xfce4-session` as the `windowManager.command`, so
-            # let's make it launch xmonad.
-            #
-            # This requires some gymnastics to extract the correct xmonad
-            # package from the home-manager configuration.
-            ".config/autostart/xmonad.desktop".text = let
-              xmonad = hmCfg.home.file.".xmonad/xmonad-${pkgs.hostPlatform.system}".source;
-            in ''
-              [Desktop Entry]
-              Type=Application
-              Name=xmonad
-              Exec=${xmonad}
-            '';
-
-            ".config/autostart/DisableXfceSessionSaveOnExit.desktop".text = ''
-              [Desktop Entry]
-              Type=Application
-              Name=Disable XFCE Session Save on Exit
-              Exec=${pkgs.xfce.xfconf}/bin/xfconf-query -c xfce4-session -p /general/SaveOnExit -s false
+            initExtra = ''
+              ${pkgs.xfce.xfconf}/bin/xfconf-query -c xfce4-session -p /general/SaveOnExit -s false
+              ${pkgs.runtimeShell} ${pkgs.xfce.xfce4-session.xinitrc} &
             '';
           };
 
