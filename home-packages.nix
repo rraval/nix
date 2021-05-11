@@ -7,6 +7,7 @@ pkgs: with pkgs; [
   gimp
   imagemagick
   libreoffice
+  obs-studio
   playerctl
   qrencode
   ripgrep
