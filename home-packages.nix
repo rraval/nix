@@ -13,6 +13,8 @@ pkgs: with pkgs; [
   rofimoji
   slack
   spotify
+  transmission-gtk
+  vlc
   xclip
   zbar
 ]
