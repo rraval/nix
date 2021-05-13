@@ -65,7 +65,7 @@ pkgs: {
     nnoremap <C-K> :cp<CR>
 
     " command t
-    let g:CommandTFileScanner = 'git'
+    noremap <Leader>t :GFiles<CR>
 
     " terminal
     nnoremap <Leader>w :terminal<CR>
