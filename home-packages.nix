@@ -18,4 +18,5 @@ pkgs: with pkgs; [
   vlc
   xclip
   zbar
+  zoom-us
 ]
