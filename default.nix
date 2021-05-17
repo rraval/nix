@@ -194,13 +194,15 @@ in {
           isNormalUser = true;
           uid = 1000;
           group = cfg.user.name;
-          extraGroups = [ "wheel" "audio" ];
+          extraGroups = [ "wheel" "audio" "docker" ];
           hashedPassword = cfg.user.sha256Password;
           createHome = true;
           home = "/home/${cfg.user.name}";
           shell = pkgs.fish;
         };
       };
+
+      virtualisation.docker.enable = true;
 
       services = let
         encircleVpn = cfg.toil.encircle.vpn;
