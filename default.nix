@@ -211,6 +211,8 @@ in {
             '';
           };
 
+          pcscd.enable = true;
+
           postgresql = let
             postgresqlPkg = pkgs.postgresql_13;
             hasEncircle = cfg.toil.encircle.postgresql;
@@ -292,7 +294,13 @@ in {
               email = cfg.user.email;
             };
 
-            gpg.enable = true;
+            gpg = {
+              enable = true;
+
+              # Use PC/SC to talk to smartcards
+              # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
+              scdaemonSettings.disable-ccid = true;
+            };
 
             neovim = import ./neovim.nix pkgs;
 

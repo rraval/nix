@@ -17,6 +17,7 @@ pkgs: with pkgs; [
   transmission-gtk
   vlc
   xclip
+  yubikey-manager
   zbar
   zoom-us
 ]
