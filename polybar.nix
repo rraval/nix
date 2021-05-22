@@ -4,6 +4,8 @@ pkgs: {
   script = "polybar rail &";
   settings = {
     "bar/rail" = {
+      background = "#ffffff";
+      foreground = "#000000";
       font = [
         "DejaVu Sans:style=Book;2"
         "Noto Emoji:style=Regular:scale=10;2"
