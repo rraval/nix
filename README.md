@@ -45,7 +45,6 @@ And finally, modify `/etc/nixos/configuration.nix`:
 
     networking = {
       hostName = "apollo";
-      wiredEthernet = "enp6s0";
     };
 
     rootDevice = {
