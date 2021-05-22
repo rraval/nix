@@ -382,8 +382,8 @@ in {
               # xfsettingsd messes with xmonad workspace names for whatever reason
               ${pkgs.xfce.xfconf}/bin/xfconf-query -c xfwm4 -p /general/workspace_names -s 1 -s 2 -s 3 -s 4 -s 5 -s 6 -s 7 -s 8 -s 9
 
-              # Disable display popup
-              ${pkgs.xfce.xfconf}/bin/xfconf-query -c displays -p '/Notify' -s false
+              # Use power-manager system tray icon
+              ${pkgs.xfce.xfconf}/bin/xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/show-tray-icon -s true
 
               ${pkgs.runtimeShell} ${pkgs.xfce.xfce4-session.xinitrc} &
             '';
