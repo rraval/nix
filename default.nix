@@ -9,6 +9,9 @@
 # TODO: Put home-manager dependency in this file.
 #
 # TODO: Integrate all other dotfiles.
+#
+# TODO: The git clone thing doesn't work and is nonsense. Replace it with a
+# bespoke git manager tool.
 { pkgs, lib, config, ... }: let
   inherit (lib)
     mkEnableOption
