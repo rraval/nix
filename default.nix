@@ -69,11 +69,6 @@ in {
         description = "Networking hostname of this machine";
         type = types.str;
       };
-
-      wiredEthernet = mkOption {
-        description = "Optional single network interface to bring up with DHCP";
-        type = types.nullOr types.str;
-      };
     };
 
     bluetooth = mkEnableOption "bluetooth support";
@@ -150,11 +145,9 @@ in {
           useDHCP = false;
 
           hostName = cfg.networking.hostName;
-        }
 
-        (mkIf (cfg.networking.wiredEthernet != null) {
-          interfaces.${cfg.networking.wiredEthernet}.useDHCP = true;
-        })
+          networkmanager.enable = true;
+        }
       ];
 
       boot = {
@@ -194,7 +187,7 @@ in {
           isNormalUser = true;
           uid = 1000;
           group = cfg.user.name;
-          extraGroups = [ "wheel" "audio" "docker" ];
+          extraGroups = [ "wheel" "audio" "networkmanager" "docker" ];
           hashedPassword = cfg.user.sha256Password;
           createHome = true;
           home = "/home/${cfg.user.name}";
