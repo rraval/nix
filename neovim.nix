@@ -2,6 +2,8 @@ pkgs: {
   enable = true;
   plugins = with pkgs.vimPlugins; [
     camelcasemotion
+    coc-nvim
+    coc-rust-analyzer
     coffee-script
     fugitive
     fzf-vim
@@ -66,6 +68,10 @@ pkgs: {
 
     " command t
     noremap <Leader>t :GFiles<CR>
+
+    " coc
+    nnoremap <silent> K :call CocActionAsync('doHover')<cr>
+    nnoremap <silent> <Leader>f :call CocAction('format')<cr>
 
     " terminal
     nnoremap <Leader>w :terminal<CR>

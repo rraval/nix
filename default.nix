@@ -408,6 +408,10 @@ in {
             '';
           };
 
+          home.file = {
+            ".config/nvim/coc-settings.json".source = ./coc-settings.json;
+          };
+
           home.activation = {
             sshKeygen = hmLib.dag.entryAfter ["writeBoundary"] ''
               if [[ ! -f "$HOME"/.ssh/id_rsa ]]; then
