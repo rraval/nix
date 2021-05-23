@@ -1,5 +1,4 @@
 pkgs: with pkgs; [
-  alacritty
   dig
   discord
   fzf

@@ -319,7 +319,7 @@ in {
 
             rofi = {
               enable = true;
-              terminal = "${pkgs.alacritty}/bin/alacritty";
+              terminal = "${pkgs.xfce.terminal}/bin/xfce4-terminal";
               theme = "glue_pro_blue";
               extraConfig = {
                 modi = "drun,window,ssh";
@@ -373,10 +373,6 @@ in {
               templates = "$HOME";
               videos = "$HOME";
             };
-
-            configFile = {
-              "alacritty.yml".source = ./alacritty.yml;
-            };
           };
 
           xsession = {
@@ -412,6 +408,7 @@ in {
 
           home.file = {
             ".config/nvim/coc-settings.json".source = ./coc-settings.json;
+            ".config/xfce4/terminal/terminalrc".source = ./terminalrc;
           };
 
           home.activation = {
