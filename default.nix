@@ -153,6 +153,8 @@ in {
         }
       ];
 
+      powerManagement.cpuFreqGovernor = "ondemand";
+
       boot = {
         loader = {
           systemd-boot.enable = true;
