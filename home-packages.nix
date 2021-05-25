@@ -1,4 +1,5 @@
 pkgs: with pkgs; [
+  android-studio
   dig
   discord
   fzf

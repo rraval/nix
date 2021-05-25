@@ -192,7 +192,7 @@ in {
           isNormalUser = true;
           uid = 1000;
           group = cfg.user.name;
-          extraGroups = [ "wheel" "audio" "networkmanager" "docker" ];
+          extraGroups = [ "wheel" "audio" "networkmanager" "docker" "adbusers" ];
           hashedPassword = cfg.user.sha256Password;
           createHome = true;
           home = "/home/${cfg.user.name}";
@@ -244,6 +244,8 @@ in {
               };
             })
           ];
+
+          udev.packages = [ pkgs.android-udev-rules ];
 
           xserver = {
             enable = true;
