@@ -1,3 +1,4 @@
 {
-    "rust-analyzer.serverPath": "rust-analyzer"
+    "rust-analyzer.serverPath": "rust-analyzer",
+    "rust-analyzer.checkOnSave.command": "clippy"
 }
