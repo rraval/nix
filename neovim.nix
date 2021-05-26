@@ -4,6 +4,7 @@ pkgs: {
     camelcasemotion
     coc-nvim
     coc-rust-analyzer
+    coc-tsserver
     coffee-script
     fugitive
     fzf-vim
