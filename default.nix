@@ -362,6 +362,9 @@ in {
               maxCacheTtl = 2 * hour_in_seconds;
               defaultCacheTtlSsh = 4 * hour_in_seconds;
               maxCacheTtlSsh = 12 * hour_in_seconds;
+              extraConfig = ''
+                auto-expand-secmem 0x30000
+              '';
             };
 
             polybar = import ./polybar.nix pkgs;
