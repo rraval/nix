@@ -335,6 +335,7 @@ in {
             ssh = {
               enable = true;
               userKnownHostsFile = "${homeDir}/.ssh/known_hosts ${./known_hosts}";
+              serverAliveInterval = 60;
               matchBlocks = mkMerge [
                 (mkIf (cfg.toil.encircle.sshIdentity != null) {
                   "*.encircleproduction.com" = {
