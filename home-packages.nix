@@ -1,4 +1,6 @@
 pkgs: with pkgs; [
+  (callPackage (import ./git-nomad.nix) {})
+
   android-studio
   chromium
   dig
