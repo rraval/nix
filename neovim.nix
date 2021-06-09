@@ -5,6 +5,7 @@ pkgs: {
     coc-nvim
     coc-rust-analyzer
     coc-tsserver
+    coc-tslint-plugin
     coffee-script
     fugitive
     fzf-vim
