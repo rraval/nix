@@ -99,12 +99,6 @@ in {
       encircle = {
         sshKeyTrustedByPhabricator = mkEnableOption "cloning repos from Phabricator";
 
-        sshIdentity = mkOption {
-          description = "Path to SSH identity for Encircle";
-          default = null;
-          type = types.nullOr types.str;
-        };
-
         postgresql = mkEnableOption "setup Postgres with encircle user and DB extensions";
 
         vpn = mkOption {
@@ -336,16 +330,6 @@ in {
               enable = true;
               userKnownHostsFile = "${homeDir}/.ssh/known_hosts ${./known_hosts}";
               serverAliveInterval = 60;
-              matchBlocks = mkMerge [
-                (mkIf (cfg.toil.encircle.sshIdentity != null) {
-                  "*.encircleproduction.com" = {
-                    identityFile = cfg.toil.encircle.sshIdentity;
-                  };
-                  "*.encirclestaging.com" = {
-                    identityFile = cfg.toil.encircle.sshIdentity;
-                  };
-                })
-              ];
             };
           };
 
