@@ -84,6 +84,7 @@ pkgs: {
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
 
+    inoremap <silent><expr> <c-space> coc#refresh()
     nmap <Leader>q <Plug>(coc-codeaction-cursor)
 
     highlight link CocHintSign Comment
