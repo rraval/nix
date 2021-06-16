@@ -9,6 +9,7 @@ pkgs: with pkgs; [
   ghostwriter
   gimp
   imagemagick
+  lens
   libreoffice
   nodejs
   obs-studio
