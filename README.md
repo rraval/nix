@@ -4,73 +4,75 @@ I seriously doubt anybody else would want to use this whole sale, but it's a use
 
 ## Usage
 
-To set up a new box, first get the right channels (someday we'll use flakes and this part will go away):
+To set up a new box:
 
 ```
-$ sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-$ sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-$ sudo nix-channel --update
+# FIXME: nixos-minimal ISO commands here
 ```
 
-Then clone this repo somewhere like:
-
-```
-$ git clone https://github.com/rraval/nix.git rraval-nix
-```
-
-And finally, modify `/etc/nixos/configuration.nix`:
+Then modify `/etc/nixos/flake.nix` (for hostname `apollo`):
 
 ```nix
-{ ... }: {
-  imports = [
-    <home-manager/nixos>
-    ./hardware-configuration.nix
-    /path/to/rraval-nix  # Modify this to point to a checkout
-  ];
+{
+  inputs = {
+    nixpkgs.follows = "rravalBox/nixpkgs";
+    rravalBox.url = "/home/rraval/nix";
+  };
 
-  rravalBox = {
-    enable = true;
+  outputs = { self, nixpkgs, rravalBox }: {
+    nixosConfigurations.apollo = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        rravalBox.nixosModule
+        ./hardware-configuration.nix
+        {
+          rravalBox = {
+            enable = true;
 
-    system = {
-      locale = "en_CA.UTF-8";
-      timeZone = "America/Toronto";
-    };
+            system = {
+              locale = "en_CA.UTF-8";
+              timeZone = "America/Toronto";
+            };
 
-    user = {
-      name = "rraval";
-      sha256Password = "...";
-      realName = "Ronuk Raval";
-      email = "ronuk.raval@gmail.com";
-    };
+            user = {
+              name = "rraval";
+              sha256Password = "...";
+              realName = "Ronuk Raval";
+              email = "ronuk.raval@gmail.com";
+            };
 
-    networking = {
-      hostName = "apollo";
-    };
+            networking = {
+              hostName = "apollo";
+            };
 
-    rootDevice = {
-      encryptedDisk = "/dev/disk/by-uuid/...";
-      isSolidState = true;
-    };
+            rootDevice = {
+              encryptedDisk = "/dev/disk/by-uuid/...";
+              isSolidState = true;
+            };
 
-    bluetooth = true;
+            bluetooth = true;
 
-    # These require manual work and progressive enhancement.
-    toil = {
-      # For example, the first run will generate SSH keys for the machine.
-      # Then if you manually modify your GitHub account to trust that key, you
-      # can enable this option and progressively make your way to the ideal
-      # fixed point.
-      sshKeyTrustedByGitHub = true;
+            # These require manual work and progressive enhancement.
+            toil = {
+              # For example, the first run will generate SSH keys for the machine.
+              # Then if you manually modify your GitHub account to trust that key, you
+              # can enable this option and progressively make your way to the ideal
+              # fixed point.
+              sshKeyTrustedByGitHub = true;
 
-      encircle = {
-        sshKeyTrustedByPhabricator = true;
-        sshIdentity = "/home/rraval/.encircle/id_rsa";
-        postgresql = true;
-        vpn = {
-          config = "/home/rraval/.encircle/vpn.conf";
-          dnsIp = "...";
-        };
-      };
+              encircle = {
+                sshKeyTrustedByPhabricator = true;
+                sshIdentity = "/home/rraval/.encircle/id_rsa";
+                postgresql = true;
+                vpn = {
+                  config = "/home/rraval/.encircle/vpn.conf";
+                  dnsIp = "...";
+                };
+              };
+            };
+          }
+        }
+      ];
     };
   };
 }
