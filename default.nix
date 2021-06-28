@@ -186,7 +186,7 @@ in {
           isNormalUser = true;
           uid = 1000;
           group = cfg.user.name;
-          extraGroups = [ "wheel" "audio" "networkmanager" "docker" "adbusers" ];
+          extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" ];
           hashedPassword = cfg.user.sha256Password;
           createHome = true;
           home = "/home/${cfg.user.name}";
@@ -266,6 +266,10 @@ in {
 
       environment = {
         systemPackages = import ./system-packages.nix pkgs;
+
+        shells = [
+          pkgs.fish
+        ];
 
         variables = {
           EDITOR = "nvim";
