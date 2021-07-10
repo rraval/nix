@@ -17,6 +17,7 @@ pkgs: with pkgs; [
   qrencode
   ripgrep
   rofimoji
+  skypeforlinux
   slack
   spotify
   transmission-gtk
