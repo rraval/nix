@@ -14,6 +14,7 @@ pkgs: with pkgs; [
   nodejs
   obs-studio
   playerctl
+  pv
   qrencode
   ripgrep
   rofimoji
