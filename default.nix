@@ -239,6 +239,17 @@ in {
             })
           ];
 
+          printing = {
+            enable = true;
+            drivers = with pkgs; [
+              gutenprint
+              gutenprintBin
+              hplip
+              mfcl2720dwcupswrapper
+              mfcl2720dwlpr
+            ];
+          };
+
           udev.packages = [ pkgs.android-udev-rules ];
 
           xserver = {
