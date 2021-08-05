@@ -20,7 +20,7 @@ pkgs: with pkgs; [
   qrencode
   ripgrep
   rofimoji
-  scribus
+  scribusUnstable
   skypeforlinux
   slack
   spotify
