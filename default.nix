@@ -298,7 +298,10 @@ in {
           programs = {
             direnv = {
               enable = true;
-              enableNixDirenvIntegration = true;
+              nix-direnv = {
+                enable = true;
+                enableFlakes = true;
+              };
             };
 
             firefox = import ./firefox.nix { name = cfg.user.name; };
