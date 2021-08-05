@@ -2,6 +2,7 @@ pkgs: with pkgs; [
   (callPackage (import ./git-nomad.nix) {})
 
   android-studio
+  audacity
   chromium
   dig
   discord
@@ -9,6 +10,7 @@ pkgs: with pkgs; [
   ghostwriter
   gimp
   imagemagick
+  inkscape
   lens
   libreoffice
   nodejs
@@ -18,12 +20,14 @@ pkgs: with pkgs; [
   qrencode
   ripgrep
   rofimoji
+  scribus
   skypeforlinux
   slack
   spotify
   transmission-gtk
   vlc
   xclip
+  youtube-dl
   yubikey-manager
   zbar
   zoom-us
