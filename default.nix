@@ -255,6 +255,7 @@ in {
           xserver = {
             enable = true;
             xkbOptions = "ctrl:nocaps";
+            xkbVariant = "basic";
             displayManager.defaultSession = "xfce";
             desktopManager.xfce = {
               enable = true;
