@@ -15,6 +15,7 @@ pkgs: with pkgs; [
   libreoffice
   nodejs
   obs-studio
+  okular
   playerctl
   pv
   qrencode
