@@ -11,6 +11,7 @@ pkgs: with pkgs; [
   gimp
   imagemagick
   inkscape
+  kdenlive
   lens
   libreoffice
   nodejs
