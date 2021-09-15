@@ -27,6 +27,7 @@ pkgs: with pkgs; [
   slack
   spotify
   transmission-gtk
+  unzip
   vlc
   xclip
   youtube-dl
