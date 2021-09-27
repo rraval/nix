@@ -9,8 +9,10 @@ pkgs: with pkgs; [
   fzf
   ghostwriter
   gimp
+  htop
   imagemagick
   inkscape
+  iotop
   kdenlive
   lens
   libreoffice
@@ -28,6 +30,7 @@ pkgs: with pkgs; [
   spotify
   transmission-gtk
   unzip
+  visidata
   vlc
   xclip
   youtube-dl
