@@ -254,8 +254,6 @@ in {
 
           xserver = {
             enable = true;
-            xkbOptions = "ctrl:nocaps";
-            xkbVariant = "basic";
             displayManager.defaultSession = "xfce";
             desktopManager.xfce = {
               enable = true;
@@ -294,7 +292,12 @@ in {
         useGlobalPkgs = true;
 
         users.${cfg.user.name} = {
-          home.packages = import ./home-packages.nix pkgs;
+          home = {
+            packages = import ./home-packages.nix pkgs;
+            keyboard = {
+              options = ["ctrl:nocaps"];
+            };
+          };
 
           programs = {
             direnv = {
