@@ -124,5 +124,10 @@ pkgs: {
             \ },
         \ }
     \ }
+
+    " makeprg
+    if !empty($NEOVIM_MAKEPRG)
+      set makeprg=$NEOVIM_MAKEPRG
+    endif
   '';
 }
