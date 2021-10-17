@@ -132,21 +132,7 @@ in {
         package = pkgs.nixUnstable;
         extraOptions = "experimental-features = nix-command flakes";
       };
-      nixpkgs.config = {
-        allowUnfree = true;
-        packageOverrides = oldPkgs: {
-          nixUnstable = oldPkgs.nixUnstable.overrideAttrs (oldAttrs: rec {
-            version = "2.4_rraval_pre20210802_${lib.substring 0 7 src.rev}";
-
-            src = pkgs.fetchFromGitHub {
-              owner = "NixOS";
-              repo = "nix";
-              rev = "47e96bb533f8cacc171bec9b688b134de31a48a9";
-              sha256 = "sha256-vwj1fAGn3Pl9Vr/qSL+oDxuwbRzEdI3dsEg6o3xTmWg=";
-            };
-          });
-        };
-      };
+      nixpkgs.config.allowUnfree = true;
       time.timeZone = cfg.system.timeZone;
       system.stateVersion = "20.09";
 
