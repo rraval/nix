@@ -19,6 +19,7 @@ pkgs: with pkgs; [
   nodejs
   obs-studio
   okular
+  passff-host
   playerctl
   pv
   qrencode
