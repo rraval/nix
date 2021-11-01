@@ -425,6 +425,7 @@ in {
           home.file = {
             ".config/nvim/coc-settings.json".source = ./coc-settings.json;
             ".config/xfce4/terminal/terminalrc".source = ./terminalrc;
+            ".mozilla/native-messaging-hosts/passff.json".source = "${pkgs.passff-host}/share/passff-host/passff.json";
           };
 
           home.activation = {
