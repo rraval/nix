@@ -15,6 +15,7 @@ pkgs: with pkgs; [
   iotop
   kdenlive
   lens
+  libfaketime
   libreoffice
   nodejs
   obs-studio
