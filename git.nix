@@ -10,6 +10,7 @@
     };
     core = {
       whitespace = "trailing-space,space-before-tab";
+      commentChar = ";";
     };
     apply = {
       whitespace = "fix";
