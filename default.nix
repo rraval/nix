@@ -144,6 +144,10 @@ in {
           hostName = cfg.networking.hostName;
 
           networkmanager.enable = true;
+
+          # for VLC Chromecast integration, see
+          # https://github.com/NixOS/nixpkgs/blob/c207be6/pkgs/applications/video/vlc/default.nix#L20
+          firewall.allowedTCPPorts = [ 8010 ];
         }
       ];
 
