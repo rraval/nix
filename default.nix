@@ -51,11 +51,6 @@ in {
         type = types.str;
       };
 
-      sha256Password = mkOption {
-        description = "SHA 256 hash of user in single-user system. Use `mkpasswd -m sha-512` to generate";
-        type = types.str;
-      };
-
       realName = mkOption {
         description = "Full name to use in Git commits etc.";
         type = types.str;
@@ -191,7 +186,7 @@ in {
           uid = 1000;
           group = cfg.user.name;
           extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" ];
-          hashedPassword = cfg.user.sha256Password;
+          hashedPassword = lib.removeSuffix "\n" (builtins.readFile (./passwd. + cfg.user.name));
           createHome = true;
           home = "/home/${cfg.user.name}";
           shell = pkgs.fish;
