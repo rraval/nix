@@ -75,3 +75,18 @@ And finally, modify `/etc/nixos/configuration.nix`:
   };
 }
 ```
+
+## Upcoming Flakification
+
+There is an ongoing effort to move this configuration over to nix flakes, which
+involves exposing complete configurations by host name instead of the current
+NixOS module API surface.
+
+Secrets are checked right into the repo, so setup involves:
+
+1. Cloning the repo somewhere
+2. Adding a new entry under `nixosConfigurations.<hostname>` for the new host
+3. Grab a shell with `nix-shell -p blackbox`
+4. Run `blackbox_postdeploy`
+5. Replace `/etc/nixos` to link to the cloned repo
+6. Run `nixos-rebuild switch --flake /etc/nixos#<hostname>`
