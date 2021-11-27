@@ -15,7 +15,7 @@
     ]);
   };
 
-  importNixOS = name: import (./nixos + "/${name}.nix") env;
+  importNixOS = name: import (./nixos + "/${name}") env;
 in mkMerge [
   {
     nix = {
@@ -108,32 +108,7 @@ in mkMerge [
 
         pcscd.enable = true;
 
-        postgresql = let
-          postgresqlPkg = pkgs.postgresql_13;
-          hasEncircle = cfg.toil.encircle.postgresql;
-        in mkMerge [
-          {
-            enable = true;
-            package = postgresqlPkg;
-            initdbArgs = [ "--locale" "C" "-E" "UTF8" ];
-            settings = {
-              TimeZone = "UTC";
-            };
-            authentication = "local all all trust";
-            ensureUsers = optional hasEncircle {
-              name = "encircle";
-              # FIXME: no way to grant CREATEDB
-              # https://github.com/NixOS/nixpkgs/blob/39e6bf76474ce742eb027a88c4da6331f0a1526f/nixos/modules/services/databases/postgresql.nix#L381
-            };
-          }
-
-          (mkIf hasEncircle {
-            extraPlugins = import (/. + "${encircleRepoDir}/db_extensions") {
-              stdenv = pkgs.stdenv;
-              postgresql = postgresqlPkg;
-            };
-          })
-        ];
+        postgresql = importNixOS "encircle-postgresql";
 
         printing = {
           enable = true;
@@ -167,7 +142,7 @@ in mkMerge [
     ];
 
     environment = {
-      systemPackages = importNixOS "system-packages";
+      systemPackages = importNixOS "system-packages.nix";
 
       shells = [
         pkgs.fish
@@ -185,7 +160,7 @@ in mkMerge [
 
       users.${user.name} = {
         home = {
-          packages = importNixOS "home-packages";
+          packages = importNixOS "home-packages.nix";
           keyboard = {
             options = ["ctrl:nocaps"];
           };
@@ -200,9 +175,9 @@ in mkMerge [
             };
           };
 
-          firefox = importNixOS "firefox";
-          fish = importNixOS "fish";
-          git = importNixOS "git";
+          firefox = importNixOS "firefox.nix";
+          fish = importNixOS "fish.nix";
+          git = importNixOS "git.nix";
 
           gpg = {
             enable = true;
@@ -216,7 +191,7 @@ in mkMerge [
             scdaemonSettings.disable-ccid = true;
           };
 
-          neovim = importNixOS "neovim";
+          neovim = importNixOS "neovim.nix";
 
           password-store = {
             enable = true;
@@ -261,7 +236,7 @@ in mkMerge [
             '';
           };
 
-          polybar = importNixOS "polybar";
+          polybar = importNixOS "polybar.nix";
         };
 
         xdg = {
