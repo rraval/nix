@@ -13,6 +13,14 @@
 # TODO: The git clone thing doesn't work and is nonsense. Replace it with a
 # bespoke git manager tool.
 { pkgs, lib, config, ... }: let
+  user = {
+    name = "rraval";
+    realName = "Ronuk Raval";
+    email = "ronuk.raval@gmail.com";
+  };
+  locale = "en_CA.UTF-8";
+  timeZone = "America/Toronto";
+
   inherit (lib)
     mkEnableOption
     mkIf
@@ -23,43 +31,12 @@
   ;
   hmLib = pkgs.callPackage <home-manager/modules/lib> {};
   cfg = config.rravalBox;
-  hmCfg = config.home-manager.users.${cfg.user.name};
+  hmCfg = config.home-manager.users.${user.name};
   homeDir = hmCfg.home.homeDirectory;
   encircleRepoDir = "${homeDir}/encircle";
 in {
   options.rravalBox = {
     enable = mkEnableOption "Configure this machine for rraval";
-
-    system = {
-      locale = mkOption {
-        default = "en_CA.UTF-8";
-        description = "System locale";
-        type = types.str;
-      };
-
-      timeZone = mkOption {
-        default = "America/Toronto";
-        description = "System timezone";
-        type = types.str;
-      };
-    };
-
-    user = {
-      name = mkOption {
-        description = "Username in the single-user system";
-        type = types.str;
-      };
-
-      realName = mkOption {
-        description = "Full name to use in Git commits etc.";
-        type = types.str;
-      };
-
-      email = mkOption {
-        description = "Email to use in Git commits etc.";
-        type = types.str;
-      };
-    };
 
     networking = {
       hostName = mkOption {
@@ -122,12 +99,12 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       nix = {
-        allowedUsers = [ cfg.user.name ];
+        allowedUsers = [ user.name ];
         package = pkgs.nixUnstable;
         extraOptions = "experimental-features = nix-command flakes";
       };
       nixpkgs.config.allowUnfree = true;
-      time.timeZone = cfg.system.timeZone;
+      time.timeZone = timeZone;
       system.stateVersion = "20.09";
 
       networking = mkMerge [
@@ -162,7 +139,7 @@ in {
         };
       };
 
-      i18n.defaultLocale = cfg.system.locale;
+      i18n.defaultLocale = locale;
       console.useXkbConfig = true;
       hardware = mkMerge [
         {
@@ -181,18 +158,18 @@ in {
       users = {
         mutableUsers = false;
 
-        groups.${cfg.user.name} = {
+        groups.${user.name} = {
           gid = 1000;
         };
 
-        users.${cfg.user.name} = {
+        users.${user.name} = {
           isNormalUser = true;
           uid = 1000;
-          group = cfg.user.name;
+          group = user.name;
           extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" "scanner" "lp" ];
-          hashedPassword = lib.removeSuffix "\n" (builtins.readFile (./passwd. + cfg.user.name));
+          hashedPassword = lib.removeSuffix "\n" (builtins.readFile (./passwd. + user.name));
           createHome = true;
-          home = "/home/${cfg.user.name}";
+          home = "/home/${user.name}";
           shell = pkgs.fish;
         };
       };
@@ -296,7 +273,7 @@ in {
         useUserPackages = true;
         useGlobalPkgs = true;
 
-        users.${cfg.user.name} = {
+        users.${user.name} = {
           home = {
             packages = import ./home-packages.nix pkgs;
             keyboard = {
@@ -313,13 +290,13 @@ in {
               };
             };
 
-            firefox = import ./firefox.nix { name = cfg.user.name; };
+            firefox = import ./firefox.nix { name = user.name; };
 
             fish = import ./fish.nix pkgs;
 
             git = import ./git.nix {
-              name = cfg.user.realName;
-              email = cfg.user.email;
+              name = user.realName;
+              email = user.email;
             };
 
             gpg = {
