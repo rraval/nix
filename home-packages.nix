@@ -9,6 +9,7 @@ pkgs: with pkgs; [
   fzf
   ghostwriter
   gimp
+  gnome.simple-scan
   htop
   imagemagick
   inkscape

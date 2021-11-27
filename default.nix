@@ -168,6 +168,10 @@ in {
       hardware = mkMerge [
         {
           pulseaudio.enable = true;
+          sane = {
+            enable = true;
+            extraBackends = [ pkgs.hplipWithPlugin ];
+          };
         }
 
         (mkIf cfg.bluetooth {
@@ -186,7 +190,7 @@ in {
           isNormalUser = true;
           uid = 1000;
           group = cfg.user.name;
-          extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" ];
+          extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" "scanner" "lp" ];
           hashedPassword = lib.removeSuffix "\n" (builtins.readFile (./passwd. + cfg.user.name));
           createHome = true;
           home = "/home/${cfg.user.name}";
