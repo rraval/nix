@@ -105,21 +105,19 @@ in {
       time.timeZone = timeZone;
       system.stateVersion = "20.09";
 
-      networking = mkMerge [
-        {
-          # global useDHCP is deprecated, don't use it
-          useDHCP = false;
+      networking = {
+        # global useDHCP is deprecated, don't use it
+        useDHCP = false;
 
-          hostName = cfg.networking.hostName;
+        hostName = cfg.networking.hostName;
 
-          networkmanager.enable = true;
+        networkmanager.enable = true;
 
-          # for VLC Chromecast integration, see
-          # https://github.com/NixOS/nixpkgs/blob/c207be6/pkgs/applications/video/vlc/default.nix#L20
-          firewall.allowedTCPPorts = [ 8010 ];
-          firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
-        }
-      ];
+        # for VLC Chromecast integration, see
+        # https://github.com/NixOS/nixpkgs/blob/c207be6/pkgs/applications/video/vlc/default.nix#L20
+        firewall.allowedTCPPorts = [ 8010 ];
+        firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
+      };
 
       powerManagement.cpuFreqGovernor = "ondemand";
 
@@ -139,16 +137,14 @@ in {
 
       i18n.defaultLocale = locale;
       console.useXkbConfig = true;
-      hardware = mkMerge [
-        {
-          bluetooth.enable = true;
-          pulseaudio.enable = true;
-          sane = {
-            enable = true;
-            extraBackends = [ pkgs.hplipWithPlugin ];
-          };
-        }
-      ];
+      hardware = {
+        bluetooth.enable = true;
+        pulseaudio.enable = true;
+        sane = {
+          enable = true;
+          extraBackends = [ pkgs.hplipWithPlugin ];
+        };
+      };
 
       users = {
         mutableUsers = false;
