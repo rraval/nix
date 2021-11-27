@@ -1,5 +1,5 @@
 { pkgs, ... }: let
-  postgresqlPkg = pkgs.postgresql_13;
+  postgresqlPkg = pkgs.postgresql_11;
   mkDbExtension = name: pkgs.stdenv.mkDerivation {
     name = "encircle-postgresql-db-extension-${name}";
     src = ./archive.tar.xz;
