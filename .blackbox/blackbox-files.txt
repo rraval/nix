@@ -1,2 +1,3 @@
 box/nixos/encircle-postgresql/archive.tar.xz
+box/nixos/encircle-vpn/vpn.conf
 box/passwd.nix

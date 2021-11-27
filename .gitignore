@@ -4,3 +4,4 @@
 /.blackbox/secring.gpg
 /box/nixos/encircle-postgresql/archive.tar.xz
 /box/passwd.nix
+/box/nixos/encircle-vpn/vpn.conf

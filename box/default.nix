@@ -95,17 +95,6 @@ in mkMerge [
       {
         avahi.enable = true;
         blueman.enable = true;
-
-        dnsmasq = {
-          enable = true;
-          extraConfig = ''
-            ${lib.optionalString (encircleVpn != null) ''
-              server=/encirclestaging.com/${encircleVpn.dnsIp}
-              server=/encircleproduction.com/${encircleVpn.dnsIp}
-            ''}
-          '';
-        };
-
         pcscd.enable = true;
 
         postgresql = importNixOS "encircle-postgresql";
@@ -134,11 +123,7 @@ in mkMerge [
         };
       }
 
-      (mkIf (encircleVpn != null) {
-        openvpn.servers.encircle = {
-          config = "config ${encircleVpn.config}";
-        };
-      })
+      (importNixOS "encircle-vpn")
     ];
 
     environment = {
