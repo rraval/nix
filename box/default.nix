@@ -4,6 +4,17 @@
     mkMerge
     optional
   ;
+
+  env = let
+    importPkg = name: pkgs.callPackage (./packages + "/${name}.nix") {};
+    importPkgList = names: lib.genAttrs names importPkg;
+  in {
+    pkgs = pkgs // (importPkgList [
+      "git-nomad"
+    ]);
+  };
+
+  importNixOS = name: import (./nixos + "/${name}.nix") env;
 in mkMerge [
   {
     nix = {
@@ -173,7 +184,7 @@ in mkMerge [
 
       users.${user.name} = {
         home = {
-          packages = import ./home-packages.nix pkgs;
+          packages = importNixOS "home-packages";
           keyboard = {
             options = ["ctrl:nocaps"];
           };

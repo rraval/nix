@@ -1,6 +1,4 @@
-pkgs: with pkgs; [
-  (callPackage (import ./packages/git-nomad.nix) {})
-
+{ pkgs, ... }: with pkgs; [
   android-studio
   audacity
   chromium
@@ -9,6 +7,7 @@ pkgs: with pkgs; [
   fzf
   ghostwriter
   gimp
+  git-nomad
   gnome.simple-scan
   htop
   imagemagick
