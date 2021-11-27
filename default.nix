@@ -45,8 +45,6 @@ in {
       };
     };
 
-    bluetooth = mkEnableOption "bluetooth support";
-
     rootDevice = {
       encryptedDisk = mkOption {
         description = ''
@@ -143,16 +141,13 @@ in {
       console.useXkbConfig = true;
       hardware = mkMerge [
         {
+          bluetooth.enable = true;
           pulseaudio.enable = true;
           sane = {
             enable = true;
             extraBackends = [ pkgs.hplipWithPlugin ];
           };
         }
-
-        (mkIf cfg.bluetooth {
-          bluetooth.enable = true;
-        })
       ];
 
       users = {
@@ -181,6 +176,7 @@ in {
       in mkMerge [
         {
           avahi.enable = true;
+          blueman.enable = true;
 
           dnsmasq = {
             enable = true;
@@ -244,10 +240,6 @@ in {
             };
           };
         }
-
-        (mkIf cfg.bluetooth {
-          blueman.enable = true;
-        })
 
         (mkIf (encircleVpn != null) {
           openvpn.servers.encircle = {
