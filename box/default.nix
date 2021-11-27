@@ -80,7 +80,7 @@ in mkMerge [
         uid = 1000;
         group = user.name;
         extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" "scanner" "lp" ];
-        hashedPassword = lib.removeSuffix "\n" (builtins.readFile (../passwd. + user.name));
+        hashedPassword = (import ./passwd.nix).${user.name};
         createHome = true;
         home = "/home/${user.name}";
         shell = pkgs.fish;

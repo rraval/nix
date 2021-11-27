@@ -2,5 +2,5 @@
 /.blackbox/pubring.gpg~
 /.blackbox/pubring.kbx~
 /.blackbox/secring.gpg
-/passwd.rraval
 /box/nixos/encircle-postgresql/archive.tar.xz
+/box/passwd.nix

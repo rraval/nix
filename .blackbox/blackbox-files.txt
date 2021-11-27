@@ -1,2 +1,2 @@
 box/nixos/encircle-postgresql/archive.tar.xz
-passwd.rraval
+box/passwd.nix
