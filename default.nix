@@ -21,7 +21,6 @@
     optional
     types
   ;
-  util = import ./util.nix;
   hmLib = pkgs.callPackage <home-manager/modules/lib> {};
   cfg = config.rravalBox;
   hmCfg = config.home-manager.users.${cfg.user.name};
@@ -457,32 +456,6 @@ in {
             gpgPermissions = hmLib.dag.entryAfter ["writeBoundary"] ''
               $DRY_RUN_CMD chmod 700 ${hmCfg.programs.gpg.homedir}
             '';
-          };
-
-          systemd.user = let
-            mkGitCloneOneshot = import ./git-clone.nix pkgs;
-          in {
-            startServices = "sd-switch";
-            services = mkMerge [
-              (mkIf cfg.toil.sshKeyTrustedByGitHub {
-                clone-rraval-pass = mkGitCloneOneshot {
-                  url = "git@github.com:rraval/pass.git";
-                  dest = hmCfg.programs.password-store.settings.PASSWORD_STORE_DIR;
-                };
-
-                clone-rraval-zeroindexed = mkGitCloneOneshot {
-                  url = "git@github.com:rraval/zeroindexed.git";
-                  dest = "${homeDir}/zeroindexed";
-                };
-              })
-
-              (mkIf cfg.toil.encircle.sshKeyTrustedByPhabricator {
-                clone-rraval-encircle = mkGitCloneOneshot {
-                  url = "ssh://phabricator-vcs@phabricator.internal.encircleapp.com:2222/diffusion/2/encircle.git";
-                  dest = encircleRepoDir;
-                };
-              })
-            ];
           };
         };
       };
