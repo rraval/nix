@@ -1,5 +1,5 @@
 pkgs: with pkgs; [
-  (callPackage (import ./git-nomad.nix) {})
+  (callPackage (import ./packages/git-nomad.nix) {})
 
   android-studio
   audacity
