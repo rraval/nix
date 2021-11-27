@@ -1,4 +1,5 @@
 This directory contains nix expressions that produce NixOS configuration
 attrsets (i.e. usable inside specific `config.<whatever>` blocks).
 
-There is no defined pattern on what parameters each expression takes.
+Each expression must be callable by `importNixOS` as defined by
+[`box/default.nix`](../box/default.nix).

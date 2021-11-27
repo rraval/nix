@@ -1,4 +1,4 @@
-pkgs: {
+{ pkgs, ... }: {
   enable = true;
   package = pkgs.polybarFull;
   script = "polybar rail &";

@@ -1,7 +1,7 @@
-{ name, email }: {
+{ user, ... }: {
   enable = true;
-  userName = name;
-  userEmail = email;
+  userName = user.realName;
+  userEmail = user.email;
   extraConfig = {
     color = {
       diff = "auto";

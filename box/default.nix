@@ -9,6 +9,7 @@
     importPkg = name: pkgs.callPackage (./packages + "/${name}.nix") {};
     importPkgList = names: lib.genAttrs names importPkg;
   in {
+    inherit user;
     pkgs = pkgs // (importPkgList [
       "git-nomad"
     ]);
@@ -166,7 +167,7 @@ in mkMerge [
     ];
 
     environment = {
-      systemPackages = import ./system-packages.nix pkgs;
+      systemPackages = importNixOS "system-packages";
 
       shells = [
         pkgs.fish
@@ -199,14 +200,9 @@ in mkMerge [
             };
           };
 
-          firefox = import ./nixos/firefox.nix { name = user.name; };
-
-          fish = import ./nixos/fish.nix pkgs;
-
-          git = import ./nixos/git.nix {
-            name = user.realName;
-            email = user.email;
-          };
+          firefox = importNixOS "firefox";
+          fish = importNixOS "fish";
+          git = importNixOS "git";
 
           gpg = {
             enable = true;
@@ -220,7 +216,7 @@ in mkMerge [
             scdaemonSettings.disable-ccid = true;
           };
 
-          neovim = import ./nixos/neovim.nix pkgs;
+          neovim = importNixOS "neovim";
 
           password-store = {
             enable = true;
@@ -265,7 +261,7 @@ in mkMerge [
             '';
           };
 
-          polybar = import ./nixos/polybar.nix pkgs;
+          polybar = importNixOS "polybar";
         };
 
         xdg = {

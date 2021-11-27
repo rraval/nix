@@ -1,7 +1,7 @@
-{ name }: {
+{ user, ... }: {
   enable = true;
-  profiles."${name}" = {
-    inherit name;
+  profiles."${user.name}" = {
+    inherit (user) name;
     settings = {
       "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       "signon.rememberSignons" = false;
