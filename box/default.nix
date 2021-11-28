@@ -1,4 +1,4 @@
-{ pkgs, lib, hmLib, user, locale, timeZone, cfg, hmCfg, homeDir, encircleRepoDir }: let
+{ pkgs, lib, hmLib, user, locale, timeZone, cfg, hmCfg, homeDir }: let
   inherit (lib)
     mkIf
     mkMerge
@@ -89,9 +89,7 @@ in mkMerge [
 
     virtualisation.docker.enable = true;
 
-    services = let
-      encircleVpn = cfg.toil.encircle.vpn;
-    in mkMerge [
+    services = mkMerge [
       {
         avahi.enable = true;
         blueman.enable = true;

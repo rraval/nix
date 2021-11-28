@@ -31,7 +31,6 @@
   cfg = config.rravalBox;
   hmCfg = config.home-manager.users.${user.name};
   homeDir = hmCfg.home.homeDirectory;
-  encircleRepoDir = "${homeDir}/encircle";
 in {
   options.rravalBox = {
     enable = mkEnableOption "Configure this machine for rraval";
@@ -59,40 +58,9 @@ in {
         type = types.bool;
       };
     };
-
-    toil = {
-      sshKeyTrustedByGitHub = mkEnableOption "cloning private repos from GitHub";
-
-      encircle = {
-        sshKeyTrustedByPhabricator = mkEnableOption "cloning repos from Phabricator";
-
-        postgresql = mkEnableOption "setup Postgres with encircle user and DB extensions";
-
-        vpn = mkOption {
-          description = "OpenVPN configuration to connect to Encircle intranet";
-          default = null;
-          type = with types; nullOr (submodule {
-            options = {
-              config = mkOption {
-                description = "Path to OpenVPN config file including inline certificates";
-                type = str;
-              };
-
-              # We could extract this from the DHCP options OpenVPN pushes down
-              # on connect, but that would require writing even more custom
-              # code to hook it up to dnsmasq
-              dnsIp = mkOption {
-                description = "IP address for DNS lookups on intranet domains";
-                type = str;
-              };
-            };
-          });
-        };
-      };
-    };
   };
 
   config = mkIf cfg.enable (import ./box {
-    inherit pkgs lib hmLib user locale timeZone cfg hmCfg homeDir encircleRepoDir;
+    inherit pkgs lib hmLib user locale timeZone cfg hmCfg homeDir;
   });
 }
