@@ -135,6 +135,10 @@ in mkMerge [
         EDITOR = "nvim";
         VISUAL = "nvim";
       };
+
+      # Automatically load fish direnv hook
+      # https://github.com/nix-community/home-manager/pull/2408#issuecomment-951079054
+      pathsToLink = [ "/share/fish" ];
     };
 
     home-manager = {
