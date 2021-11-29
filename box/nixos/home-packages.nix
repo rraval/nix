@@ -25,7 +25,8 @@
   qrencode
   ripgrep
   rofimoji
-  scribusUnstable
+  # broken with compile error in sfnt.cpp
+  # scribusUnstable
   skypeforlinux
   slack
   spotify
