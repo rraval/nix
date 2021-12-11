@@ -39,6 +39,12 @@ in mkMerge [
       # https://github.com/NixOS/nixpkgs/blob/c207be6/pkgs/applications/video/vlc/default.nix#L20
       firewall.allowedTCPPorts = [ 8010 ];
       firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
+      # FIXME: this belongs in encircle-postgresql since it's exposing the database to minikube-on-docker.
+      # https://github.com/kubernetes/minikube/blob/27b0c74/pkg/drivers/kic/oci/network_create.go#L36
+      # This needs to wait until all modules are under `mkMerge`.
+      firewall.extraCommands = ''
+        iptables -A nixos-fw -p tcp -s 192.168.49.0/24 --dport 5432 -j nixos-fw-accept
+      '';
     };
 
     powerManagement.cpuFreqGovernor = "ondemand";

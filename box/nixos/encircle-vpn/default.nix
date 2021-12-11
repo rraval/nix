@@ -1,11 +1,13 @@
 { ... }: let
-  dnsIp = "10.3.1.5";
+  vpnDnsIp = "10.3.1.5";
+  minikubeDnsIp = "192.168.49.2";
 in {
   dnsmasq = {
     enable = true;
     extraConfig = ''
-      server=/encirclestaging.com/${dnsIp}
-      server=/encircleproduction.com/${dnsIp}
+      server=/encirclestaging.com/${vpnDnsIp}
+      server=/encircleproduction.com/${vpnDnsIp}
+      server=/encircle.local/${minikubeDnsIp}
     '';
   };
 

@@ -21,7 +21,11 @@ in {
   settings = {
     TimeZone = "UTC";
   };
-  authentication = "local all all trust";
+  enableTCPIP = true;
+  authentication = ''
+    local all all trust
+    host encircle encircle 192.168.49.0/24 trust
+  '';
   ensureUsers = [{
     name = "encircle";
     # FIXME: no way to grant CREATEDB
