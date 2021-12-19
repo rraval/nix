@@ -1,11 +1,9 @@
 { pkgs, ... }: with pkgs; [
   android-studio
-  asciinema
   audacity
   chromium
   dig
   discord
-  figlet
   fzf
   ghostwriter
   gimp
@@ -32,7 +30,6 @@
   skypeforlinux
   slack
   spotify
-  tmux
   transmission-gtk
   unzip
   visidata
