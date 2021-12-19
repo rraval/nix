@@ -31,6 +31,7 @@
   skypeforlinux
   slack
   spotify
+  tmux
   transmission-gtk
   unzip
   visidata
