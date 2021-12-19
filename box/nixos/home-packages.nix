@@ -5,6 +5,7 @@
   chromium
   dig
   discord
+  figlet
   fzf
   ghostwriter
   gimp
