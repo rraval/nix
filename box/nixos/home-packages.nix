@@ -1,5 +1,6 @@
 { pkgs, ... }: with pkgs; [
   android-studio
+  asciinema
   audacity
   chromium
   dig
