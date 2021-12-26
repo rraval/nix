@@ -1,15 +1,15 @@
 { lib, rustPlatform, fetchFromGitHub }: rustPlatform.buildRustPackage rec {
   pname = "git-nomad";
-  version = "0.3.2";
+  version = "0.4.0";
 
   src = fetchFromGitHub {
     owner = "rraval";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-+3nuivxCIhIGuPkVQQ2lZULC4Pj3PLftIF9O8SdwazM=";
+    sha256 = "sha256-gk4alpi6BHJ0qVM1UJlQe7mzFpmUKy3smLNOhuviENg=";
   };
 
-  cargoHash = "sha256-NOyJonZX0fVe5DKTXvH/GunI8+WRyKthaxHlI88qH6k=";
+  cargoHash = "sha256-C3ATVXt5gFvGBLRoIjYp8UilvAJG31WW9CR94nV+gFc=";
 
   meta = with lib; {
     homepage = "https://github.com/rraval/git-nomad";
