@@ -19,6 +19,7 @@
   libreoffice
   nodejs
   obs-studio
+  obsidian
   okular
   playerctl
   pv
