@@ -45,6 +45,12 @@ in mkMerge [
       firewall.extraCommands = ''
         iptables -A nixos-fw -p tcp -s 192.168.49.0/24 --dport 5432 -j nixos-fw-accept
       '';
+
+      # FIXME: this belongs in encircle related config but need to refactor to
+      # pure NixOS modules first.
+      hosts = {
+        "10.3.0.4" = [ "bastion.internal.encircleapp.com" ];
+      };
     };
 
     powerManagement.cpuFreqGovernor = "ondemand";
