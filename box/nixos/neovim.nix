@@ -4,14 +4,15 @@
     camelcasemotion
     coc-nvim
     coc-rust-analyzer
-    coc-tsserver
     coc-tslint-plugin
+    coc-tsserver
     coffee-script
     fugitive
     fzf-vim
     solarized
     splice-vim
     typescript-vim
+    vim-ledger
     vim-nix
     vim-startify
   ];
