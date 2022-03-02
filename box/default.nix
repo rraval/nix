@@ -73,7 +73,19 @@ in mkMerge [
     console.useXkbConfig = true;
     hardware = {
       bluetooth.enable = true;
-      pulseaudio.enable = true;
+      pulseaudio = {
+        enable = true;
+        # https://forum.endeavouros.com/t/stupid-simple-tweak-to-improve-pulseaudio-audio-quality/9654
+        daemon.config = {
+          resample-method = "soxr-vhq";
+          default-sample-format = "s32le";
+          default-sample-rate = 96000;
+          flat-volumes = "no";
+          realtime-scheduling = "yes";
+          rlimit-rttime = -1;
+          exit-idle-time = -1;
+        };
+      };
       sane = {
         enable = true;
         extraBackends = [ pkgs.hplipWithPlugin ];
