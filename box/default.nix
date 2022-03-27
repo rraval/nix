@@ -217,7 +217,7 @@ in mkMerge [
 
         services = {
           dropbox = {
-            enable = true;
+            enable = false;
             path = "${homeDir}/dropbox";
           };
 
