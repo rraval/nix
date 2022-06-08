@@ -2,6 +2,7 @@
   android-studio
   audacity
   chromium
+  darktable
   dig
   discord
   fzf
