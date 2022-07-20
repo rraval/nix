@@ -84,6 +84,7 @@
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+    nmap <silent> gw :call coc#float#jump()<cr>
 
     inoremap <silent><expr> <c-space> coc#refresh()
     nmap <Leader>q <Plug>(coc-codeaction-cursor)
