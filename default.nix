@@ -27,7 +27,7 @@
     mkOption
     types
   ;
-  hmLib = pkgs.callPackage <home-manager/modules/lib> {};
+  hmLib = (import <home-manager/modules/lib/stdlib-extended.nix> pkgs.lib).hm;
   cfg = config.rravalBox;
   hmCfg = config.home-manager.users.${user.name};
   homeDir = hmCfg.home.homeDirectory;

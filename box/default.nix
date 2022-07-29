@@ -19,7 +19,7 @@
 in mkMerge [
   {
     nix = {
-      allowedUsers = [ user.name ];
+      settings.allowed-users = [ user.name ];
       package = pkgs.nixUnstable;
       extraOptions = "experimental-features = nix-command flakes";
     };
@@ -171,6 +171,7 @@ in mkMerge [
 
       users.${user.name} = {
         home = {
+          stateVersion = "20.09";
           packages = importNixOS "home-packages.nix";
           keyboard = {
             options = ["ctrl:nocaps"];
@@ -213,7 +214,7 @@ in mkMerge [
 
           rofi = {
             enable = true;
-            terminal = "${pkgs.xfce.terminal}/bin/xfce4-terminal";
+            terminal = "${pkgs.xfce.xfce4-terminal}/bin/xfce4-terminal";
             theme = "glue_pro_blue";
             extraConfig = {
               modi = "drun,window,ssh";
