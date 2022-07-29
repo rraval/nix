@@ -5,6 +5,7 @@
   darktable
   dig
   discord
+  diskonaut
   fzf
   ghostwriter
   gimp
