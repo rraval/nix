@@ -1,4 +1,5 @@
 {
     "rust-analyzer.serverPath": "rust-analyzer",
-    "rust-analyzer.checkOnSave.command": "clippy"
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.updates.prompt": false
 }
