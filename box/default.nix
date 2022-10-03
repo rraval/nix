@@ -1,9 +1,22 @@
-{ pkgs, lib, hmLib, user, locale, timeZone, cfg, hmCfg, homeDir }: let
+{ pkgs, lib, config, boxArgs, ... }: let
+  inherit (boxArgs)
+    hmLib
+    user
+    locale
+    timeZone
+    hostName
+    rootDevice
+    rravalSha256Passwd
+  ;
+
   inherit (lib)
     mkIf
     mkMerge
     optional
   ;
+
+  hmCfg = config.home-manager.users.${user.name};
+  homeDir = hmCfg.home.homeDirectory;
 
   env = let
     importPkg = name: pkgs.callPackage (./packages + "/${name}.nix") {};
@@ -34,7 +47,7 @@ in mkMerge [
       # global useDHCP is deprecated, don't use it
       useDHCP = false;
 
-      hostName = cfg.networking.hostName;
+      inherit hostName;
 
       networkmanager.enable = true;
 
@@ -42,18 +55,6 @@ in mkMerge [
       # https://github.com/NixOS/nixpkgs/blob/c207be6/pkgs/applications/video/vlc/default.nix#L20
       firewall.allowedTCPPorts = [ 8010 ];
       firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
-      # FIXME: this belongs in encircle-postgresql since it's exposing the database to minikube-on-docker.
-      # https://github.com/kubernetes/minikube/blob/27b0c74/pkg/drivers/kic/oci/network_create.go#L36
-      # This needs to wait until all modules are under `mkMerge`.
-      firewall.extraCommands = ''
-        iptables -A nixos-fw -p tcp -s 192.168.49.0/24 --dport 5432 -j nixos-fw-accept
-      '';
-
-      # FIXME: this belongs in encircle related config but need to refactor to
-      # pure NixOS modules first.
-      hosts = {
-        "10.3.0.4" = [ "bastion.internal.encircleapp.com" ];
-      };
     };
 
     powerManagement.cpuFreqGovernor = "ondemand";
@@ -65,9 +66,9 @@ in mkMerge [
       };
       initrd.luks.devices = {
         decrypted0 = {
-          device = builtins.toString cfg.rootDevice.encryptedDisk;
+          device = builtins.toString rootDevice.encryptedDisk;
           preLVM = true;
-          allowDiscards = cfg.rootDevice.isSolidState;
+          allowDiscards = rootDevice.isSolidState;
         };
       };
     };
@@ -75,6 +76,7 @@ in mkMerge [
     i18n.defaultLocale = locale;
     console.useXkbConfig = true;
     hardware = {
+      enableRedistributableFirmware = true;
       bluetooth.enable = true;
       pulseaudio = {
         enable = true;
@@ -107,7 +109,7 @@ in mkMerge [
         uid = 1000;
         group = user.name;
         extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" "scanner" "lp" ];
-        hashedPassword = (import ./passwd.nix).${user.name};
+        hashedPassword = user.sha256Passwd;
         createHome = true;
         home = "/home/${user.name}";
         shell = pkgs.fish;
@@ -121,8 +123,6 @@ in mkMerge [
         avahi.enable = true;
         blueman.enable = true;
         pcscd.enable = true;
-
-        postgresql = importNixOS "encircle-postgresql";
 
         printing = {
           enable = true;
@@ -147,8 +147,6 @@ in mkMerge [
           };
         };
       }
-
-      (importNixOS "encircle-vpn")
     ];
 
     environment = {
@@ -332,7 +330,7 @@ in mkMerge [
     };
   }
 
-  (mkIf cfg.rootDevice.isSolidState {
+  (mkIf rootDevice.isSolidState {
     fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   })
 ]

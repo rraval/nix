@@ -29,8 +29,6 @@
   ;
   hmLib = (import <home-manager/modules/lib/stdlib-extended.nix> pkgs.lib).hm;
   cfg = config.rravalBox;
-  hmCfg = config.home-manager.users.${user.name};
-  homeDir = hmCfg.home.homeDirectory;
 in {
   options.rravalBox = {
     enable = mkEnableOption "Configure this machine for rraval";
