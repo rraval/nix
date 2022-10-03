@@ -39,3 +39,9 @@ There's two layers of "secrets" in this repository:
 2. Secret credentials, needed at run time by various services on the system. These are currently unmanaged by Nix and have to be manually created.
 
 FIXME: agenix might be a good solution for (2), though it'll have to be untangled with the `nix-private` concerns in (1).
+
+## Local development
+
+```
+$ sudo nixos-rebuild switch --flake path:/home/rraval/nix --override-input rravalNixPrivate path:/home/rraval/nix-private
+```
