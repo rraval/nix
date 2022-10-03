@@ -21,7 +21,10 @@ in mkMerge [
     nix = {
       settings.allowed-users = [ user.name ];
       package = pkgs.nixUnstable;
-      extraOptions = "experimental-features = nix-command flakes";
+      extraOptions = ''
+        experimental-features = nix-command flakes
+        !include /etc/nix/extra-nix.conf
+      '';
     };
     nixpkgs.config.allowUnfree = true;
     time.timeZone = timeZone;
