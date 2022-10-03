@@ -29,3 +29,13 @@ Finally, run:
 ```
 $ nixos-rebuild switch --flake path:/to/rraval-nix#hostname
 ```
+
+## Secrets
+
+There's two layers of "secrets" in this repository:
+
+1. Secret code, needed at evaluation time, which involves Nix derivations that I'd rather not publish publicly. These are managed by a private Git repo: https://github.com/rraval/nix-private; which is an input to this flake.
+
+2. Secret credentials, needed at run time by various services on the system. These are currently unmanaged by Nix and have to be manually created.
+
+FIXME: agenix might be a good solution for (2), though it'll have to be untangled with the `nix-private` concerns in (1).
