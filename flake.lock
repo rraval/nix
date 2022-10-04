@@ -51,11 +51,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1664808709,
-        "narHash": "sha256-nROKk/7qJx61LrcgraWOC+AYtAQAioneSnyxtgjKN/k=",
+        "lastModified": 1664823740,
+        "narHash": "sha256-c23YDP+7zXA+M7rkcsTwYnzdy+lVsZtz0rQ05d/M7Nc=",
         "owner": "rraval",
         "repo": "nix-private",
-        "rev": "a6ee812110016c65502b7e01bdcb0941f56667b9",
+        "rev": "d8c0d14bc774158138a81bad5e52cae924bbfc48",
         "type": "github"
       },
       "original": {
