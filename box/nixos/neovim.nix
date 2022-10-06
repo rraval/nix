@@ -28,6 +28,7 @@
     set nobackup
     set backupcopy=yes
     set nowrap
+    set mouse=
     set tw=0
     set bg=dark
     set scrolloff=5
