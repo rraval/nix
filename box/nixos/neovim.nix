@@ -21,6 +21,32 @@
     set background=dark
     colorscheme solarized
 
+    autocmd VimEnter,ColorScheme * call ExtendSolarize()
+    function ExtendSolarize()
+      " From https://github.com/altercation/vim-colors-solarized/blob/528a59f/colors/solarized.vim#L303
+      " Solarized Palette in 256color mode
+      let l:base03      = "234"
+      let l:base02      = "235"
+      let l:base01      = "239"
+      let l:base00      = "240"
+      let l:base0       = "244"
+      let l:base1       = "245"
+      let l:base2       = "187"
+      let l:base3       = "230"
+      let l:yellow      = "136"
+      let l:orange      = "166"
+      let l:red         = "124"
+      let l:magenta     = "125"
+      let l:violet      = "61"
+      let l:blue        = "33"
+      let l:cyan        = "37"
+      let l:green       = "64"
+
+      hi! link CocInlayHint CocHintSign
+      exe "hi! CocFloating ctermbg=".l:base03
+      exe "hi! CocMenuSel ctermbg=".l:base01
+    endfunction
+
     set softtabstop=4
     set tabstop=4
     set shiftwidth=4
