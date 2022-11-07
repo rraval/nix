@@ -12,11 +12,10 @@
         "Liberation Mono:style=Regular;2"
       ];
       tray = {
-        position = "right";
+        position = "left";
       };
       modules = {
-        left = "workspaces window";
-        right = "date volume";
+        left = "volume date workspaces window";
       };
       module.margin = {
         left = 1;
