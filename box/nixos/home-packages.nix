@@ -33,6 +33,7 @@
   skypeforlinux
   slack
   spotify
+  stremio
   transmission-gtk
   unzip
   visidata
