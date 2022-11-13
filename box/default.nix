@@ -215,7 +215,7 @@ in mkMerge [
 
           rofi = {
             enable = true;
-            terminal = "${pkgs.xfce.xfce4-terminal}/bin/xfce4-terminal";
+            terminal = "${pkgs.wezterm}/bin/wezterm";
             theme = "glue_pro_blue";
             extraConfig = {
               modi = "drun,window,ssh";
@@ -298,7 +298,7 @@ in mkMerge [
 
         home.file = {
           ".config/nvim/coc-settings.json".source = ./config/coc-settings.json;
-          ".config/xfce4/terminal/terminalrc".source = ./config/terminalrc;
+          ".config/wezterm/wezterm.lua".source = ./config/wezterm.lua;
           ".mozilla/native-messaging-hosts/passff.json".source = "${pkgs.passff-host}/share/passff-host/passff.json";
         };
 

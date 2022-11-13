@@ -15,7 +15,7 @@ import qualified XMonad.StackSet as W
 main = do
     xmonad desktopConfig
         { modMask = mod4Mask
-        , terminal = "xfce4-terminal"
+        , terminal = "wezterm"
         , manageHook = manageDocks
             <+> composeAll
                 [ isFullscreen --> doFullFloat

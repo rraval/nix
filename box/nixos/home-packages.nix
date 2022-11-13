@@ -38,6 +38,7 @@
   unzip
   visidata
   vlc
+  wezterm
   xclip
   youtube-dl
   yubikey-manager

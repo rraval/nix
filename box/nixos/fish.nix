@@ -83,6 +83,11 @@
 
     # END SOLARIZED
 
+    # See https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
+    # See https://wezfurlong.org/wezterm/shell-integration.html
+    # Source: https://gitlab.freedesktop.org/Per_Bothner/specifications/-/blob/master/proposals/prompts-data/shell-integration.fish
+    ${builtins.readFile ./fish_semantic_zones.fish}
+
     set -x GCC_COLORS 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     set -x TIME '\n\n%U user, %S system, %E elapsed, %P CPU (%X text, %D data, %M max)k\n%I inputs, %O outputs (%F major, %R minor) pagefaults, %W swaps'
 
