@@ -11,94 +11,96 @@
     }
   ];
   interactiveShellInit = ''
-    # BEGIN SOLARIZED
-    # https://github.com/ithinkihaveacat/dotfiles/blob/master/fish/solarized.fish
-
-    # Use these settings if you've applied a Solarized theme to your terminal (for
-    # example, if "ls -G" produces Solarized output). i.e. if "blue" is #268bd2, not
-    # whatever the default is. (See "../etc/Solarized Dark.terminal" for OS X.)
-
-    set -l base03  "--bold black"
-    set -l base02  "black"
-    set -l base01  "--bold green"
-    set -l base00  "--bold yellow"
-    set -l base0   "--bold blue"
-    set -l base1   "--bold cyan"
-    set -l base2   "white"
-    set -l base3   "--bold white"
-    set -l yellow  "yellow"
-    set -l orange  "--bold red"
-    set -l red     "red"
-    set -l magenta "magenta"
-    set -l violet  "--bold magenta"
-    set -l blue    "blue"
-    set -l cyan    "cyan"
-    set -l green   "green"
-
-    # Use these settings if your terminal supports term256 and your terminal hasn't
-    # been configured with a Solarized theme.i.e. if "blue" is the default blue, not
-    # Solarized blue.
-    #
-    set -l rgb_base03  002b36
-    set -l rgb_base02  073642
-    set -l rgb_base01  586e75
-    set -l rgb_base00  657b83
-    set -l rgb_base0   839496
-    set -l rgb_base1   93a1a1
-    set -l rgb_base2   eee8d5
-    set -l rgb_base3   fdf6e3
-    set -l rgb_yellow  b58900
-    set -l rgb_orange  cb4b16
-    set -l rgb_red     dc322f
-    set -l rgb_magenta d33682
-    set -l rgb_violet  6c71c4
-    set -l rgb_blue    268bd2
-    set -l rgb_cyan    2aa198
-    set -l rgb_green   859900
-
-    # Used by fish's completion; see
-    # http://fishshell.com/docs/2.0/index.html#variables-color
-
-    set -g fish_color_normal      $base0
-    set -g fish_color_command     $base0
-    set -g fish_color_quote       $cyan
-    set -g fish_color_redirection $base0
-    set -g fish_color_end         $base0
-    set -g fish_color_error       $red
-    set -g fish_color_param       $blue
-    set -g fish_color_comment     $base01
-    set -g fish_color_match       $cyan
-    set -g fish_color_search_match "--background=$base02"
-    set -g fish_color_operator    $orange
-    set -g fish_color_escape      $cyan
-
-    # Used by fish_prompt
-
-    set -g fish_color_ssh $rgb_base00
-
-    set -g __fish_git_prompt_color_branch      $rgb_cyan
-    set -g __fish_git_prompt_color_dirtystate  $rgb_base3
-    set -g __fish_git_prompt_color_stagedstate $rgb_green
-    set -g __fish_git_prompt_color_upstream    $rgb_cyan
-
-    # END SOLARIZED
-
-    # See https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
-    # See https://wezfurlong.org/wezterm/shell-integration.html
-    # Source: https://gitlab.freedesktop.org/Per_Bothner/specifications/-/blob/master/proposals/prompts-data/shell-integration.fish
-    ${builtins.readFile ./fish_semantic_zones.fish}
-
-    set -x GCC_COLORS 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     set -x TIME '\n\n%U user, %S system, %E elapsed, %P CPU (%X text, %D data, %M max)k\n%I inputs, %O outputs (%F major, %R minor) pagefaults, %W swaps'
 
-    set __fish_prompt_cwd       $rgb_yellow
-    set __fish_prompt_normal    $rgb_base2
+    # `reaver` is a fish prompt featuring
+    # - A minimal left prompt with git status integration
+    # - A right prompt with command duration and time
+    # - Semantic prompt integration, see
+    #   https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
+    #   and https://wezfurlong.org/wezterm/shell-integration.html
 
-    set __fish_git_prompt_show_informative_status   y
-    set __fish_git_prompt_showdirtystate            y
-    set __fish_git_prompt_showstashstate            y
-    set __fish_git_prompt_showuntrackedfiles        y
-    set __fish_git_prompt_showupstream              auto
-    set __fish_git_prompt_showcolorhints            y
+    # The `application identifier`, used by terminals to distinguish nested prompts.
+    set _reaver_aid "fish_reaver_"$fish_pid
+
+    # Empty string while the command is being edited or running
+    # Numeric exit code if the command exited normally
+    # Literal string `CANCEL` if the command was interrupted
+    set _reaver_command_status ""
+
+    function _reaver_osc_133 -a code -d 'Emit an arbitrary OSC 133 code, see https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md'
+      printf "\033]133;%s\007" "$code"
+    end
+
+    function _reaver_osc_133_start -d 'First do a fresh-line, then start a new command, and enter prompt mode'
+      _reaver_osc_133 "A;aid=$_reaver_aid;cl=m"
+    end
+
+    function _reaver_osc_133_end -a exit_code -d 'End of current command'
+      _reaver_osc_133 "D;$exit_code;aid=$_reaver_aid"
+    end
+
+    function _reaver_osc_133_prompt -a kind prompt_contents -d 'Explicit start of a prompt'
+      _reaver_osc_133 "P;k=$kind"
+      printf "%s" "$prompt_contents"
+      _reaver_osc_133 "B"
+    end
+
+    function _reaver_osc_133_output -d 'End of input, and start of output'
+      _reaver_osc_133 "C"
+    end
+
+    function _reaver_on_fish_prompt --on-event fish_prompt
+      # Emit codes about previous command exit.
+      # Don't use `--on-event fish_postexec` because it is called before
+      # omitted-newline output
+      if [ -n "$_reaver_command_status" ]
+        _reaver_osc_133_end "$_reaver_command_status"
+      end
+
+      _reaver_osc_133_start
+    end
+
+    function _reaver_on_pre_exec --on-event fish_preexec
+      _reaver_osc_133_output
+    end
+
+    function _reaver_on_post_exec --on-event fish_postexec
+      set _reaver_command_status "$status"
+    end
+
+    function _reaver_on_cancel --on-event fish_cancel
+      set _reaver_command_status CANCEL
+    end
+
+    set -g __fish_git_prompt_show_informative_status
+    set -g __fish_git_prompt_showcolorhints
+
+    function _reaver_left_prompt
+      printf '%s%s%s%s$ ' (set_color yellow) (prompt_pwd) (set_color normal) (fish_git_prompt)
+    end
+
+    function _reaver_right_prompt
+      # FIXME: format CMD_DURATION
+      set -l _reaver_right_prompt_seconds (math --scale=3 $CMD_DURATION / 1000 % 60)
+      set -l _reaver_right_prompt_minutes (math --scale=0 $CMD_DURATION / 60000 % 60)
+      set -l _reaver_right_prompt_hours (math --scale=0 $CMD_DURATION / 3600000)
+
+      test "$_reaver_right_prompt_hours" -gt 0 && set -l -a _reaver_right_prompt_duration "$_reaver_right_prompt_hours"
+      test "$_reaver_right_prompt_minutes" -gt 0 && set -l -a _reaver_right_prompt_duration "$_reaver_right_prompt_minutes"
+      test "$_reaver_right_prompt_seconds" -gt 0 && set -l -a _reaver_right_prompt_duration "$_reaver_right_prompt_seconds"
+
+      printf "%s+%s @ %s%s" (set_color brblack) (string join ":" $_reaver_right_prompt_duration) (date '+%H:%M:%S') (set_color normal)
+    end
+
+    function fish_prompt
+      _reaver_osc_133_prompt "i" (_reaver_left_prompt)
+    end
+
+    function fish_right_prompt
+      _reaver_osc_133_prompt "r" (_reaver_right_prompt)
+    end
+
+    set -x TIME '\n\n%U user, %S system, %E elapsed, %P CPU (%X text, %D data, %M max)k\n%I inputs, %O outputs (%F major, %R minor) pagefaults, %W swaps'
   '';
 }
