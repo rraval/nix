@@ -1,12 +1,16 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
+local color_scheme = 'Solarized Dark (base16)'
+local colors = wezterm.color.get_builtin_schemes()[color_scheme]
+colors.scrollbar_thumb = colors.cursor_fg
+
 return {
     adjust_window_size_when_changing_font_size = false, -- using a tiling window manager
     audible_bell = 'Disabled',
     automatically_reload_config = true,
     check_for_updates = false,
-    color_scheme = 'Solarized Dark (base16)',
+    colors = colors,
     enable_scroll_bar = true,
     font = wezterm.font 'Monospace',
     font_size = 10.0,
