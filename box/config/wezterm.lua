@@ -18,7 +18,10 @@ return {
     hide_tab_bar_if_only_one_tab = true,
     pane_focus_follows_mouse = true,
     scrollback_lines = 10000,
-    term = 'wezterm',
+
+    -- Would like to enable this but breaks SSH'ing into machines that don't
+    -- have this terminfo.
+    -- term = 'wezterm',
 
     keys = {
         { key = 'UpArrow', mods = 'SHIFT', action = act.ScrollToPrompt(-1) },
