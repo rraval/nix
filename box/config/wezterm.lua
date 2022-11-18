@@ -14,6 +14,7 @@ return {
     enable_scroll_bar = true,
     font = wezterm.font 'Monospace',
     font_size = 10.0,
+    force_reverse_video_cursor = true,
     hide_tab_bar_if_only_one_tab = true,
     pane_focus_follows_mouse = true,
     scrollback_lines = 10000,
