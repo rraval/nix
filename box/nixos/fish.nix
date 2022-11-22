@@ -75,13 +75,13 @@
 
     set -g __fish_git_prompt_show_informative_status
     set -g __fish_git_prompt_showcolorhints
+    set -g __fish_git_prompt_showuntrackedfiles
 
     function _reaver_left_prompt
       printf '%s%s%s%s$ ' (set_color yellow) (prompt_pwd) (set_color normal) (fish_git_prompt)
     end
 
     function _reaver_right_prompt
-      # FIXME: format CMD_DURATION
       set -l _reaver_right_prompt_seconds (math --scale=3 $CMD_DURATION / 1000 % 60)
       set -l _reaver_right_prompt_minutes (math --scale=0 $CMD_DURATION / 60000 % 60)
       set -l _reaver_right_prompt_hours (math --scale=0 $CMD_DURATION / 3600000)
@@ -100,7 +100,5 @@
     function fish_right_prompt
       _reaver_osc_133_prompt "r" (_reaver_right_prompt)
     end
-
-    set -x TIME '\n\n%U user, %S system, %E elapsed, %P CPU (%X text, %D data, %M max)k\n%I inputs, %O outputs (%F major, %R minor) pagefaults, %W swaps'
   '';
 }
