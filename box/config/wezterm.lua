@@ -18,6 +18,7 @@ return {
     hide_tab_bar_if_only_one_tab = true,
     pane_focus_follows_mouse = true,
     scrollback_lines = 10000,
+    selection_word_boundary = ' \t\n{}[]()"\'`,;:',
 
     -- Would like to enable this but breaks SSH'ing into machines that don't
     -- have this terminfo.
