@@ -26,6 +26,7 @@
   playerctl
   pv
   qrencode
+  rehex
   ripgrep
   rofimoji
   # broken with compile error in sfnt.cpp
