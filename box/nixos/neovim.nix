@@ -45,6 +45,8 @@
     set showmatch
     set showmode
     set cinoptions=>4,+8,(8,u0
+    set number
+    set relativenumber
 
     " stop autoindenting things as I type
     autocmd FileType python setlocal indentkeys-=<:>
