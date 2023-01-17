@@ -63,7 +63,7 @@
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
     " Fold diffs inside fugitive commit windows
-    autocmd FileType gitcommit set foldmethod=syntax
+    autocmd FileType git set foldmethod=syntax
 
     " netrw can go die in a fire
     let g:loaded_netrw = 1
