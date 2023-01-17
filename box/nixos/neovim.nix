@@ -62,6 +62,9 @@
     " Jump to last cursor position, see :help last-position-jump
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+    " Fold diffs inside fugitive commit windows
+    autocmd FileType gitcommit set foldmethod=syntax
+
     " netrw can go die in a fire
     let g:loaded_netrw = 1
     let g:loaded_netrwPlugin = 1
