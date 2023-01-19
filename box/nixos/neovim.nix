@@ -75,7 +75,7 @@
     let g:splice_prefix = ","
 
     " camel case motion
-    "call camelcasemotion#CreateMotionMappings(',')
+    call camelcasemotion#CreateMotionMappings(',')
 
     " quickfix
     " automatically put the quickfix window as a fully expanded bottom most split
