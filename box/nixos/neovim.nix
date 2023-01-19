@@ -27,6 +27,8 @@
       hi! link CocSearch CocUnderline
       hi! link CocFloating Pmenu
       hi! link CocMenuSel PmenuSel
+
+      hi! Folded ctermfg=0 ctermbg=13
     endfunction
 
     set softtabstop=4
