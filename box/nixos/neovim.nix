@@ -128,11 +128,6 @@
     " arc
     nnoremap <Leader>z :cexpr system("arc lint --output=compiler")<CR>
 
-    " prevent nested nvim's
-    if has('nvim')
-      let $VISUAL = 'nvr -cc split --remote-wait'
-    endif
-
     " firenvim, firefox integration
     let g:firenvim_config = {
         \ 'localSettings': {
