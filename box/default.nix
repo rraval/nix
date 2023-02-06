@@ -80,11 +80,7 @@ in mkMerge [
       bluetooth.enable = true;
       pulseaudio = {
         enable = true;
-        # https://forum.endeavouros.com/t/stupid-simple-tweak-to-improve-pulseaudio-audio-quality/9654
         daemon.config = {
-          resample-method = "soxr-vhq";
-          default-sample-format = "s32le";
-          default-sample-rate = 96000;
           flat-volumes = "no";
           realtime-scheduling = "yes";
           rlimit-rttime = -1;
@@ -165,6 +161,8 @@ in mkMerge [
       # https://github.com/nix-community/home-manager/pull/2408#issuecomment-951079054
       pathsToLink = [ "/share/fish" ];
     };
+
+    programs.noisetorch.enable = true;
 
     home-manager = {
       useUserPackages = true;
