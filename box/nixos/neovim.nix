@@ -125,8 +125,25 @@
     nnoremap <Leader>s :SSave! default<CR>:SClose<CR>
     nnoremap <Leader>a :SLoad default<CR>
 
+    " scrollbind
+    nnoremap <Leader>d :set scb!<CR>:echo 'scb=' . &scb
+
     " arc
+    function ArcRefTask()
+      let l:ref = system('git show -s --format=%B HEAD^ | grep "^Ref"')
+      put =l:ref
+    endfunction
+
+    function ArcDependsOnDiff()
+      let l:commit_message = system('git show -s --format=%B HEAD^ | grep "^Differential Revision:"')
+      let l:diff = matchlist(l:commit_message, '/\([^/]\+\)$')[1]
+      let l:ref = 'Depends on ' . l:diff . '.'
+      put =l:ref
+    endfunction
+
     nnoremap <Leader>z :cexpr system("arc lint --output=compiler")<CR>
+    nnoremap <Leader>x :call ArcRefTask()<CR>
+    nnoremap <Leader>c :call ArcDependsOnDiff()<CR>
 
     " firenvim, firefox integration
     let g:firenvim_config = {
