@@ -24,6 +24,7 @@
   obsidian
   okular
   playerctl
+  postman
   pv
   qrencode
   rehex
