@@ -24,7 +24,6 @@
   in {
     inherit user;
     pkgs = pkgs // (importPkgList [
-      "git-nomad"
     ]);
   };
 
