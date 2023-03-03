@@ -25,13 +25,13 @@
 
     system = "x86_64-linux";
 
-    mkBox = { hostName, rootDevice, extraModules ? [] }: {
+    mkBox = { hostName, rootDisks, extraModules ? [] }: {
       name = hostName;
       value = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
           boxArgs = {
-            inherit user locale timeZone hostName rootDevice;
+            inherit user locale timeZone hostName rootDisks;
             hmLib = homeManager.lib.hm;
           };
         };
@@ -46,9 +46,15 @@
     nixosConfigurations = builtins.listToAttrs [
       (mkBox {
         hostName = "apollo";
-        rootDevice = {
-          encryptedDisk = "/dev/disk/by-uuid/270f43d6-38dd-4f81-b155-fe20fece7a38";
-          isSolidState = true;
+        rootDisks = {
+          decrypted0 = {
+            encryptedDisk = "/dev/disk/by-uuid/270f43d6-38dd-4f81-b155-fe20fece7a38";
+            isSolidState = true;
+          };
+          decrypted1 = {
+            encryptedDisk = "/dev/disk/by-uuid/532bf1c6-a46a-48a8-acaa-1d4764ea63d3";
+            isSolidState = true;
+          };
         };
         extraModules = [
           ({ pkgs, lib, ... }: {
@@ -81,9 +87,11 @@
 
       (mkBox {
         hostName = "boreas";
-        rootDevice = {
-          encryptedDisk = "/dev/disk/by-uuid/c6bf32b5-0cb2-4e5b-bdce-9725edb726d0";
-          isSolidState = true;
+        rootDisks = {
+          decrypted0 = {
+            encryptedDisk = "/dev/disk/by-uuid/c6bf32b5-0cb2-4e5b-bdce-9725edb726d0";
+            isSolidState = true;
+          };
         };
         extraModules = [
           ({ pkgs, lib, ... }: {

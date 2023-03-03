@@ -5,11 +5,12 @@
     locale
     timeZone
     hostName
-    rootDevice
+    rootDisks
     rravalSha256Passwd
   ;
 
   inherit (lib)
+    concatMapAttrs
     mkIf
     mkMerge
     optional
@@ -63,13 +64,11 @@ in mkMerge [
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
       };
-      initrd.luks.devices = {
-        decrypted0 = {
-          device = builtins.toString rootDevice.encryptedDisk;
-          preLVM = true;
-          allowDiscards = rootDevice.isSolidState;
-        };
-      };
+      initrd.luks.devices = builtins.mapAttrs (diskName: diskDescription: {
+        device = builtins.toString diskDescription.encryptedDisk;
+        preLVM = true;
+        allowDiscards = diskDescription.isSolidState;
+      }) rootDisks;
     };
 
     i18n.defaultLocale = locale;
@@ -327,7 +326,13 @@ in mkMerge [
     };
   }
 
-  (mkIf rootDevice.isSolidState {
+  (let
+    isRootSolidState =
+      builtins.any
+      (diskDescription: diskDescription.isSolidState)
+      (builtins.attrValues rootDisks)
+    ;
+  in mkIf isRootSolidState {
     fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   })
 ]
