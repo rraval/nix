@@ -41,6 +41,7 @@
   visidata
   vlc
   wezterm
+  wireshark
   xclip
   youtube-dl
   yubikey-manager

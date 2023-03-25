@@ -102,7 +102,17 @@ in mkMerge [
         isNormalUser = true;
         uid = 1000;
         group = user.name;
-        extraGroups = [ "wheel" "audio" "video" "networkmanager" "docker" "adbusers" "scanner" "lp" ];
+        extraGroups = [
+          "adbusers"
+          "audio"
+          "docker"
+          "lp"
+          "networkmanager"
+          "scanner"
+          "video"
+          "wheel"
+          "wireshark"
+        ];
         hashedPassword = user.sha256Passwd;
         createHome = true;
         home = "/home/${user.name}";
@@ -161,6 +171,7 @@ in mkMerge [
     };
 
     programs.noisetorch.enable = true;
+    programs.wireshark.enable = true;
 
     home-manager = {
       useUserPackages = true;
