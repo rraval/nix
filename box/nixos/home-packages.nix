@@ -7,6 +7,7 @@
   discord
   diskonaut
   fzf
+  gh
   ghostwriter
   gimp
   git-nomad
