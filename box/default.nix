@@ -124,7 +124,10 @@ in mkMerge [
 
     services = mkMerge [
       {
-        avahi.enable = true;
+        avahi = {
+          enable = true;
+          nssmdns = true;
+        };
         blueman.enable = true;
         pcscd.enable = true;
 
