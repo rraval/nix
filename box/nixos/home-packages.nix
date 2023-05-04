@@ -1,6 +1,7 @@
 { pkgs, ... }: with pkgs; [
   android-studio
   audacity
+  calibre
   chromium
   darktable
   dig
