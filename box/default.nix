@@ -87,7 +87,7 @@ in mkMerge [
       };
       sane = {
         enable = true;
-        extraBackends = [ pkgs.hplipWithPlugin ];
+        extraBackends = [ pkgs.sane-airscan ];
       };
     };
 
