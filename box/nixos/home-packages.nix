@@ -7,6 +7,7 @@
   dig
   discord
   diskonaut
+  fx
   fzf
   gh
   ghostwriter

@@ -85,8 +85,10 @@
     nnoremap <C-J> :cn<CR>
     nnoremap <C-K> :cp<CR>
 
-    " command t
+    " file navigation / version control
     noremap <Leader>t :GFiles<CR>
+    noremap <Leader>r :Buffers<CR>
+    noremap <Leader>g :vert Git<CR>
 
     " coc
     nnoremap <silent> K :call CocActionAsync('doHover')<cr>
