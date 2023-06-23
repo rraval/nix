@@ -68,5 +68,6 @@
 
     up = "pull --rebase=merges";
     ff = "merge --ff-only";
+    mm = "!git fetch origin && git merge origin/master";
   };
 }
