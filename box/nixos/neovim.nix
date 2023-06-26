@@ -14,7 +14,6 @@
     typescript-vim
     vim-ledger
     vim-nix
-    vim-startify
   ];
   extraConfig = ''
     syntax enable
@@ -125,11 +124,6 @@
     nnoremap <A-j> <C-w>j
     nnoremap <A-k> <C-w>k
     nnoremap <A-l> <C-w>l
-
-    " session management
-    let g:startify_disable_at_vimenter = 1
-    nnoremap <Leader>s :SSave! default<CR>:SClose<CR>
-    nnoremap <Leader>a :SLoad default<CR>
 
     " scrollbind
     nnoremap <Leader>d :set scb!<CR>:echo 'scb=' . &scb
