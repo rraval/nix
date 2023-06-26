@@ -89,6 +89,7 @@
     nnoremap <C-K> :cp<CR>
 
     " file navigation / version control
+    noremap <Leader>a :tab split<CR>
     noremap <Leader>t :GFiles<CR>
     noremap <Leader>r :Buffers<CR>
     noremap <Leader>g :vert Git<CR>
