@@ -92,7 +92,7 @@
     noremap <Leader>a :tab split<CR>
     noremap <Leader>t :GFiles<CR>
     noremap <Leader>r :Buffers<CR>
-    noremap <Leader>g :vert Git<CR>
+    noremap <Leader>g :tab Git<CR>
 
     " coc
     nnoremap <silent> K :call CocActionAsync('doHover')<cr>
