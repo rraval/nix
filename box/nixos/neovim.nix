@@ -52,6 +52,10 @@
 
     " stop autoindenting things as I type
     autocmd FileType python setlocal indentkeys-=<:>
+    " align with black code formatting style
+    let g:pyindent_open_paren = 'shiftwidth()'
+    let g:pyindent_nested_paren = 'shiftwidth()'
+    let g:pyindent_continue = 'shiftwidth()'
 
     " because Y being yy is stupid
     map Y y$
