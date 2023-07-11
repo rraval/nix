@@ -27,7 +27,7 @@ main = do
         , layoutHook = maximizeWithPadding 0 layout'
         }
 
-layout' = avoidStruts $ smartBorders $ tallLayout ||| Mirror tallLayout
+layout' = avoidStruts $ Mirror tallLayout ||| noBorders Full
 tallLayout = Tall 1 (3/100) (1/2)
 
 keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) = M.fromList $
