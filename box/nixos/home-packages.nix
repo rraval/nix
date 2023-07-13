@@ -7,6 +7,7 @@
   dig
   discord
   diskonaut
+  flameshot
   fx
   fzf
   gh
