@@ -63,6 +63,11 @@
     " Ctrl+D for inserting the current buffer's directory for optin relative editing
     cnoremap <expr> <C-d> expand('%:h/') . '/'
 
+    " % takes too many hands to type for a common motion
+    nnoremap <C-e> %
+    vnoremap <C-e> %
+    onoremap <C-e> %
+
     " kill any trailing whitespace on save
     autocmd BufWritePre * %s/\s\+$//e
 
