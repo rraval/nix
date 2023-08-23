@@ -13,6 +13,7 @@
     splice-vim
     typescript-vim
     vim-ledger
+    vim-matchup
     vim-nix
   ];
   extraConfig = ''
