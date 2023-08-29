@@ -18,7 +18,7 @@
       name = "rraval";
       realName = "Ronuk Raval";
       email = "ronuk.raval@gmail.com";
-      sha256Passwd = rravalNixPrivate.data.rravalSha256Passwd;
+      hashedPasswd = rravalNixPrivate.data.rravalHashedPasswd;
     };
     locale = "en_CA.UTF-8";
     timeZone = "America/Toronto";

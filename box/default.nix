@@ -113,7 +113,7 @@ in mkMerge [
           "wheel"
           "wireshark"
         ];
-        hashedPassword = user.sha256Passwd;
+        hashedPassword = user.hashedPasswd;
         createHome = true;
         home = "/home/${user.name}";
         shell = pkgs.fish;
@@ -175,6 +175,7 @@ in mkMerge [
 
     programs.noisetorch.enable = true;
     programs.wireshark.enable = true;
+    programs.fish.enable = true;
 
     home-manager = {
       useUserPackages = true;
