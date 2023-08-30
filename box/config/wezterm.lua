@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
-local color_scheme = 'Solarized Dark (base16)'
+local color_scheme = 'Solarized (dark) (terminal.sexy)'
 local colors = wezterm.color.get_builtin_schemes()[color_scheme]
 colors.scrollbar_thumb = colors.cursor_fg
 
