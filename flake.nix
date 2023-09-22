@@ -11,9 +11,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gitNomad = {
+      url = "github:rraval/git-nomad";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, rravalNixPrivate, homeManager }: let
+  outputs = { self, nixpkgs, rravalNixPrivate, homeManager, gitNomad }: let
     user = {
       name = "rraval";
       realName = "Ronuk Raval";
@@ -29,13 +33,23 @@
       name = hostName;
       value = nixpkgs.lib.nixosSystem {
         inherit system;
+
         specialArgs = {
           boxArgs = {
             inherit user locale timeZone hostName rootDisks;
             hmLib = homeManager.lib.hm;
           };
         };
+
         modules = extraModules ++ [
+          {
+            nixpkgs.overlays = [
+              (final: prev: {
+                git-nomad = gitNomad.packages.${system}.default;
+              })
+            ];
+          }
+
           homeManager.nixosModule
           rravalNixPrivate.nixosModules.encircle
           ./box
