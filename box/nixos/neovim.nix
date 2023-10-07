@@ -57,6 +57,8 @@
     let g:pyindent_nested_paren = 'shiftwidth()'
     let g:pyindent_continue = 'shiftwidth()'
 
+    autocmd FileType ledger setlocal foldmethod=marker
+
     " because Y being yy is stupid
     map Y y$
 
