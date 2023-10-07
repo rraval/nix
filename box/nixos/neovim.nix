@@ -75,9 +75,6 @@
     " Jump to last cursor position, see :help last-position-jump
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-    " Fold diffs inside fugitive commit windows
-    autocmd FileType git set foldmethod=syntax
-
     " netrw can go die in a fire
     let g:loaded_netrw = 1
     let g:loaded_netrwPlugin = 1
@@ -119,38 +116,8 @@
 
     highlight link CocHintSign Comment
 
-    " terminal
-    nnoremap <Leader>w :terminal<CR>
-    autocmd BufEnter term://* startinsert
-    tnoremap <Esc> <C-\><C-n>
-    tnoremap <A-h> <C-\><C-n><C-w>h
-    tnoremap <A-j> <C-\><C-n><C-w>j
-    tnoremap <A-k> <C-\><C-n><C-w>k
-    tnoremap <A-l> <C-\><C-n><C-w>l
-    nnoremap <A-h> <C-w>h
-    nnoremap <A-j> <C-w>j
-    nnoremap <A-k> <C-w>k
-    nnoremap <A-l> <C-w>l
-
     " scrollbind
     nnoremap <Leader>d :set scb!<CR>:echo 'scb=' . &scb
-
-    " arc
-    function ArcRefTask()
-      let l:ref = system('git show -s --format=%B HEAD^ | grep "^Ref"')
-      put =l:ref
-    endfunction
-
-    function ArcDependsOnDiff()
-      let l:commit_message = system('git show -s --format=%B HEAD^ | grep "^Differential Revision:"')
-      let l:diff = matchlist(l:commit_message, '/\([^/]\+\)$')[1]
-      let l:ref = 'Depends on ' . l:diff . '.'
-      put =l:ref
-    endfunction
-
-    nnoremap <Leader>z :cexpr system("arc lint --output=compiler")<CR>
-    nnoremap <Leader>x :call ArcRefTask()<CR>
-    nnoremap <Leader>c :call ArcDependsOnDiff()<CR>
 
     " firenvim, firefox integration
     let g:firenvim_config = {
