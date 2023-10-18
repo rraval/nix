@@ -46,7 +46,6 @@
     acom = "commit --amend";
 
     st = "status -sb";
-    d = "diff";
     cached = "diff --cached";
     stat = "diff --stat";
     graph = "log --graph --oneline --all --decorate";
@@ -56,6 +55,7 @@
     cont = "rebase --continue";
     todo = "rebase --edit-todo";
 
+    d = "switch --detach";
     b = "branch";
     to = "branch --set-upstream-to";
     tom = "branch --set-upstream-to origin/master";
@@ -66,6 +66,7 @@
     fliptable = "!echo '(╯°□°）╯︵ ┻━┻'; git reset --hard HEAD";
     flipup = "!echo '┬─┬ ノ( ゜-゜ノ)'; git reset --hard '@{u}'";
 
+    f = "fetch";
     up = "pull --rebase=merges";
     ff = "merge --ff-only";
     mm = "!git fetch origin && git merge origin/master";
