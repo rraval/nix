@@ -15,11 +15,8 @@
     apply = {
       whitespace = "fix";
     };
-    branch = {
-      autoSetupMerge = "always";
-    };
     push = {
-      default = "simple";
+      default = "current";
     };
     rebase = {
       autosquash = true;
