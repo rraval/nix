@@ -130,6 +130,7 @@ in mkMerge [
         };
         blueman.enable = true;
         pcscd.enable = true;
+        tailscale.enable = true;
 
         printing = {
           enable = true;
