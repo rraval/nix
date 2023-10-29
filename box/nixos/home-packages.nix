@@ -4,6 +4,7 @@
   blender
   calibre
   chromium
+  cura
   darktable
   dig
   discord
