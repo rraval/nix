@@ -22,6 +22,7 @@
       autosquash = true;
       stat = true;
       missingCommitsCheck = "warn";
+      updateRefs = true;
     };
     merge = {
       tool = "splice";
