@@ -95,8 +95,9 @@
 
     " file navigation / version control
     noremap <Leader>a :tab split<CR>
-    noremap <Leader>t :GFiles<CR>
+    noremap <Leader>e :Lines<CR>
     noremap <Leader>r :Buffers<CR>
+    noremap <Leader>t :GFiles<CR>
     noremap <Leader>g :tab Git<CR>
 
     " coc
