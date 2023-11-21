@@ -17,6 +17,7 @@
   gimp
   git-nomad
   gnome.simple-scan
+  hexyl
   htop
   imagemagick
   inkscape
