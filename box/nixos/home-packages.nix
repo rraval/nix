@@ -1,4 +1,6 @@
 { pkgs, ... }: with pkgs; [
+  posterazor
+  libation
   android-studio
   audacity
   blender
@@ -43,6 +45,7 @@
   slack
   spotify
   stremio
+  tmux
   transmission-gtk
   unzip
   visidata
