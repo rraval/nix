@@ -1,6 +1,4 @@
 { pkgs, ... }: with pkgs; [
-  posterazor
-  libation
   android-studio
   audacity
   blender
@@ -26,6 +24,7 @@
   iotop
   kdenlive
   lens
+  libation
   libfaketime
   libreoffice
   nodejs
@@ -33,6 +32,7 @@
   obsidian
   okular
   playerctl
+  posterazor
   #postman
   pv
   qrencode
@@ -47,6 +47,7 @@
   stremio
   tmux
   transmission-gtk
+  trippy
   unzip
   visidata
   vlc
