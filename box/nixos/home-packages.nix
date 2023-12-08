@@ -33,7 +33,7 @@
   obsidian
   okular
   playerctl
-  postman
+  #postman
   pv
   qrencode
   rehex
