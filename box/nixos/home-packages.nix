@@ -2,6 +2,7 @@
   android-studio
   audacity
   blender
+  bruno
   calibre
   chromium
   cura
@@ -33,7 +34,6 @@
   okular
   playerctl
   posterazor
-  #postman
   pv
   qrencode
   rehex
