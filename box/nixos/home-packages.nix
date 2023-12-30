@@ -32,6 +32,7 @@
   obs-studio
   obsidian
   okular
+  pdftk
   playerctl
   posterazor
   pv
