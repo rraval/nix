@@ -46,6 +46,7 @@
   slack
   spotify
   stremio
+  subsurface
   tmux
   transmission-gtk
   trippy
