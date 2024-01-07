@@ -58,6 +58,7 @@
     let g:pyindent_continue = 'shiftwidth()'
 
     autocmd FileType ledger setlocal foldmethod=marker
+    autocmd FileType git setlocal foldmethod=syntax
 
     " because Y being yy is stupid
     map Y y$
