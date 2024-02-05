@@ -49,6 +49,7 @@
   spotify
   stremio
   subsurface
+  tig
   tmux
   transmission-gtk
   trippy
