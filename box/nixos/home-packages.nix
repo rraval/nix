@@ -42,6 +42,7 @@
   rehex
   ripgrep
   rofimoji
+  rpi-imager
   # broken with compile error in sfnt.cpp
   # scribusUnstable
   skypeforlinux
