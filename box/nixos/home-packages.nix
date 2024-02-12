@@ -5,6 +5,7 @@
   bruno
   calibre
   chromium
+  corefonts
   cura
   darktable
   dig
@@ -52,6 +53,7 @@
   trippy
   unzip
   visidata
+  vistafonts
   vlc
   wezterm
   wireshark
