@@ -8,6 +8,7 @@
   corefonts
   cura
   darktable
+  delta
   dig
   discord
   diskonaut

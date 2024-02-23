@@ -11,6 +11,14 @@
     core = {
       whitespace = "trailing-space,space-before-tab";
       commentChar = ";";
+      pager = "delta";
+    };
+    interactive = {
+      diffFilter = "delta --color-only";
+    };
+    delta = {
+      navigate = "true";
+      hyperlinks = "true";
     };
     apply = {
       whitespace = "fix";
@@ -27,6 +35,9 @@
     merge = {
       tool = "splice";
       conflictstyle = "diff3";
+    };
+    diff = {
+      colorMoved = "default";
     };
     mergetool = {
       keepBackup = false;
