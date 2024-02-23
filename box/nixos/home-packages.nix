@@ -30,6 +30,7 @@
   libation
   libfaketime
   libreoffice
+  musescore
   nodejs
   obs-studio
   obsidian
