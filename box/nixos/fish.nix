@@ -9,6 +9,43 @@
         cp ${pkgs.fzf}/share/fish/vendor_conf.d/load-fzf-key-bindings.fish $out/init.fish
       '';
     }
+
+    {
+      name = "git-nomad-fish";
+      src = pkgs.writeTextFile {
+        name = "git-nomad-fish";
+        destination = "/init.fish";
+        text = ''
+          function __git_nomad_refs -d 'Output `refs/nomad/*` refs only if `git-nomad` is installed and cwd is in a git directory'
+              type -q git-nomad; and git-nomad ls --print=ref 2>/dev/null
+          end
+
+          # The following were adapted from the fish supplied git completions, but made to
+          # complete nomad refs instead. Those completions also define
+          # functions like `__fish_git_using_command`.
+
+          # Adapted from __fish_git_branches
+          complete -f -c git -n '__fish_git_using_command show' -n 'not contains -- -- (commandline -opc)' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command checkout' -n 'not contains -- -- (commandline -opc)' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command branch' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command describe' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command merge' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command merge-base' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command rebase' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command rebase' -l onto -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command reflog' -ka '(__git_nomad_refs)'
+          complete -c git -n '__fish_git_using_command reset' -n 'not contains -- -- (commandline -opc)' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command rev-parse' -ka '(__git_nomad_refs)'
+          complete -c git -n '__fish_git_using_command worktree' -n '__fish_seen_subcommand_from add' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command format-patch' -ka '(__git_nomad_refs)'
+
+          # Adapted from __fish_git_refs
+          complete -f -c git -n '__fish_git_using_command cherry' -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command restore' -r -s s -l source -ka '(__git_nomad_refs)'
+          complete -f -c git -n '__fish_git_using_command switch' -s d -l detach -rka '(__git_nomad_refs)'
+        '';
+      };
+    }
   ];
   interactiveShellInit = ''
     set -x TIME '\n\n%U user, %S system, %E elapsed, %P CPU (%X text, %D data, %M max)k\n%I inputs, %O outputs (%F major, %R minor) pagefaults, %W swaps'
