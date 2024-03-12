@@ -32,7 +32,6 @@
   libreoffice
   musescore
   nodejs
-  obs-studio
   obsidian
   okular
   pdftk
