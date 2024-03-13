@@ -43,6 +43,7 @@
   ripgrep
   rofimoji
   rpi-imager
+  screenkey
   # broken with compile error in sfnt.cpp
   # scribusUnstable
   skypeforlinux
