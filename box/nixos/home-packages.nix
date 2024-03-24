@@ -35,6 +35,7 @@
   obsidian
   okular
   pdftk
+  pgformatter
   playerctl
   posterazor
   pv
