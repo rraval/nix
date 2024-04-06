@@ -66,6 +66,7 @@
 
     d = "switch --detach";
     b = "branch";
+    bd = ''!n=$(git symbolic-ref --short HEAD) && git switch --detach && git branch -D "$n"'';
     to = "branch --set-upstream-to";
     tom = "branch --set-upstream-to origin/master";
     br = "for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:green)%(refname:short)%(color:reset): %(color:red)%(objectname:short)%(color:reset) %(contents:subject) %(color:yellow)(%(authorname) %(committerdate:relative))%(color:reset)'";
