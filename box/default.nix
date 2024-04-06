@@ -182,6 +182,7 @@ in mkMerge [
     programs.noisetorch.enable = true;
     programs.wireshark.enable = true;
     programs.fish.enable = true;
+    programs.steam.enable = true;
 
     home-manager = {
       useUserPackages = true;
