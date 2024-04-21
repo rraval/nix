@@ -6,17 +6,22 @@ import XMonad
 import XMonad.Actions.CycleWS(nextScreen, swapNextScreen)
 import XMonad.Actions.Navigation2D
 import XMonad.Config.Desktop
+import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Maximize
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
+import XMonad.Util.Themes
 import qualified XMonad.StackSet as W
 
 main = do
     xmonad desktopConfig
         { modMask = mod4Mask
         , terminal = "wezterm"
-        , manageHook = manageDocks
+        , workspaces = map fst workspaces'
+        , manageHook = insertPosition End Newer
+            <+> manageDocks
             <+> composeAll
                 [ isFullscreen --> doFullFloat
                 , className =? "Xfce4-notifyd" --> doIgnore
@@ -24,13 +29,34 @@ main = do
                 ]
             <+> manageHook desktopConfig
         , keys = \c -> keys' c
-        , layoutHook = maximizeWithPadding 0 layout'
+        , layoutHook = maximizeWithPadding 10 layout'
         }
 
-layout' = avoidStruts $ Mirror tallLayout ||| noBorders Full
+layout' = avoidStruts $ noBorders (tabbed shrinkText theme') ||| Mirror tallLayout ||| tallLayout
 tallLayout = Tall 1 (3/100) (1/2)
 
-keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) = M.fromList $
+theme' = (theme smallClean)
+    { decoHeight = 22
+    , fontName = "xft:DejaVu Sans:style=Book;2"
+    }
+
+workspaces' =
+    [ ("1", xK_1)
+    , ("2", xK_2)
+    , ("3", xK_3)
+    , ("4", xK_4)
+    , ("5", xK_5)
+    , ("6", xK_6)
+    , ("7", xK_7)
+    , ("8", xK_8)
+    , ("9", xK_9)
+    , ("`", xK_grave)
+    , ("0", xK_0)
+    , ("-", xK_minus)
+    , ("=", xK_equal)
+    ]
+
+keys' (XConfig {modMask = modm, terminal = terminal}) = M.fromList $
     [ ((modm, xK_q), kill)
     , ((modm .|. shiftMask, xK_q), io $ exitWith ExitSuccess)
     , ((modm .|. shiftMask, xK_w), spawn "systemctl suspend")
@@ -61,6 +87,6 @@ keys' (XConfig {modMask = modm, terminal = terminal, workspaces = workspaces}) =
     ]
     ++
     -- workspace navigation
-    [((modifier .|. modm, key), windows $ action i)
-        | (i, key) <- zip workspaces [xK_1 .. xK_9]
+    [((modm .|. modifier, key), windows $ action name)
+        | (name, key) <- workspaces'
         , (action, modifier) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
