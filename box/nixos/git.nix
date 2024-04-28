@@ -53,6 +53,7 @@
     com = "commit";
     mcom = "merge --no-ff";
     acom = "commit --amend";
+    sep = "commit --allow-empty -m ------";
 
     st = "status -sb";
     cached = "diff --cached";
