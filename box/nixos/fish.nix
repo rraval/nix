@@ -48,6 +48,7 @@
     }
   ];
   interactiveShellInit = ''
+    set -x ENCIRCLE_ENV local
     set -x TIME '\n\n%U user, %S system, %E elapsed, %P CPU (%X text, %D data, %M max)k\n%I inputs, %O outputs (%F major, %R minor) pagefaults, %W swaps'
 
     # `reaver` is a fish prompt featuring
