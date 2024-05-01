@@ -12,6 +12,7 @@
     solarized
     splice-vim
     typescript-vim
+    vim-eunuch
     vim-ledger
     vim-matchup
     vim-nix
