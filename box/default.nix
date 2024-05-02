@@ -200,6 +200,9 @@ in mkMerge [
         programs = {
           direnv = {
             enable = true;
+            stdlib = ''
+              export ENCIRCLE_ENV=local
+            '';
             nix-direnv = {
               enable = true;
             };
