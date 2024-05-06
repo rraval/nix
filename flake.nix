@@ -5,7 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     rravalNixPrivate = {
       url = "github:rraval/nix-private";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     homeManager = {
       url = "github:nix-community/home-manager";
@@ -15,9 +14,13 @@
       url = "github:rraval/git-nomad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    encircle = {
+      url = "path:/home/rraval/encircle-nix-configs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, rravalNixPrivate, homeManager, gitNomad }: let
+  outputs = { self, nixpkgs, rravalNixPrivate, homeManager, gitNomad, encircle }: let
     user = {
       name = "rraval";
       realName = "Ronuk Raval";
@@ -51,7 +54,7 @@
           }
 
           homeManager.nixosModule
-          rravalNixPrivate.nixosModules.encircle
+          encircle.nixosModules.default
           ./box
         ];
       };

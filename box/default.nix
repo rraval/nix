@@ -367,4 +367,14 @@ in mkMerge [
   in mkIf isRootSolidState {
     fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   })
+
+  {
+    encircle = {
+      hosts.enable = true;
+      vanta.enable = true;
+      postgresql.enable = true;
+      vpn.enable = true;
+      minikube.enable = true;
+    };
+  }
 ]
