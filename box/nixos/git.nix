@@ -13,6 +13,9 @@
       commentChar = ";";
       pager = "delta";
     };
+    branch = {
+      autoSetupMerge = "simple";
+    };
     interactive = {
       diffFilter = "delta --color-only";
     };
