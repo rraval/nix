@@ -15,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     encircle = {
-      url = "path:/home/rraval/encircle-nix-configs";
+      url = "github:EncircleInc/nix-configs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

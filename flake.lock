@@ -56,14 +56,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1714926130,
-        "narHash": "sha256-hIjI1IU/vX88CR4k15UxNVHtmROyiiEediYKeCRF1W4=",
-        "path": "/home/rraval/encircle-nix-configs",
-        "type": "path"
+        "lastModified": 1714926056,
+        "narHash": "sha256-ebB5UYWZXem0ppA+rPeZ+EI0LV9s7jLUtsiGiPrAGe0=",
+        "owner": "EncircleInc",
+        "repo": "nix-configs",
+        "rev": "2e18d8e4cd9fc5658ade5f78adf7e74aba6ccb99",
+        "type": "github"
       },
       "original": {
-        "path": "/home/rraval/encircle-nix-configs",
-        "type": "path"
+        "owner": "EncircleInc",
+        "repo": "nix-configs",
+        "type": "github"
       }
     },
     "flake-parts": {
