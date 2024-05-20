@@ -10,8 +10,10 @@
     };
     core = {
       whitespace = "trailing-space,space-before-tab";
-      commentChar = ";";
       pager = "delta";
+    };
+    commit = {
+      cleanup = "scissors";
     };
     branch = {
       autoSetupMerge = "simple";
