@@ -9,8 +9,8 @@
     coffee-script
     fugitive
     fzf-vim
+    nightfox-nvim
     oil-nvim
-    solarized
     typescript-vim
     vim-eunuch
     vim-ledger
@@ -20,17 +20,7 @@
   extraConfig = ''
     syntax enable
     set background=dark
-
-    autocmd VimEnter,ColorScheme * call ExtendColorScheme()
-    function ExtendColorScheme()
-      hi! Pmenu ctermfg=0 ctermbg=15
-      hi! link CocInlayHint CocHintSign
-      hi! link CocSearch CocUnderline
-      hi! link CocFloating Pmenu
-      hi! link CocMenuSel PmenuSel
-
-      hi! Folded ctermfg=0 ctermbg=13
-    endfunction
+    colorscheme nightfox
 
     set softtabstop=4
     set tabstop=4
