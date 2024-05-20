@@ -36,18 +36,10 @@
       updateRefs = true;
     };
     merge = {
-      tool = "splice";
       conflictstyle = "diff3";
     };
     diff = {
       colorMoved = "default";
-    };
-    mergetool = {
-      keepBackup = false;
-      splice = {
-        cmd = "nvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'";
-        trustExitCode = true;
-      };
     };
   };
   aliases = {

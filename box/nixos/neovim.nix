@@ -11,7 +11,6 @@
     fzf-vim
     oil-nvim
     solarized
-    splice-vim
     typescript-vim
     vim-eunuch
     vim-ledger
@@ -79,9 +78,6 @@
 
     " Jump to last cursor position, see :help last-position-jump
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-    " splice
-    let g:splice_prefix = ","
 
     " camel case motion
     call camelcasemotion#CreateMotionMappings(',')
