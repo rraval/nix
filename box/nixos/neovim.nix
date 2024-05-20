@@ -9,6 +9,7 @@
     coffee-script
     fugitive
     fzf-vim
+    oil-nvim
     solarized
     splice-vim
     typescript-vim
@@ -79,10 +80,6 @@
     " Jump to last cursor position, see :help last-position-jump
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-    " netrw can go die in a fire
-    let g:loaded_netrw = 1
-    let g:loaded_netrwPlugin = 1
-
     " splice
     let g:splice_prefix = ","
 
@@ -138,5 +135,9 @@
     if !empty($NEOVIM_MAKEPRG)
       set makeprg=$NEOVIM_MAKEPRG
     endif
+  '';
+  extraLuaConfig = ''
+    require("oil").setup()
+    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   '';
 }
