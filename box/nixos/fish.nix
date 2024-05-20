@@ -110,9 +110,9 @@
       set _reaver_command_status CANCEL
     end
 
-    set -g __fish_git_prompt_show_informative_status
-    set -g __fish_git_prompt_showcolorhints
-    set -g __fish_git_prompt_showuntrackedfiles
+    set -g __fish_git_prompt_show_informative_status 1
+    set -g __fish_git_prompt_showcolorhints 1
+    set -g __fish_git_prompt_showuntrackedfiles 1
 
     function _reaver_left_prompt
       printf '%s%s%s%s$ ' (set_color yellow) (prompt_pwd) (set_color normal) (fish_git_prompt)
