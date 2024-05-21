@@ -38,6 +38,14 @@ tallLayout = Tall 1 (3/100) (1/2)
 theme' = (theme smallClean)
     { decoHeight = 22
     , fontName = "xft:DejaVu Sans:style=Book;2"
+    -- Adapted the tab colors
+    -- https://github.com/EdenEast/nightfox.nvim/blob/main/extra/nightfox/wezterm.toml
+    , activeColor         = "#71839b"
+    , activeBorderColor   = "#71839b"
+    , activeTextColor     = "#192330"
+    , inactiveColor       = "#212e3f"
+    , inactiveBorderColor = "#212e3f"
+    , inactiveTextColor   = "#aeafb0"
     }
 
 workspaces' =
