@@ -67,7 +67,7 @@
     bd = ''!n=$(git symbolic-ref --short HEAD) && git switch --detach && git branch -D "$n"'';
     to = "branch --set-upstream-to";
     br = "for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:green)%(refname:short)%(color:reset): %(color:red)%(objectname:short)%(color:reset) %(contents:subject) %(color:yellow)(%(authorname) %(committerdate:relative))%(color:reset)'";
-    nr = "for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:green)%(refname:short)%(color:reset): %(color:red)%(objectname:short)%(color:reset) %(contents:subject) %(color:yellow)(%(authorname) %(committerdate:relative))%(color:reset)'";
+    nr = "!git for-each-ref --sort=committerdate refs/nomad/ --exclude \"refs/nomad/$(hostname)/**\" --format='%(HEAD) %(color:green)%(refname:strip=3)%(color:reset): %(color:red)%(objectname:short)%(color:reset) %(contents:subject) %(color:yellow)(%(authorname) %(committerdate:relative))%(color:reset)'";
     co = "checkout";
     cx = "cherry-pick -x";
     fliptable = "!echo '(╯°□°）╯︵ ┻━┻'; git reset --hard HEAD";
