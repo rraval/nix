@@ -77,6 +77,8 @@
     autocmd FileType qf wincmd J
     nnoremap <C-J> :cn<CR>
     nnoremap <C-K> :cp<CR>
+    " load quickfix from system clipboard
+    noremap <Leader>z :cexpr getreg('+')<CR>
 
     " file navigation / version control
     noremap <Leader>a :tab split<CR>
