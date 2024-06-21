@@ -56,11 +56,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714926056,
-        "narHash": "sha256-ebB5UYWZXem0ppA+rPeZ+EI0LV9s7jLUtsiGiPrAGe0=",
+        "lastModified": 1719009496,
+        "narHash": "sha256-5KrsFgxcW0hhYe8FR6rEnqQ3BzWSymQaBMyJh8A3vcQ=",
         "owner": "EncircleInc",
         "repo": "nix-configs",
-        "rev": "2e18d8e4cd9fc5658ade5f78adf7e74aba6ccb99",
+        "rev": "a628874fd90e5d1a5458b01d25be257678aff8ee",
         "type": "github"
       },
       "original": {
