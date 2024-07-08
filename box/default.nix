@@ -1,6 +1,5 @@
 { pkgs, lib, config, boxArgs, ... }: let
   inherit (boxArgs)
-    hmLib
     user
     locale
     timeZone
@@ -212,18 +211,6 @@ in mkMerge [
           fish = importNixOS "fish.nix";
           git = importNixOS "git.nix";
 
-          gpg = {
-            enable = true;
-
-            settings = {
-              keyserver = "hkps://keys.openpgp.org";
-            };
-
-            # Use PC/SC to talk to smartcards
-            # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
-            scdaemonSettings.disable-ccid = true;
-          };
-
           neovim = importNixOS "neovim.nix";
 
           obs-studio = {
@@ -248,12 +235,6 @@ in mkMerge [
             extraConfig = {
               modi = "drun,window,ssh";
             };
-          };
-
-          ssh = {
-            enable = true;
-            userKnownHostsFile = "${homeDir}/.ssh/known_hosts ${./config/known_hosts}";
-            serverAliveInterval = 60;
           };
         };
 
@@ -341,31 +322,6 @@ in mkMerge [
           in builtins.toPath "${vdPlugins}/plugins/dedupe.py";
           ".visidatarc".text = ''
             import plugins.dedupe
-          '';
-        };
-
-        home.activation = {
-          sshKeygen = hmLib.dag.entryAfter ["writeBoundary"] ''
-            if [[ ! -f "$HOME"/.ssh/id_rsa ]]; then
-              $DRY_RUN_CMD ssh-keygen -b 4096 -f "$HOME"/.ssh/id_rsa -N ""
-            fi
-          '';
-
-          # From https://logs.nix.samueldr.com/home-manager/2020-11-12
-          #
-          # 08:17 <coco> For gpg, I get "gpg: WARNING: unsafe permissions on
-          # homedir '/home/<user>/.gnupg'". I can perform a `chmod go-rwx`
-          # to fix this, but is there a declarative way to do that?
-          #
-          # 11:22 <hexa-> chmod 700 ~/.gnupg
-          #
-          # 11:22 <hexa-> and be done
-          #
-          # 11:28 <piegames1> coco: As the folder itself is not really part
-          # of any declarativeness, you only need to run the command once
-          # and be done.
-          gpgPermissions = hmLib.dag.entryAfter ["writeBoundary"] ''
-            $DRY_RUN_CMD chmod 700 ${hmCfg.programs.gpg.homedir}
           '';
         };
       };

@@ -40,11 +40,13 @@
         specialArgs = {
           boxArgs = {
             inherit user locale timeZone hostName rootDisks;
-            hmLib = homeManager.lib.hm;
           };
         };
 
         modules = extraModules ++ [
+          homeManager.nixosModule
+          encircle.nixosModules.default
+
           {
             nixpkgs.overlays = [
               (final: prev: {
@@ -53,8 +55,12 @@
             ];
           }
 
-          homeManager.nixosModule
-          encircle.nixosModules.default
+          {
+            home-manager.users.rraval.imports = [
+              ./hm-modules
+            ];
+          }
+
           ./box
         ];
       };
