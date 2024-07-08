@@ -2,6 +2,7 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      bufexplorer
       camelcasemotion
       coc-nvim
       coc-rust-analyzer
@@ -124,6 +125,14 @@
       if !empty($NEOVIM_MAKEPRG)
         set makeprg=$NEOVIM_MAKEPRG
       endif
+
+      " bufexplorer
+      let g:bufExplorerDefaultHelp=0       " Do not show default help.
+      let g:bufExplorerShowDirectories=0   " Do not show directories.
+
+      " fugitive
+      " buffers for `G diff` are important!
+      autocmd User FugitivePager setlocal bufhidden= buflisted
     '';
     extraLuaConfig = ''
       require("oil").setup()
