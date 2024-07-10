@@ -91,7 +91,6 @@
 
       # `reaver` is a fish prompt featuring
       # - A minimal left prompt with git status integration
-      # - A right prompt with command duration and time
       # - Semantic prompt integration, see
       #   https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
       #   and https://wezfurlong.org/wezterm/shell-integration.html
@@ -157,24 +156,8 @@
         printf '%s%s%s%s$ ' (set_color yellow) (prompt_pwd) (set_color normal) (fish_git_prompt)
       end
 
-      function _reaver_right_prompt
-        set -l _reaver_right_prompt_seconds (math --scale=3 $CMD_DURATION / 1000 % 60)
-        set -l _reaver_right_prompt_minutes (math --scale=0 $CMD_DURATION / 60000 % 60)
-        set -l _reaver_right_prompt_hours (math --scale=0 $CMD_DURATION / 3600000)
-
-        test "$_reaver_right_prompt_hours" -gt 0 && set -l -a _reaver_right_prompt_duration "$_reaver_right_prompt_hours"
-        test "$_reaver_right_prompt_minutes" -gt 0 && set -l -a _reaver_right_prompt_duration "$_reaver_right_prompt_minutes"
-        test "$_reaver_right_prompt_seconds" -gt 0 && set -l -a _reaver_right_prompt_duration "$_reaver_right_prompt_seconds"
-
-        printf "%s+%s @ %s%s" (set_color brblack) (string join ":" $_reaver_right_prompt_duration) (date '+%H:%M:%S') (set_color normal)
-      end
-
       function fish_prompt
         _reaver_osc_133_prompt "i" (_reaver_left_prompt)
-      end
-
-      function fish_right_prompt
-        _reaver_osc_133_prompt "r" (_reaver_right_prompt)
       end
     '';
   };
