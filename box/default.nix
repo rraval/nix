@@ -189,7 +189,6 @@ in mkMerge [
 
       users.${user.name} = {
         programs = {
-          fish = importNixOS "fish.nix";
           git = importNixOS "git.nix";
 
           neovim = importNixOS "neovim.nix";

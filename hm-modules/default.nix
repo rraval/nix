@@ -2,6 +2,7 @@
   imports = [
     ./direnv.nix
     ./firefox.nix
+    ./fish.nix
     ./gpg.nix
     ./ssh
   ];
