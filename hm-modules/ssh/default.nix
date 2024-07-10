@@ -6,11 +6,9 @@
   };
 
   # Automatically generate (user + node) specific SSH keys.
-  # FIXME: stop using $DRY_RUN_CMD
-  # https://nix-community.github.io/home-manager/release-notes.xhtml#sec-release-24.05-highlights
   home.activation.sshKeygen = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [[ ! -f "$HOME"/.ssh/id_rsa ]]; then
-      $DRY_RUN_CMD ssh-keygen -b 4096 -f "$HOME"/.ssh/id_rsa -N ""
+      run ssh-keygen -b 4096 -f "$HOME"/.ssh/id_rsa -N ""
     fi
   '';
 }
