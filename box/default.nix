@@ -189,7 +189,6 @@ in mkMerge [
 
       users.${user.name} = {
         programs = {
-
           firefox = importNixOS "firefox.nix";
           fish = importNixOS "fish.nix";
           git = importNixOS "git.nix";
@@ -222,19 +221,6 @@ in mkMerge [
         };
 
         services = {
-          gpg-agent = let hour_in_seconds = 60 * 60; in {
-            enable = true;
-            pinentryFlavor = "gtk2";
-            enableSshSupport = true;
-            defaultCacheTtl = hour_in_seconds;
-            maxCacheTtl = 2 * hour_in_seconds;
-            defaultCacheTtlSsh = 4 * hour_in_seconds;
-            maxCacheTtlSsh = 12 * hour_in_seconds;
-            extraConfig = ''
-              auto-expand-secmem 0x30000
-            '';
-          };
-
           polybar = importNixOS "polybar.nix";
         };
 
