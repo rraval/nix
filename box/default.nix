@@ -189,8 +189,6 @@ in mkMerge [
 
       users.${user.name} = {
         programs = {
-          git = importNixOS "git.nix";
-
           neovim = importNixOS "neovim.nix";
 
           obs-studio = {

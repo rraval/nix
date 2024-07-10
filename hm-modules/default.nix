@@ -1,11 +1,30 @@
-{ pkgs, ...}: {
+{ pkgs, lib, ...}: {
   imports = [
     ./direnv.nix
     ./firefox.nix
     ./fish.nix
+    ./git.nix
     ./gpg.nix
     ./ssh
   ];
+
+  options = with lib; {
+    my = {
+      realName = mkOption {
+        type = types.str;
+        description = ''
+          Name for the person representing this user.
+        '';
+      };
+
+      email = mkOption {
+        type = types.str;
+        description = ''
+          Email for the person representing this user.
+        '';
+      };
+    };
+  };
 
   config.home = {
     stateVersion = "20.09";

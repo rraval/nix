@@ -56,9 +56,13 @@
           }
 
           {
-            home-manager.users.rraval.imports = [
-              ./hm-modules
-            ];
+            home-manager.users.rraval = {
+              imports = [ ./hm-modules ];
+              config.my = {
+                realName = "Ronuk Raval";
+                email = "ronuk.raval@gmail.com";
+              };
+            };
           }
 
           ./box
