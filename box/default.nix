@@ -222,11 +222,6 @@ in mkMerge [
         };
 
         services = {
-          dropbox = {
-            enable = false;
-            path = "${homeDir}/dropbox";
-          };
-
           gpg-agent = let hour_in_seconds = 60 * 60; in {
             enable = true;
             pinentryFlavor = "gtk2";
