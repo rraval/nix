@@ -188,14 +188,6 @@ in mkMerge [
       useGlobalPkgs = true;
 
       users.${user.name} = {
-        home = {
-          stateVersion = "20.09";
-          packages = importNixOS "home-packages.nix";
-          keyboard = {
-            options = ["ctrl:nocaps"];
-          };
-        };
-
         programs = {
           direnv = {
             enable = true;
