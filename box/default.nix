@@ -189,12 +189,6 @@ in mkMerge [
 
       users.${user.name} = {
         programs = {
-          direnv = {
-            enable = true;
-            nix-direnv = {
-              enable = true;
-            };
-          };
 
           firefox = importNixOS "firefox.nix";
           fish = importNixOS "fish.nix";

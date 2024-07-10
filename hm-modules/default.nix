@@ -1,5 +1,6 @@
 { pkgs, ...}: {
   imports = [
+    ./direnv.nix
     ./gpg.nix
     ./ssh
   ];
