@@ -199,9 +199,6 @@ in mkMerge [
         programs = {
           direnv = {
             enable = true;
-            stdlib = ''
-              export ENCIRCLE_ENV=local
-            '';
             nix-direnv = {
               enable = true;
             };
@@ -340,6 +337,7 @@ in mkMerge [
 
   {
     encircle = {
+      env.enable = true;
       hosts.enable = true;
       vanta.enable = true;
       postgresql.enable = true;
