@@ -189,14 +189,6 @@ in mkMerge [
 
       users.${user.name} = {
         programs = {
-          password-store = {
-            enable = true;
-            package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
-            settings = {
-              PASSWORD_STORE_DIR = "${homeDir}/pass";
-            };
-          };
-
           rofi = {
             enable = true;
             terminal = "${pkgs.wezterm}/bin/wezterm";

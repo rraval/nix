@@ -7,6 +7,7 @@
     ./gpg.nix
     ./neovim
     ./obs-studio.nix
+    ./password-store.nix
     ./ssh
   ];
 
