@@ -189,8 +189,6 @@ in mkMerge [
 
       users.${user.name} = {
         programs = {
-          neovim = importNixOS "neovim.nix";
-
           obs-studio = {
             enable = true;
             plugins = with pkgs.obs-studio-plugins; [
@@ -266,7 +264,6 @@ in mkMerge [
         };
 
         home.file = {
-          ".config/nvim/coc-settings.json".source = ./config/coc-settings.json;
           ".config/wezterm/wezterm.lua".source = ./config/wezterm.lua;
 
           # FIXME: visidata stuff is spread all over the place
