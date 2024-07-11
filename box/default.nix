@@ -238,8 +238,6 @@ in mkMerge [
         };
 
         home.file = {
-          ".config/wezterm/wezterm.lua".source = ./config/wezterm.lua;
-
           # FIXME: visidata stuff is spread all over the place
           # refactor to its own NixOS module
           ".visidata/plugins/dedupe.py".source = let

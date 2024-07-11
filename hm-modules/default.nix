@@ -10,6 +10,7 @@
     ./password-store.nix
     ./rofi.nix
     ./ssh
+    ./wezterm.nix
   ];
 
   options = with lib; {
@@ -98,7 +99,6 @@
       visidata
       vistafonts
       vlc
-      wezterm
       wireshark
       xclip
       youtube-dl
