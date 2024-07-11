@@ -188,17 +188,6 @@ in mkMerge [
       useGlobalPkgs = true;
 
       users.${user.name} = {
-        programs = {
-          rofi = {
-            enable = true;
-            terminal = "${pkgs.wezterm}/bin/wezterm";
-            theme = "glue_pro_blue";
-            extraConfig = {
-              modi = "drun,window,ssh";
-            };
-          };
-        };
-
         services = {
           polybar = importNixOS "polybar.nix";
         };
