@@ -189,13 +189,6 @@ in mkMerge [
 
       users.${user.name} = {
         programs = {
-          obs-studio = {
-            enable = true;
-            plugins = with pkgs.obs-studio-plugins; [
-              input-overlay
-            ];
-          };
-
           password-store = {
             enable = true;
             package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);

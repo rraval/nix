@@ -6,6 +6,7 @@
     ./git.nix
     ./gpg.nix
     ./neovim
+    ./obs-studio.nix
     ./ssh
   ];
 
