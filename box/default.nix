@@ -182,14 +182,6 @@ in mkMerge [
     programs.wireshark.enable = true;
     programs.fish.enable = true;
     programs.steam.enable = true;
-
-    home-manager = {
-      useUserPackages = true;
-      useGlobalPkgs = true;
-
-      users.${user.name} = {
-      };
-    };
   }
 
   (let

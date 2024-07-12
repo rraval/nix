@@ -56,11 +56,16 @@
           }
 
           {
-            home-manager.users.rraval = {
-              imports = [ ./hm-modules ];
-              config.my = {
-                realName = "Ronuk Raval";
-                email = "ronuk.raval@gmail.com";
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+
+              users.rraval = {
+                imports = [ ./hm-modules ];
+                config.my = {
+                  realName = "Ronuk Raval";
+                  email = "ronuk.raval@gmail.com";
+                };
               };
             };
           }
