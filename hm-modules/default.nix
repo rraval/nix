@@ -12,6 +12,7 @@
     ./rofi.nix
     ./ssh
     ./wezterm.nix
+    ./xdg.nix
   ];
 
   options = with lib; {
