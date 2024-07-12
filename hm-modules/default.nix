@@ -13,6 +13,7 @@
     ./ssh
     ./wezterm.nix
     ./xdg.nix
+    ./xsession
   ];
 
   options = with lib; {
