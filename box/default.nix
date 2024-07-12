@@ -188,10 +188,6 @@ in mkMerge [
       useGlobalPkgs = true;
 
       users.${user.name} = {
-        services = {
-          polybar = importNixOS "polybar.nix";
-        };
-
         xdg = {
           userDirs = {
             enable = true;

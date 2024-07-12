@@ -8,6 +8,7 @@
     ./neovim
     ./obs-studio.nix
     ./password-store.nix
+    ./polybar.nix
     ./rofi.nix
     ./ssh
     ./wezterm.nix
