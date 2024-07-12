@@ -11,6 +11,7 @@
     ./polybar.nix
     ./rofi.nix
     ./ssh
+    ./visidata.nix
     ./wezterm.nix
     ./xdg.nix
     ./xsession
@@ -99,7 +100,6 @@
       transmission-gtk
       trippy
       unzip
-      visidata
       vistafonts
       vlc
       wireshark
