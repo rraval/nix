@@ -49,7 +49,7 @@
       ap = "add -p";
       com = "commit";
       mcom = "merge --no-ff";
-      acom = "commit --amend";
+      acom = "commit --allow-empty --amend";
       sep = "commit --allow-empty -m ------";
 
       st = "status -sb";
