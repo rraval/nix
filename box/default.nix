@@ -227,16 +227,5 @@ in {
     in lib.mkIf isRootSolidState {
       fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
     })
-
-    {
-      encircle = {
-        env.enable = true;
-        hosts.enable = true;
-        vanta.enable = true;
-        postgresql.enable = true;
-        vpn.enable = true;
-        minikube.enable = true;
-      };
-    }
   ];
 }

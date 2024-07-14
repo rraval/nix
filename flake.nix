@@ -24,7 +24,6 @@
     boxModule = {
       imports = [
         homeManager.nixosModule
-        encircle.nixosModules.default
         ./box
       ];
     };
@@ -33,20 +32,25 @@
       system = "x86_64-linux";
 
       modules = [
-        boxModule
-        hostModule
+        {
+          imports = [ hostModule ];
+
+          networking.hostName = hostName;
+          i18n.defaultLocale =  "en_CA.UTF-8";
+          time.timeZone = "America/Toronto";
+        }
 
         ({ pkgs, ... }: {
-          networking.hostName = hostName;
-
+          # FIXME: it would be nice for gitNomad to provide an overlay
           nixpkgs.overlays = [
             (final: prev: {
               git-nomad = gitNomad.packages.${pkgs.system}.default;
             })
           ];
+        })
 
-          i18n.defaultLocale =  "en_CA.UTF-8";
-          time.timeZone = "America/Toronto";
+        ({ pkgs, ... }: {
+          imports = [ boxModule ];
 
           # FIXME: this whole block can go into rravalNixPrivate
           box.user = {
@@ -73,6 +77,19 @@
             };
           };
         })
+
+        {
+          imports = [ encircle.nixosModules.default ];
+
+          encircle = {
+            env.enable = true;
+            hosts.enable = true;
+            vanta.enable = true;
+            postgresql.enable = true;
+            vpn.enable = true;
+            minikube.enable = true;
+          };
+        }
       ];
     };
 
