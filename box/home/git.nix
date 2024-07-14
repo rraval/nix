@@ -1,8 +1,10 @@
-{ config, ... }: {
+{ config, ... }: let
+  userCfg = config.box.user;
+in {
   programs.git = {
     enable = true;
-    userName = config.my.realName;
-    userEmail = config.my.email;
+    userName = userCfg.realName;
+    userEmail = userCfg.email;
     extraConfig = {
       color = {
         diff = "auto";

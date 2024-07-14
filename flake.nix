@@ -52,7 +52,6 @@
         ({ pkgs, ... }: {
           imports = [ boxModule ];
 
-          # FIXME: this whole block can go into rravalNixPrivate
           box.user = {
             login = {
               name = "rraval";
@@ -61,20 +60,6 @@
 
             realName = "Ronuk Raval";
             email = "ronuk.raval@gmail.com";
-          };
-
-          # FIXME: this goes in ./box
-          home-manager = {
-            useUserPackages = true;
-            useGlobalPkgs = true;
-
-            users.rraval = {
-              imports = [ ./hm-modules ];
-              config.my = {
-                realName = "Ronuk Raval";
-                email = "ronuk.raval@gmail.com";
-              };
-            };
           };
         })
 
