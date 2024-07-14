@@ -1,11 +1,4 @@
 { pkgs, lib, config, ... }: let
-  inherit (lib)
-    concatMapAttrs
-    mkIf
-    mkMerge
-    optional
-  ;
-
   cfg = config.box;
   user = cfg.user.login.name;
 in {
@@ -75,7 +68,7 @@ in {
     };
   };
 
-  config = mkMerge [
+  config = lib.mkMerge [
     {
       nix = {
         settings.allowed-users = [ user ];
@@ -169,40 +162,38 @@ in {
 
       virtualisation.docker.enable = true;
 
-      services = mkMerge [
-        {
-          avahi = {
-            enable = true;
-            nssmdns = true;
-          };
-          blueman.enable = true;
-          pcscd.enable = true;
-          tailscale.enable = true;
+      services = {
+        avahi = {
+          enable = true;
+          nssmdns = true;
+        };
+        blueman.enable = true;
+        pcscd.enable = true;
+        tailscale.enable = true;
 
-          printing = {
-            enable = true;
-            drivers = with pkgs; [
-              gutenprint
-              gutenprintBin
-              hplip
-              mfcl2720dwcupswrapper
-              mfcl2720dwlpr
-            ];
-          };
+        printing = {
+          enable = true;
+          drivers = with pkgs; [
+            gutenprint
+            gutenprintBin
+            hplip
+            mfcl2720dwcupswrapper
+            mfcl2720dwlpr
+          ];
+        };
 
-          udev.packages = [ pkgs.android-udev-rules ];
+        udev.packages = [ pkgs.android-udev-rules ];
 
-          xserver = {
+        xserver = {
+          enable = true;
+          displayManager.defaultSession = "xfce";
+          desktopManager.xfce = {
             enable = true;
-            displayManager.defaultSession = "xfce";
-            desktopManager.xfce = {
-              enable = true;
-              noDesktop = true;
-              enableXfwm = false;
-            };
+            noDesktop = true;
+            enableXfwm = false;
           };
-        }
-      ];
+        };
+      };
 
       environment = {
         systemPackages = with pkgs; [
@@ -237,7 +228,7 @@ in {
         (diskDescription: diskDescription.isSolidState)
         (builtins.attrValues cfg.disks)
       ;
-    in mkIf isRootSolidState {
+    in lib.mkIf isRootSolidState {
       fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
     })
 
