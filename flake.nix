@@ -113,7 +113,7 @@
         # AMD Radeon RX 5600 XT fixes
         boot.kernelPatches = [{
           name = "amdgpu-sleep-fix";
-          patch = ./amdgpu-sleep-fix.patch;
+          patch = ./workaround/amdgpu-sleep-fix.patch;
         }];
       };
 
@@ -144,7 +144,7 @@
 
         # Lenovo E15 additions
         powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-        hardware.firmware = [ ( pkgs.writeTextDir "/lib/firmware/hda-jack-retask.fw" ( builtins.readFile ./e15-hda-jack-retask.fw ) ) ];
+        hardware.firmware = [ ( pkgs.writeTextDir "/lib/firmware/hda-jack-retask.fw" ( builtins.readFile ./workaround/e15-hda-jack-retask.fw ) ) ];
         boot.extraModprobeConfig = ''
           options snd-hda-intel patch=hda-jack-retask.fw
         '';
