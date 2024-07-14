@@ -78,6 +78,7 @@ in {
     ./filesystems.nix
     ./gaming.nix
     ./graphical.nix
+    ./home
     ./networking.nix
     ./nix.nix
     ./printer.nix

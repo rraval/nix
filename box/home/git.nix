@@ -1,5 +1,5 @@
-{ config, ... }: let
-  userCfg = config.box.user;
+{ osConfig, ... }: let
+  userCfg = osConfig.box.user;
 in {
   programs.git = {
     enable = true;
