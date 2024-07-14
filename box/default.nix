@@ -69,10 +69,21 @@ in {
   };
 
   imports = [
+    ./android.nix
+    ./audio.nix
+    ./bluetooth.nix
     ./boot.nix
+    ./docker.nix
+    ./environment.nix
     ./filesystems.nix
+    ./gaming.nix
+    ./graphical.nix
     ./networking.nix
     ./nix.nix
+    ./printer.nix
+    ./scanner.nix
+    ./users.nix
+    ./yubikey.nix
   ];
 
   config = {
@@ -82,112 +93,5 @@ in {
     hardware.enableRedistributableFirmware = true;
 
     powerManagement.cpuFreqGovernor = "ondemand";
-
-    console.useXkbConfig = true;
-    hardware = {
-      bluetooth.enable = true;
-      pulseaudio = {
-        enable = true;
-        daemon.config = {
-          flat-volumes = "no";
-          realtime-scheduling = "yes";
-          rlimit-rttime = -1;
-          exit-idle-time = -1;
-        };
-      };
-      sane = {
-        enable = true;
-        extraBackends = [ pkgs.sane-airscan ];
-      };
-    };
-
-    users = {
-      mutableUsers = false;
-
-      groups.${user} = {
-        gid = 1000;
-      };
-
-      users.${user} = {
-        isNormalUser = true;
-        uid = 1000;
-        group = user;
-        extraGroups = [
-          "adbusers"
-          "audio"
-          "docker"
-          "lp"
-          "scanner"
-          "video"
-          "wheel"
-          "wireshark"
-        ];
-        hashedPassword = cfg.user.login.hashedPassword;
-        createHome = true;
-        home = "/home/${user}";
-        shell = pkgs.fish;
-      };
-    };
-
-    virtualisation.docker.enable = true;
-
-    services = {
-      avahi = {
-        enable = true;
-        nssmdns = true;
-      };
-      blueman.enable = true;
-      pcscd.enable = true;
-      tailscale.enable = true;
-
-      printing = {
-        enable = true;
-        drivers = with pkgs; [
-          gutenprint
-          gutenprintBin
-          hplip
-          mfcl2720dwcupswrapper
-          mfcl2720dwlpr
-        ];
-      };
-
-      udev.packages = [ pkgs.android-udev-rules ];
-
-      xserver = {
-        enable = true;
-        displayManager.defaultSession = "xfce";
-        desktopManager.xfce = {
-          enable = true;
-          noDesktop = true;
-          enableXfwm = false;
-        };
-      };
-    };
-
-    environment = {
-      systemPackages = with pkgs; [
-        fish
-        git
-        neovim
-      ];
-
-      shells = [
-        pkgs.fish
-      ];
-
-      variables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-      };
-
-      # Automatically load fish direnv hook
-      # https://github.com/nix-community/home-manager/pull/2408#issuecomment-951079054
-      pathsToLink = [ "/share/fish" ];
-    };
-
-    programs.noisetorch.enable = true;
-    programs.wireshark.enable = true;
-    programs.fish.enable = true;
-    programs.steam.enable = true;
   };
 }

@@ -18,5 +18,8 @@ in {
     firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   };
 
-  users.users.${user}.extraGroups = [ "networkmanager" ];
+  services.tailscale.enable = true;
+  programs.wireshark.enable = true;
+
+  users.users.${user}.extraGroups = [ "networkmanager" "wireshark" ];
 }
