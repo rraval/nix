@@ -70,29 +70,15 @@ in {
 
   imports = [
     ./filesystems.nix
+    ./networking.nix
     ./nix.nix
   ];
 
   config = {
-    nixpkgs.config.allowUnfree = true;
     system.stateVersion = "20.09";
 
-    networking = {
-      # global useDHCP is deprecated, don't use it
-      useDHCP = false;
-
-      networkmanager.enable = true;
-
-      firewall.allowedTCPPorts = [
-        # for VLC Chromecast integration, see
-        # https://github.com/NixOS/nixpkgs/blob/c207be6/pkgs/applications/video/vlc/default.nix#L20
-        8010
-
-        # HTTP servers for local development
-        8888
-      ];
-      firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
-    };
+    nixpkgs.config.allowUnfree = true;
+    hardware.enableRedistributableFirmware = true;
 
     powerManagement.cpuFreqGovernor = "ondemand";
 
@@ -110,7 +96,6 @@ in {
 
     console.useXkbConfig = true;
     hardware = {
-      enableRedistributableFirmware = true;
       bluetooth.enable = true;
       pulseaudio = {
         enable = true;
@@ -143,7 +128,6 @@ in {
           "audio"
           "docker"
           "lp"
-          "networkmanager"
           "scanner"
           "video"
           "wheel"
