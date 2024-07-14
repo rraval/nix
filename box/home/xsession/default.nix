@@ -5,9 +5,7 @@
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      extraPackages = haskellPkgs: with haskellPkgs; [
-        dbus
-      ];
+      extraPackages = haskellPkgs: with haskellPkgs; [ dbus ];
       config = ./xmonad.hs;
     };
 

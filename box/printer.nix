@@ -1,5 +1,5 @@
-{ pkgs, config, ...}: let
-  user = config.box.user.login.name;
+{ pkgs, config, ... }:
+let user = config.box.user.login.name;
 in {
   services = {
     avahi = {

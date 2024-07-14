@@ -1,4 +1,5 @@
-{ pkgs, ... }: let
+{ pkgs, ... }:
+let
   jsvinePlugins = pkgs.fetchFromGitHub {
     owner = "jsvine";
     repo = "visidata-plugins";
@@ -10,7 +11,8 @@ in {
     packages = [ pkgs.visidata ];
 
     file = {
-      ".visidata/plugins/dedupe.py".source = builtins.toPath "${jsvinePlugins}/plugins/dedupe.py";
+      ".visidata/plugins/dedupe.py".source =
+        builtins.toPath "${jsvinePlugins}/plugins/dedupe.py";
       ".visidatarc".text = ''
         import plugins.dedupe
       '';

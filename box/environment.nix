@@ -1,14 +1,8 @@
 { pkgs, ... }: {
   environment = {
-    systemPackages = with pkgs; [
-      fish
-      git
-      neovim
-    ];
+    systemPackages = with pkgs; [ fish git neovim ];
 
-    shells = [
-      pkgs.fish
-    ];
+    shells = [ pkgs.fish ];
 
     variables = {
       EDITOR = "nvim";

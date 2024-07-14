@@ -1,4 +1,5 @@
-{ pkgs, lib, config, ... }: let
+{ pkgs, lib, config, ... }:
+let
   cfg = config.box;
   user = cfg.user.login.name;
 in {
@@ -60,7 +61,8 @@ in {
 
         example = {
           decrypted0 = {
-            encryptedDevice = "/dev/disk/by-uuid/00000000-0000-0000-0000-000000000000";
+            encryptedDevice =
+              "/dev/disk/by-uuid/00000000-0000-0000-0000-000000000000";
             isSolidState = true;
           };
         };

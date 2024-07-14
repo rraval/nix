@@ -1,5 +1,5 @@
-{ config, ... }: let
-  user = config.box.user.login.name;
+{ config, ... }:
+let user = config.box.user.login.name;
 in {
   networking = {
     # global useDHCP is deprecated, don't use it
@@ -15,7 +15,10 @@ in {
       # HTTP servers for local development
       8888
     ];
-    firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
+    firewall.allowedUDPPortRanges = [{
+      from = 32768;
+      to = 60999;
+    }];
   };
 
   services.tailscale.enable = true;

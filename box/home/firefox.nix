@@ -20,6 +20,7 @@
   };
 
   home.file = {
-    ".mozilla/native-messaging-hosts/passff.json".source = "${pkgs.passff-host}/share/passff-host/passff.json";
+    ".mozilla/native-messaging-hosts/passff.json".source =
+      "${pkgs.passff-host}/share/passff-host/passff.json";
   };
 }

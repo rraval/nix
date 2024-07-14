@@ -1,5 +1,5 @@
-{ config, ...}: let
-  user = config.box.user.login.name;
+{ config, ... }:
+let user = config.box.user.login.name;
 in {
   hardware.pulseaudio = {
     enable = true;

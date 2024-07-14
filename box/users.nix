@@ -1,12 +1,10 @@
-{ config, pkgs, ... }: let
-  loginCfg = config.box.user.login;
+{ config, pkgs, ... }:
+let loginCfg = config.box.user.login;
 in {
   users = {
     mutableUsers = false;
 
-    groups.${loginCfg.name} = {
-      gid = 1000;
-    };
+    groups.${loginCfg.name} = { gid = 1000; };
 
     users.${loginCfg.name} = {
       isNormalUser = true;

@@ -1,4 +1,6 @@
-{ config, ...}: let cfg = config.box; in {
+{ config, ... }:
+let cfg = config.box;
+in {
   boot = {
     loader = {
       systemd-boot.enable = true;

@@ -2,16 +2,15 @@
   programs.gpg = {
     enable = true;
 
-    settings = {
-      keyserver = "hkps://keys.openpgp.org";
-    };
+    settings = { keyserver = "hkps://keys.openpgp.org"; };
 
     # Use PC/SC to talk to smartcards
     # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
     scdaemonSettings.disable-ccid = true;
   };
 
-  services.gpg-agent = let hour_in_seconds = 60 * 60; in {
+  services.gpg-agent = let hour_in_seconds = 60 * 60;
+  in {
     enable = true;
     pinentryFlavor = "gtk2";
     enableSshSupport = true;
