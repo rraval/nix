@@ -68,16 +68,12 @@ in {
     };
   };
 
+  imports = [
+    ./nix.nix
+  ];
+
   config = lib.mkMerge [
     {
-      nix = {
-        settings.allowed-users = [ user ];
-        package = pkgs.nixUnstable;
-        extraOptions = ''
-          experimental-features = nix-command flakes
-          !include /etc/nix/extra-nix.conf
-        '';
-      };
       nixpkgs.config.allowUnfree = true;
       system.stateVersion = "20.09";
 
