@@ -36,7 +36,9 @@ in {
           calibre
           chromium
           corefonts
-          cura
+          # Broken with Python 3.12 default
+          # https://discourse.nixos.org/t/issue-building-nixos-due-to-sip-package/48702/3
+          # cura
           darktable
           delta
           dig
@@ -49,7 +51,6 @@ in {
           ghostwriter
           gimp
           git-nomad
-          gnome.simple-scan
           hexyl
           htop
           imagemagick
@@ -67,7 +68,6 @@ in {
           pdftk
           pgformatter
           playerctl
-          posterazor
           pv
           qrencode
           rehex
@@ -75,6 +75,7 @@ in {
           rofimoji
           rpi-imager
           screenkey
+          simple-scan
           # broken with compile error in sfnt.cpp
           # scribusUnstable
           skypeforlinux
@@ -84,14 +85,13 @@ in {
           subsurface
           tig
           tmux
-          transmission-gtk
+          transmission_4-gtk
           trippy
           unzip
           vistafonts
           vlc
           wireshark
           xclip
-          youtube-dl
           yubikey-manager
           zbar
           zoom-us

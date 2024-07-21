@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   programs.gpg = {
     enable = true;
 
@@ -12,7 +12,7 @@
   services.gpg-agent = let hour_in_seconds = 60 * 60;
   in {
     enable = true;
-    pinentryFlavor = "gtk2";
+    pinentryPackage = pkgs.pinentry-gtk2;
     enableSshSupport = true;
     defaultCacheTtl = hour_in_seconds;
     maxCacheTtl = 2 * hour_in_seconds;
