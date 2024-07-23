@@ -1,8 +1,8 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+{
   programs.ssh = {
     enable = true;
-    userKnownHostsFile =
-      "${config.home.homeDirectory}/.ssh/known_hosts ${./known_hosts}";
+    userKnownHostsFile = "${config.home.homeDirectory}/.ssh/known_hosts ${./known_hosts}";
     serverAliveInterval = 60;
   };
 

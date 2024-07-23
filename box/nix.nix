@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   nix = {
     settings.allowed-users = [ config.box.user.login.name ];
     package = pkgs.nixVersions.latest;

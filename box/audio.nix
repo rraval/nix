@@ -1,6 +1,8 @@
 { config, ... }:
-let user = config.box.user.login.name;
-in {
+let
+  user = config.box.user.login.name;
+in
+{
   hardware.pulseaudio = {
     enable = true;
     daemon.config = {

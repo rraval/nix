@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.polybar = {
     enable = true;
     package = pkgs.polybarFull;
@@ -12,8 +13,12 @@
           "Noto Emoji:style=Regular:scale=10;2"
           "Liberation Mono:style=Regular;2"
         ];
-        tray = { position = "left"; };
-        modules = { left = "volume date workspaces window"; };
+        tray = {
+          position = "left";
+        };
+        modules = {
+          left = "volume date workspaces window";
+        };
         module.margin = {
           left = 1;
           right = 1;

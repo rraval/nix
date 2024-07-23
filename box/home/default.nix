@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
-let user = config.box.user.login.name;
-in {
+let
+  user = config.box.user.login.name;
+in
+{
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -26,7 +28,9 @@ in {
 
       home = {
         stateVersion = "20.09";
-        keyboard = { options = [ "ctrl:nocaps" ]; };
+        keyboard = {
+          options = [ "ctrl:nocaps" ];
+        };
 
         packages = with pkgs; [
           android-studio

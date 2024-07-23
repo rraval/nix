@@ -1,6 +1,8 @@
 { pkgs, config, ... }:
-let user = config.box.user.login.name;
-in {
+let
+  user = config.box.user.login.name;
+in
+{
   services = {
     avahi = {
       enable = true;

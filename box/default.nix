@@ -1,8 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.box;
   user = cfg.user.login.name;
-in {
+in
+{
   options = with lib; {
     box = {
       user = {
@@ -45,24 +51,25 @@ in {
           used as a LVM physical volume.
         '';
 
-        type = types.attrsOf (types.submodule {
-          options = {
-            encryptedDevice = mkOption {
-              type = types.str;
-              description = "Path to the encrypted block device";
-            };
+        type = types.attrsOf (
+          types.submodule {
+            options = {
+              encryptedDevice = mkOption {
+                type = types.str;
+                description = "Path to the encrypted block device";
+              };
 
-            isSolidState = mkOption {
-              type = types.bool;
-              description = "Allow TRIM requests to the underlying device";
+              isSolidState = mkOption {
+                type = types.bool;
+                description = "Allow TRIM requests to the underlying device";
+              };
             };
-          };
-        });
+          }
+        );
 
         example = {
           decrypted0 = {
-            encryptedDevice =
-              "/dev/disk/by-uuid/00000000-0000-0000-0000-000000000000";
+            encryptedDevice = "/dev/disk/by-uuid/00000000-0000-0000-0000-000000000000";
             isSolidState = true;
           };
         };

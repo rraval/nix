@@ -1,6 +1,8 @@
 { config, ... }:
-let user = config.box.user.login.name;
-in {
+let
+  user = config.box.user.login.name;
+in
+{
   console.useXkbConfig = true;
 
   services.xserver = {
