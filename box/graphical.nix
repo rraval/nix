@@ -5,9 +5,13 @@ in
 {
   console.useXkbConfig = true;
 
+  services.displayManager = {
+    enable = true;
+    defaultSession = "xfce";
+  };
+
   services.xserver = {
     enable = true;
-    displayManager.defaultSession = "xfce";
     desktopManager.xfce = {
       enable = true;
       noDesktop = true;
