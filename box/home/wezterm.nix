@@ -72,6 +72,10 @@
                   action = act.OpenLinkAtMouseCursor,
               },
           },
+
+          quick_select_patterns = {
+            "EN-\\d+\\w+",  -- git branches with jira tickets
+          },
       }
     '';
   };
