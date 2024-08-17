@@ -60,6 +60,8 @@ in
           imagemagick
           inkscape
           iotop
+          jaq
+          jnv
           kdenlive
           lens
           libation
