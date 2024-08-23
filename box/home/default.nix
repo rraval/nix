@@ -44,7 +44,6 @@ in
           # https://discourse.nixos.org/t/issue-building-nixos-due-to-sip-package/48702/3
           # cura
           darktable
-          delta
           dig
           discord
           diskonaut

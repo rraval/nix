@@ -1,8 +1,13 @@
-{ osConfig, ... }:
+{ osConfig, pkgs, ... }:
 let
   userCfg = osConfig.box.user;
 in
 {
+  home.packages = with pkgs; [
+    delta
+    difftastic
+  ];
+
   programs.git = {
     enable = true;
     userName = userCfg.realName;
@@ -15,20 +20,12 @@ in
       };
       core = {
         whitespace = "trailing-space,space-before-tab";
-        pager = "delta";
       };
       commit = {
         cleanup = "scissors";
       };
       branch = {
         autoSetupMerge = "simple";
-      };
-      interactive = {
-        diffFilter = "delta --color-only";
-      };
-      delta = {
-        navigate = "true";
-        hyperlinks = "true";
       };
       apply = {
         whitespace = "fix";
@@ -44,10 +41,55 @@ in
       merge = {
         conflictstyle = "diff3";
       };
-      diff = {
-        colorMoved = "default";
-      };
     };
+    # Use includes to keep external tool config isolated.
+    includes =
+      map
+        (
+          { name, content }:
+          {
+            path = pkgs.writeText name content;
+          }
+        )
+        [
+          {
+            name = "delta";
+            content = ''
+              [core]
+                pager = delta
+
+              [interactive]
+                diffFilter = delta --color-only --features=interactive
+
+              [delta]
+                navigate = true
+                hyperlinks = true
+
+              [merge]
+                conflictstyle = diff3
+
+              [diff]
+                colorMoved = default
+            '';
+          }
+
+          {
+            name = "difftastic";
+            content = ''
+              [diff]
+                tool = difftastic
+
+              [difftool]
+                prompt = false
+
+              [difftool "difftastic"]
+                cmd = difft "$LOCAL" "$REMOTE"
+
+              [pager]
+                difftool = true
+            '';
+          }
+        ];
     aliases = {
       an = "add -N .";
       ap = "add -p";
