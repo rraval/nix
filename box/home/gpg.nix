@@ -20,6 +20,7 @@
       enable = true;
       pinentryPackage = pkgs.pinentry-gtk2;
       enableSshSupport = true;
+      enableExtraSocket = true;
       defaultCacheTtl = hour_in_seconds;
       maxCacheTtl = 2 * hour_in_seconds;
       defaultCacheTtlSsh = 4 * hour_in_seconds;
