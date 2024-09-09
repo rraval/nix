@@ -135,12 +135,13 @@
             swapDevices = [ ];
 
             # AMD Radeon RX 5600 XT fixes
-            boot.kernelPatches = [
-              {
-                name = "amdgpu-sleep-fix";
-                patch = ./workaround/amdgpu-sleep-fix.patch;
-              }
-            ];
+            # FIXME: the patch doesn't apply cleanly on latest kernel versions.
+            # boot.kernelPatches = [
+            #   {
+            #     name = "amdgpu-sleep-fix";
+            #     patch = ./workaround/amdgpu-sleep-fix.patch;
+            #   }
+            # ];
           };
 
         boreas =
