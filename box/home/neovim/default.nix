@@ -10,6 +10,7 @@
       coc-tslint-plugin
       coc-tsserver
       coffee-script
+      copilot-vim
       fugitive
       fzf-vim
       nightfox-nvim
