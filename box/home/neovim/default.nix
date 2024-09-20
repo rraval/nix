@@ -91,6 +91,11 @@
       noremap <Leader>t :GFiles<CR>
       noremap <Leader>g :tab Git<CR>
 
+      " terminal in dir of current buffer
+      noremap <Leader>w :exe 'vsplit term://' . getcwd() . '//' . $SHELL<CR>
+      noremap <Leader>W :exe 'vsplit term://%:p:h//' . $SHELL<CR>
+      autocmd TermOpen * startinsert
+
       " coc
       nnoremap <silent> K :call CocActionAsync('doHover')<cr>
 
