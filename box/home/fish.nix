@@ -91,7 +91,24 @@
       set -g fish_pager_color_description $comment
 
       # Keymaps
-      bind \cg 'cd (git rev-parse --show-toplevel); commandline -f repaint'
+      function cdup --description 'cd upwards looking for a project root'
+        set -f dir (path dirname (pwd))
+
+        while true
+          if test "$dir" = /
+            return
+          end
+
+          if test -e "$dir/.git" -o -e "$dir/justfile"
+            cd "$dir"
+            return
+          end
+
+          set -f dir (path dirname "$dir")
+        end
+      end
+
+      bind \cg 'cdup; commandline -f repaint'
       bind \ch 'echo; cdh; commandline -f repaint'
       bind \cj 'nextd; commandline -f repaint'
       bind \ck 'prevd; commandline -f repaint'
