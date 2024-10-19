@@ -94,10 +94,6 @@
       " terminal shortcuts
       autocmd TermOpen * startinsert
       tnoremap <Esc> <C-\><C-n>
-      " in cwd
-      noremap <Leader>W :exe 'vsplit term://' . getcwd() . '//' . $SHELL<CR>
-      " in dir of current buffer
-      noremap <Leader>w :exe 'vsplit term://%:p:h//' . $SHELL<CR>
 
       " coc
       nnoremap <silent> K :call CocActionAsync('doHover')<cr>
@@ -145,8 +141,33 @@
       autocmd User FugitivePager setlocal bufhidden= buflisted
     '';
     extraLuaConfig = ''
-      require("oil").setup()
+      local oil = require("oil")
+      oil.setup()
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+      local function openTerminal()
+          local bufnr = vim.api.nvim_get_current_buf()
+          local fileType = vim.bo[bufnr].filetype
+
+          local bufDir
+          if fileType == 'oil' then
+              bufDir = oil.get_current_dir(bufnr)
+          elseif fileType == 'fugitive' then
+              bufDir = vim.fn.fnamemodify(vim.b.git_dir, ':h')
+          else
+              bufDir = vim.fn.expand('%:p:h')
+          end
+
+          local shell = os.getenv('SHELL')
+
+          vim.api.nvim_command(string.format('vsplit term://%s//%s', bufDir, shell))
+      end
+
+      vim.api.nvim_set_keymap('n', '<Leader>w', "", {
+        noremap = true,
+        callback = openTerminal,
+        desc = "Open terminal in current buffer's directory",
+      })
     '';
   };
 
