@@ -90,8 +90,11 @@
       set -g fish_pager_color_completion $foreground
       set -g fish_pager_color_description $comment
 
-      # cd into git root
-      alias cdg 'cd (git rev-parse --show-toplevel)'
+      # Keymaps
+      bind \cg 'cd (git rev-parse --show-toplevel); commandline -f repaint'
+      bind \ch 'echo; cdh; commandline -f repaint'
+      bind \cj 'nextd; commandline -f repaint'
+      bind \ck 'prevd; commandline -f repaint'
 
       # `reaver` is a fish prompt featuring
       # - A minimal left prompt with git status integration
