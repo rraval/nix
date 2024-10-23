@@ -156,6 +156,8 @@
       autocmd User FugitivePager setlocal bufhidden= buflisted
     '';
     extraLuaConfig = ''
+      require("marks").setup()
+
       require("arena").setup({
         max_items = 10,
       })
@@ -170,8 +172,15 @@
           "index.coffee",
           "default.nix",
       }
-
-      require("marks").setup()
+      -- custom keybinds to quickly switch to a buffer
+      for i = 1, 9 do
+          require("arena").window.keymaps[tostring(i)] = function(win)
+              local target = win:get(i + 1)
+              local info = vim.fn.getbufinfo(target.bufnr)[1]
+              vim.api.nvim_set_current_buf(target.bufnr)
+              vim.fn.cursor(info.lnum, 0)
+          end
+      end
 
       local oil = require("oil")
       oil.setup()
