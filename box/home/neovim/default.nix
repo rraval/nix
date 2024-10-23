@@ -15,6 +15,7 @@
       coffee-script
       copilot-vim
       fugitive
+      marks-nvim
       nightfox-nvim
       oil-nvim
       telescope-fzf-native-nvim
@@ -48,6 +49,7 @@
       set cinoptions=>4,+8,(8,u0
       set number
       set relativenumber
+      set signcolumn=auto:3
 
       " stop autoindenting things as I type
       autocmd FileType python setlocal indentkeys-=<:>
@@ -92,6 +94,7 @@
       noremap <Leader>a <cmd>tab split<CR>
       noremap <Leader>g <cmd>tab Git<CR>
       noremap <Leader>t <cmd>Telescope find_files<CR>
+      noremap <Leader>r <cmd>Telescope marks<CR>
       noremap <Leader>ff <cmd>Telescope live_grep<CR>
       noremap <Leader>fg <cmd>Telescope git_branches<CR>
       noremap <Leader>fb <cmd>Telescope buffers<CR>
@@ -145,6 +148,8 @@
       local oil = require("oil")
       oil.setup()
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+      require("marks").setup()
 
       local function openTerminal()
           local bufnr = vim.api.nvim_get_current_buf()
