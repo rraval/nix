@@ -25,6 +25,16 @@
       vim-ledger
       vim-matchup
       vim-nix
+
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "arena-nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "dzfrias";
+          repo = "arena.nvim";
+          rev = "9c68cf8afe9665241cb3f7a52c9586095c17d0da";
+          hash = "sha256-7u/+DHdipch2oG5geMXxvkwjTNu0HOlN4Oc7aRmSIFM=";
+        };
+      })
     ];
     extraConfig = ''
       syntax enable
@@ -93,11 +103,12 @@
       " file navigation / version control
       noremap <Leader>a <cmd>tab split<CR>
       noremap <Leader>g <cmd>tab Git<CR>
+      noremap <Leader>r <cmd>ArenaToggle<CR>
       noremap <Leader>t <cmd>Telescope find_files<CR>
-      noremap <Leader>r <cmd>Telescope marks<CR>
       noremap <Leader>ff <cmd>Telescope live_grep<CR>
       noremap <Leader>fg <cmd>Telescope git_branches<CR>
       noremap <Leader>fb <cmd>Telescope buffers<CR>
+      noremap <Leader>fm <cmd>Telescope marks<CR>
 
       " terminal shortcuts
       autocmd TermOpen * startinsert
@@ -145,11 +156,27 @@
       autocmd User FugitivePager setlocal bufhidden= buflisted
     '';
     extraLuaConfig = ''
+      require("arena").setup({
+        max_items = 10,
+      })
+      -- Seems to not be coded properly in setup
+      require("arena.config").always_context = {
+          "mod.rs",
+          "init.lua",
+          "__init__.py",
+          "__test__.py",
+          "index.js",
+          "index.ts",
+          "index.coffee",
+          "default.nix",
+      }
+
+      require("marks").setup()
+
       local oil = require("oil")
       oil.setup()
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-      require("marks").setup()
 
       local function openTerminal()
           local bufnr = vim.api.nvim_get_current_buf()
