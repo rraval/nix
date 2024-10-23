@@ -1,9 +1,12 @@
 { pkgs, ... }:
 {
+  home.packages = [
+    pkgs.ripgrep  # used by telescope-nvim
+  ];
+
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
-      bufexplorer
       camelcasemotion
       coc-nvim
       coc-rust-analyzer
@@ -12,9 +15,10 @@
       coffee-script
       copilot-vim
       fugitive
-      fzf-vim
       nightfox-nvim
       oil-nvim
+      telescope-fzf-native-nvim
+      telescope-nvim
       typescript-vim
       vim-eunuch
       vim-ledger
@@ -85,11 +89,12 @@
       noremap <Leader>z :cexpr getreg('+')<CR>
 
       " file navigation / version control
-      noremap <Leader>a :tab split<CR>
-      noremap <Leader>e :Lines<CR>
-      noremap <Leader>r :Buffers<CR>
-      noremap <Leader>t :GFiles<CR>
-      noremap <Leader>g :tab Git<CR>
+      noremap <Leader>a <cmd>tab split<CR>
+      noremap <Leader>g <cmd>tab Git<CR>
+      noremap <Leader>t <cmd>Telescope find_files<CR>
+      noremap <Leader>ff <cmd>Telescope live_grep<CR>
+      noremap <Leader>fg <cmd>Telescope git_branches<CR>
+      noremap <Leader>fb <cmd>Telescope buffers<CR>
 
       " terminal shortcuts
       autocmd TermOpen * startinsert
@@ -131,10 +136,6 @@
       if !empty($NEOVIM_MAKEPRG)
         set makeprg=$NEOVIM_MAKEPRG
       endif
-
-      " bufexplorer
-      let g:bufExplorerDefaultHelp=0       " Do not show default help.
-      let g:bufExplorerShowDirectories=0   " Do not show directories.
 
       " fugitive
       " buffers for `G diff` are important!
