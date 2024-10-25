@@ -6,6 +6,7 @@ in
   home.packages = with pkgs; [
     delta
     difftastic
+    git-absorb
   ];
 
   programs.git = {
