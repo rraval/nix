@@ -34,6 +34,9 @@ in
       push = {
         default = "current";
       };
+      pull = {
+        ff = true;
+      };
       rebase = {
         autosquash = true;
         stat = true;
@@ -41,6 +44,7 @@ in
       };
       merge = {
         conflictstyle = "diff3";
+        ff = false;
       };
     };
     # Use includes to keep external tool config isolated.
