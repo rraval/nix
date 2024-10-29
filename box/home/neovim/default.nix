@@ -102,7 +102,8 @@
 
       " file navigation / version control
       noremap <Leader>a <cmd>tab split<CR>
-      noremap <Leader>g <cmd>tab Git<CR>
+      noremap <Leader>g <cmd>Git<CR>
+      noremap <Leader>G <cmd>tab Git<CR>
       noremap <Leader>r <cmd>ArenaToggle<CR>
       noremap <Leader>t <cmd>Telescope find_files<CR>
       noremap <Leader>ff <cmd>Telescope live_grep<CR>
