@@ -187,27 +187,36 @@
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 
-      local function openTerminal()
+      local function openTerminal(openCmd)
           local bufnr = vim.api.nvim_get_current_buf()
-          local fileType = vim.bo[bufnr].filetype
+          local buftype = vim.bo[bufnr].buftype
+          local filetype = vim.bo[bufnr].filetype
 
           local bufDir
-          if fileType == 'oil' then
+          if filetype == 'oil' then
               bufDir = oil.get_current_dir(bufnr)
-          elseif fileType == 'fugitive' then
+          elseif filetype == 'fugitive' then
               bufDir = vim.fn.fnamemodify(vim.b.git_dir, ':h')
+          elseif buftype == 'terminal' then
+              _, _, bufDir = string.find(vim.fn.expand('%:p:h'), "term://(.*)//")
           else
               bufDir = vim.fn.expand('%:p:h')
           end
 
           local shell = os.getenv('SHELL')
 
-          vim.api.nvim_command(string.format('vsplit term://%s//%s', bufDir, shell))
+          vim.api.nvim_command(string.format('%s term://%s//%s', openCmd, bufDir, shell))
       end
 
       vim.api.nvim_set_keymap('n', '<Leader>w', "", {
         noremap = true,
-        callback = openTerminal,
+        callback = function() openTerminal("vsplit") end,
+        desc = "Open terminal in current buffer's directory",
+      })
+
+      vim.api.nvim_set_keymap('n', '<Leader>W', "", {
+        noremap = true,
+        callback = function() openTerminal("tabe") end,
         desc = "Open terminal in current buffer's directory",
       })
     '';
