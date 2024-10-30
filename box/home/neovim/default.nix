@@ -183,6 +183,15 @@
           end
       end
 
+      require("telescope").setup({
+        pickers = {
+          find_files = {
+            file_ignore_patterns = { '^.git/' },
+            hidden = true,
+          },
+        },
+      })
+
       local oil = require("oil")
       oil.setup()
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
