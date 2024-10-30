@@ -71,6 +71,9 @@
       autocmd FileType ledger setlocal foldmethod=marker
       autocmd FileType git setlocal foldmethod=syntax
 
+      " refresh files on navigation
+      autocmd BufEnter,FocusGained,FocusLost,WinLeave * checktime
+
       " because Y being yy is stupid
       map Y y$
 
