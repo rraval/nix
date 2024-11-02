@@ -188,6 +188,14 @@
             file_ignore_patterns = { '^.git/' },
             hidden = true,
           },
+          buffers = {
+            mappings = {
+              i = {
+                ["<C-a>"] = "select_all",
+                ["<C-d>"] = "delete_buffer",
+              },
+            },
+          },
         },
       })
 
