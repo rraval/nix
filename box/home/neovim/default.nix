@@ -194,13 +194,18 @@
       require("scope").setup({})
       require("telescope").load_extension("scope")
 
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
       vim.keymap.set("n", "<Leader>t", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
       vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope live_grep<CR>", { desc = "Find in files" })
       vim.keymap.set("n", "<Leader>fg", "<cmd>Telescope git_branches<CR>", { desc = "Find git branches" })
       vim.keymap.set("n", "<Leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers in current tab" })
       vim.keymap.set("n", "<Leader>fB", "<cmd>Telescope scope buffers<CR>", { desc = "Find buffers in all tabs" })
       vim.keymap.set("n", "<Leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
+
+      -- jump to tab by number
+      for i = 1, 9 do
+        vim.keymap.set("n", "<Leader>" .. i, "" .. i .. "gt<CR>", { desc = "Switch to tab " .. i })
+      end
 
       local oil = require("oil")
       oil.setup()
