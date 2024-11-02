@@ -18,6 +18,7 @@
       marks-nvim
       nightfox-nvim
       oil-nvim
+      scope-nvim
       telescope-fzf-native-nvim
       telescope-nvim
       typescript-vim
@@ -108,11 +109,6 @@
       noremap <Leader>g <cmd>Git<CR>
       noremap <Leader>G <cmd>tab Git<CR>
       noremap <Leader>r <cmd>ArenaToggle<CR>
-      noremap <Leader>t <cmd>Telescope find_files<CR>
-      noremap <Leader>ff <cmd>Telescope live_grep<CR>
-      noremap <Leader>fg <cmd>Telescope git_branches<CR>
-      noremap <Leader>fb <cmd>Telescope buffers<CR>
-      noremap <Leader>fm <cmd>Telescope marks<CR>
 
       " terminal shortcuts
       autocmd TermOpen * startinsert
@@ -194,6 +190,17 @@
           },
         },
       })
+
+      require("scope").setup({})
+      require("telescope").load_extension("scope")
+
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      vim.keymap.set("n", "<Leader>t", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
+      vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope live_grep<CR>", { desc = "Find in files" })
+      vim.keymap.set("n", "<Leader>fg", "<cmd>Telescope git_branches<CR>", { desc = "Find git branches" })
+      vim.keymap.set("n", "<Leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers in current tab" })
+      vim.keymap.set("n", "<Leader>fB", "<cmd>Telescope scope buffers<CR>", { desc = "Find buffers in all tabs" })
+      vim.keymap.set("n", "<Leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
 
       local oil = require("oil")
       oil.setup()
