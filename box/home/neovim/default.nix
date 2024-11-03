@@ -190,6 +190,9 @@
           search = {
             enabled = true,
           },
+          char = {
+            autohide = true,
+          },
         },
       })
 
