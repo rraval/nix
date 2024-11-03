@@ -62,6 +62,8 @@
       set number
       set relativenumber
       set signcolumn=auto:3
+      set ignorecase
+      set smartcase
 
       " stop autoindenting things as I type
       autocmd FileType python setlocal indentkeys-=<:>
