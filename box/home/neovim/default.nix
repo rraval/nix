@@ -183,6 +183,11 @@
       end
 
       require("telescope").setup({
+        mappings = {
+          i = {
+            ["<C-a>"] = "select_all",
+          },
+        },
         pickers = {
           find_files = {
             file_ignore_patterns = { '^.git/' },
@@ -191,7 +196,6 @@
           buffers = {
             mappings = {
               i = {
-                ["<C-a>"] = "select_all",
                 ["<C-d>"] = "delete_buffer",
               },
             },
@@ -218,7 +222,6 @@
       local oil = require("oil")
       oil.setup()
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
 
       local function openTerminal(openCmd)
           local bufnr = vim.api.nvim_get_current_buf()
