@@ -18,6 +18,7 @@
       fugitive
       marks-nvim
       nightfox-nvim
+      nvim-bqf
       oil-nvim
       scope-nvim
       telescope-fzf-native-nvim
@@ -261,6 +262,12 @@
       local oil = require("oil")
       oil.setup()
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+      require("bqf").setup({
+        preview = {
+          auto_preview = false,
+        },
+      })
 
       local function openTerminal(openCmd)
           local bufnr = vim.api.nvim_get_current_buf()
