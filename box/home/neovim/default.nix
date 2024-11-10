@@ -13,8 +13,8 @@
       coc-tsserver
       coffee-script
       copilot-vim
-      flash-nvim
       fugitive
+      leap-nvim
       marks-nvim
       nightfox-nvim
       nvim-bqf
@@ -185,45 +185,42 @@
           end
       end
 
-      require("flash").setup({
-        modes = {
-          search = {
-            enabled = true,
-          },
-          char = {
-            autohide = true,
-          },
-        },
-      })
+      require("leap").create_default_mappings()
 
-      local function telescopeFlash(prompt_bufnr)
-        require("flash").jump({
-          pattern = "^",
-          label = { after = { 0, 0 } },
-          search = {
-            mode = "search",
-            exclude = {
-              function(win)
-                return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
-              end,
-            },
-          },
-          action = function(match)
-            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-            picker:set_selection(match.pos[1] - 1)
+      local function leapGetTargets (buf)
+        local pick = require('telescope.actions.state').get_current_picker(buf)
+        local scroller = require('telescope.pickers.scroller')
+        local wininfo = vim.fn.getwininfo(pick.results_win)[1]
+        local top = math.max(
+          scroller.top(pick.sorting_strategy, pick.max_results, pick.manager:num_results()),
+          wininfo.topline - 1
+        )
+        local bottom = wininfo.botline - 2  -- skip the current row
+        local targets = {}
+        for lnum = bottom, top, -1 do  -- start labeling from the closest (bottom) row
+          table.insert(targets, { wininfo = wininfo, pos = { lnum + 1, 1 }, pick = pick, })
+        end
+        return targets
+      end
+
+      local function leapPick (buf)
+        require('leap').leap {
+          targets = function () return leapGetTargets(buf) end,
+          action = function (target)
+            target.pick:set_selection(target.pos[1] - 1)
+            require('telescope.actions').select_default(buf)
           end,
-        })
+        }
       end
 
       require("telescope").setup({
         defaults = {
           mappings = {
             n = {
-              s = telescopeFlash,
             },
             i = {
-              ["<C-s>"] = telescopeFlash,
-              ["<C-a>"] = "select_all",
+              ["<C-s>"] = "select_all",
+              ["<C-f>"] = leapPick,
             },
           },
         },
