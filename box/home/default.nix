@@ -51,6 +51,7 @@ in
           fx
           fzf
           gh
+          gh-markdown-preview
           ghostwriter
           gimp
           git-nomad
