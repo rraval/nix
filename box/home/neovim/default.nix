@@ -20,6 +20,7 @@
       nvim-bqf
       oil-nvim
       scope-nvim
+      smart-open-nvim
       telescope-fzf-native-nvim
       telescope-nvim
       typescript-vim
@@ -238,6 +239,7 @@
           },
         },
       })
+      require("telescope").load_extension("smart_open")
 
       require("scope").setup({})
       require("telescope").load_extension("scope")
