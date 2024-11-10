@@ -27,6 +27,9 @@
       }
 
       return {
+          -- https://github.com/NixOS/nixpkgs/issues/336069
+          front_end = "WebGpu",
+
           adjust_window_size_when_changing_font_size = false, -- using a tiling window manager
           audible_bell = 'Disabled',
           automatically_reload_config = true,

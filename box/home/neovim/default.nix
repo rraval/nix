@@ -10,7 +10,6 @@
       camelcasemotion
       coc-nvim
       coc-rust-analyzer
-      coc-tslint-plugin
       coc-tsserver
       coffee-script
       copilot-vim

@@ -35,7 +35,6 @@ in
         packages = with pkgs; [
           android-studio
           audacity
-          blender
           bruno
           calibre
           chromium
