@@ -13,6 +13,7 @@
       coc-tsserver
       coffee-script
       copilot-vim
+      firenvim
       fugitive
       leap-nvim
       marks-nvim
@@ -139,16 +140,6 @@
 
       " scrollbind
       nnoremap <Leader>d :set scb!<CR>:echo 'scb=' . &scb
-
-      " firenvim, firefox integration
-      let g:firenvim_config = {
-          \ 'localSettings': {
-              \ '.*': {
-                  \ 'priority': 0,
-                  \ 'takeover': 'never',
-              \ },
-          \ }
-      \ }
 
       " makeprg
       if !empty($NEOVIM_MAKEPRG)
@@ -299,6 +290,25 @@
         callback = function() openTerminal("tabe") end,
         desc = "Open terminal in current buffer's directory",
       })
+
+      -- firenvim, firefox integration
+      if vim.g.started_by_firenvim == true then
+        vim.g.firenvim_config = {
+          globalSettings = { takeover = 'never' },
+          localSettings = {
+              ['https?://github.com.*'] = {
+                  takeover = 'always',
+              },
+          },
+        }
+
+        vim.o.guifont = 'monospace:h10'
+
+        vim.api.nvim_create_autocmd({'BufEnter'}, {
+            pattern = "github.com_*.txt",
+            command = "set filetype=markdown"
+        })
+      end
     '';
   };
 
