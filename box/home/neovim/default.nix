@@ -294,10 +294,15 @@
       -- firenvim, firefox integration
       if vim.g.started_by_firenvim == true then
         vim.g.firenvim_config = {
-          globalSettings = { takeover = 'never' },
           localSettings = {
               ['https?://github.com.*'] = {
                   takeover = 'always',
+                  priority = 10,
+              },
+
+              ['.*'] = {
+                takeover = 'never',
+                priority = 0,
               },
           },
         }
