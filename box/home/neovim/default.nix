@@ -237,6 +237,12 @@
 
       vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
       vim.keymap.set("n", "<Leader>t", "<cmd>Telescope smart_open<CR>", { desc = "Smart Open" })
+      vim.keymap.set("n", "<Leader>t", function()
+        require("telescope").extensions.smart_open.smart_open({
+          cwd_only = true,
+          filename_first = false,
+        })
+      end, { noremap = true, silent = true, desc = "Smart Open" })
       vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope live_grep<CR>", { desc = "Find in files" })
       vim.keymap.set("n", "<Leader>fg", "<cmd>Telescope git_branches<CR>", { desc = "Find git branches" })
       vim.keymap.set("n", "<Leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers in current tab" })
