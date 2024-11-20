@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.ripgrep  # used by telescope-nvim
+    pkgs.ripgrep # used by telescope-nvim
   ];
 
   programs.neovim = {
