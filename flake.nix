@@ -87,6 +87,14 @@
                 vpn.enable = true;
                 minikube.enable = true;
               };
+
+              home-manager.users.rraval = {
+                imports = [ encircle.homeManagerModules.default ];
+                encircle.direnv = {
+                  enable = true;
+                  devShellFlakeUrl = "path:/home/rraval/encircle-nix-configs";
+                };
+              };
             }
           ];
         };
