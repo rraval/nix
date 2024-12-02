@@ -29,6 +29,7 @@
       vim-ledger
       vim-matchup
       vim-nix
+      diffview-nvim
 
       (pkgs.vimUtils.buildVimPlugin {
         name = "arena-nvim";
@@ -112,7 +113,7 @@
       " file navigation / version control
       noremap <Leader>a <cmd>tab split<CR>
       noremap <Leader>g <cmd>Git<CR>
-      noremap <Leader>G <cmd>tab Git<CR>
+      noremap <Leader>G <cmd>DiffviewOpen<CR>
       noremap <Leader>r <cmd>ArenaToggle<CR>
 
       " terminal shortcuts
