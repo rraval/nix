@@ -40,6 +40,16 @@
           hash = "sha256-7u/+DHdipch2oG5geMXxvkwjTNu0HOlN4Oc7aRmSIFM=";
         };
       })
+
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "snacks-nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "folke";
+          repo = "snacks.nvim";
+          rev = "974bccb126b6b5d7170c519c380207069d23f557";
+          hash = "sha256-h7nysvfJDuNUyu+qrg4HmwyPxYiVq+Fmx8zqmWuV/EI=";
+        };
+      })
     ];
     extraConfig = ''
       syntax enable
@@ -319,6 +329,21 @@
             command = "set filetype=markdown"
         })
       end
+
+      require("snacks").setup({
+        scratch = {
+          filekey = {
+            cwd = true,
+            branch = false,
+            count = true,
+          },
+        },
+      })
+      vim.api.nvim_set_keymap('n', '<Leader><Leader>', "", {
+        noremap = true,
+        callback = function() Snacks.scratch() end,
+        desc = "Toggle Scratch Buffer",
+      })
     '';
   };
 
