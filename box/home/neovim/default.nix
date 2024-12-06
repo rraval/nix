@@ -8,9 +8,6 @@
     enable = true;
     plugins = with pkgs.vimPlugins; [
       camelcasemotion
-      coc-nvim
-      coc-rust-analyzer
-      coc-tsserver
       coffee-script
       copilot-vim
       firenvim
@@ -129,25 +126,6 @@
       " terminal shortcuts
       autocmd TermOpen * startinsert
       tnoremap <Esc> <C-\><C-n>
-
-      " coc
-      nnoremap <silent> K :call CocActionAsync('doHover')<cr>
-
-      nmap <silent> <Leader>f :call CocAction('format')<cr>
-
-      nmap <silent> [g <Plug>(coc-diagnostic-prev)
-      nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-      nmap <silent> gd <Plug>(coc-definition)
-      nmap <silent> gy <Plug>(coc-type-definition)
-      nmap <silent> gi <Plug>(coc-implementation)
-      nmap <silent> gr <Plug>(coc-references)
-      nmap <silent> gw :call coc#float#jump()<cr>
-
-      inoremap <silent><expr> <c-space> coc#refresh()
-      nmap <Leader>q <Plug>(coc-codeaction-cursor)
-
-      highlight link CocHintSign Comment
 
       " scrollbind
       nnoremap <Leader>d :set scb!<CR>:echo 'scb=' . &scb
@@ -345,9 +323,5 @@
         desc = "Toggle Scratch Buffer",
       })
     '';
-  };
-
-  home.file = {
-    ".config/nvim/coc-settings.json".source = ./coc-settings.json;
   };
 }
