@@ -224,6 +224,7 @@
           },
         },
       })
+      require("telescope").load_extension("fzf")
       require("telescope").load_extension("smart_open")
 
       require("scope").setup({})
