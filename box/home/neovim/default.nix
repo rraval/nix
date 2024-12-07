@@ -2,6 +2,7 @@
 {
   home.packages = [
     pkgs.ripgrep # used by telescope-nvim
+    pkgs.pyright # used by nvim-lspconfig
   ];
 
   programs.neovim = {
@@ -10,12 +11,14 @@
       camelcasemotion
       coffee-script
       copilot-vim
+      diffview-nvim
       firenvim
       fugitive
       leap-nvim
       marks-nvim
       nightfox-nvim
       nvim-bqf
+      nvim-lspconfig
       oil-nvim
       scope-nvim
       smart-open-nvim
@@ -26,7 +29,6 @@
       vim-ledger
       vim-matchup
       vim-nix
-      diffview-nvim
 
       (pkgs.vimUtils.buildVimPlugin {
         name = "arena-nvim";
@@ -321,6 +323,15 @@
         noremap = true,
         callback = function() Snacks.scratch() end,
         desc = "Toggle Scratch Buffer",
+      })
+
+      require("lspconfig").pyright.setup({
+        on_new_config = function(new_config, new_root_dir)
+          local pythonPath = new_root_dir .. "/.venv/bin/python"
+          if vim.fn.filereadable(pythonPath) then
+            new_config.settings.python.pythonPath = pythonPath
+          end
+        end,
       })
     '';
   };
