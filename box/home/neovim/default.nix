@@ -1,8 +1,11 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.ripgrep # used by telescope-nvim
-    pkgs.pyright # used by nvim-lspconfig
+    # used by nvim-lspconfig
+    pkgs.pyright
+    pkgs.rust-analyzer
+    # used by telescope-nvim
+    pkgs.ripgrep
   ];
 
   programs.neovim = {
@@ -326,14 +329,19 @@
         desc = "Toggle Scratch Buffer",
       })
 
-      require("lspconfig").pyright.setup({
+      local lspconfig = require("lspconfig")
+
+      lspconfig.pyright.setup({
         on_new_config = function(new_config, new_root_dir)
+          -- poetry integration with local .venv directories
           local pythonPath = new_root_dir .. "/.venv/bin/python"
           if vim.fn.filereadable(pythonPath) then
             new_config.settings.python.pythonPath = pythonPath
           end
         end,
       })
+
+      lspconfig.rust_analyzer.setup({})
     '';
   };
 }
