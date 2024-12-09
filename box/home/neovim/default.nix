@@ -32,6 +32,7 @@
       vim-ledger
       vim-matchup
       vim-nix
+      trouble-nvim
 
       (pkgs.vimUtils.buildVimPlugin {
         name = "arena-nvim";
@@ -342,6 +343,12 @@
       })
 
       lspconfig.rust_analyzer.setup({})
+
+      require("trouble").setup()
+      vim.api.nvim_set_keymap('n', '<Leader>x', "<cmd>Trouble diagnostics toggle<cr>", {
+        noremap = true,
+        desc = "Diagnostics (Trouble)",
+      })
     '';
   };
 }
