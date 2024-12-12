@@ -9,7 +9,7 @@ in
 
     users.${user} = {
       imports = [
-        ./direnv.nix
+        ./direnv
         ./firefox.nix
         ./fish.nix
         ./git.nix
