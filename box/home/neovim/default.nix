@@ -322,6 +322,11 @@
             branch = false,
             count = true,
           },
+          win = {
+            keys = {
+              q = false,
+            },
+          },
         },
       })
       vim.api.nvim_set_keymap('n', '<Leader><Leader>', "", {
