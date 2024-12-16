@@ -328,6 +328,16 @@
             },
           },
         },
+        indent = {
+          enabled = true,
+          indent = {
+            only_scope = true,
+            only_current = true,
+          },
+          animate = {
+            enabled = false,
+          },
+        },
       })
       vim.api.nvim_set_keymap('n', '<Leader><Leader>', "", {
         noremap = true,
