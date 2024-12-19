@@ -34,6 +34,27 @@
       vim-nix
       trouble-nvim
 
+      (nvim-treesitter.withPlugins (p: with p; [
+        p.css
+        p.fish
+        p.html
+        p.javascript
+        p.json
+        p.just
+        p.ledger
+        p.lua
+        p.markdown
+        p.nix
+        p.python
+        p.rust
+        p.sql
+        p.toml
+        p.typescript
+        p.vim
+        p.vimdoc
+        p.xml
+      ]))
+
       (pkgs.vimUtils.buildVimPlugin {
         name = "arena-nvim";
         src = pkgs.fetchFromGitHub {
@@ -363,6 +384,27 @@
       vim.api.nvim_set_keymap('n', '<Leader>x', "<cmd>Trouble diagnostics toggle<cr>", {
         noremap = true,
         desc = "Diagnostics (Trouble)",
+      })
+
+      require("nvim-treesitter").setup()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = false,
+        auto_install = false,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        indent = {
+          enable = true,
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            node_incremental = "<Space>",
+            scope_incremental = "<C-Space>",
+            node_decremental = "<BS>",
+          },
+        },
       })
     '';
   };
