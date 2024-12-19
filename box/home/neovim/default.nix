@@ -25,14 +25,15 @@
       oil-nvim
       scope-nvim
       smart-open-nvim
+      substitute-nvim
       telescope-fzf-native-nvim
       telescope-nvim
+      trouble-nvim
       typescript-vim
       vim-eunuch
       vim-ledger
       vim-matchup
       vim-nix
-      trouble-nvim
 
       (nvim-treesitter.withPlugins (p: with p; [
         p.css
@@ -193,10 +194,10 @@
           end
       end
 
-      vim.keymap.set('n',        's', '<Plug>(leap)')
-      vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
-      vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
-      vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
+      vim.keymap.set('n', '<Leader>s', '<Plug>(leap)')
+      vim.keymap.set('n', '<Leader>S', '<Plug>(leap-from-window)')
+      vim.keymap.set({'x', 'o'}, '<Leader>s', '<Plug>(leap-forward)')
+      vim.keymap.set({'x', 'o'}, '<Leader>S', '<Plug>(leap-backward)')
 
       local function leapGetTargets (buf)
         local pick = require('telescope.actions.state').get_current_picker(buf)
@@ -409,6 +410,12 @@
           },
         },
       })
+
+      require("substitute").setup()
+      vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
+      vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
+      vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
+      vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
     '';
   };
 }
