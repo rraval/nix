@@ -359,6 +359,9 @@
             enabled = false,
           },
         },
+        scope = {
+          enabled = true,
+        },
       })
       vim.api.nvim_set_keymap('n', '<Leader><Leader>', "", {
         noremap = true,
