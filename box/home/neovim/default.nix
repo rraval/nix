@@ -35,26 +35,28 @@
       vim-matchup
       vim-nix
 
-      (nvim-treesitter.withPlugins (p: with p; [
-        p.css
-        p.fish
-        p.html
-        p.javascript
-        p.json
-        p.just
-        p.ledger
-        p.lua
-        p.markdown
-        p.nix
-        p.python
-        p.rust
-        p.sql
-        p.toml
-        p.typescript
-        p.vim
-        p.vimdoc
-        p.xml
-      ]))
+      (nvim-treesitter.withPlugins (
+        p: with p; [
+          p.css
+          p.fish
+          p.html
+          p.javascript
+          p.json
+          p.just
+          p.ledger
+          p.lua
+          p.markdown
+          p.nix
+          p.python
+          p.rust
+          p.sql
+          p.toml
+          p.typescript
+          p.vim
+          p.vimdoc
+          p.xml
+        ]
+      ))
 
       (pkgs.vimUtils.buildVimPlugin {
         name = "arena-nvim";
