@@ -59,16 +59,6 @@
       ))
 
       (pkgs.vimUtils.buildVimPlugin {
-        name = "arena-nvim";
-        src = pkgs.fetchFromGitHub {
-          owner = "dzfrias";
-          repo = "arena.nvim";
-          rev = "9c68cf8afe9665241cb3f7a52c9586095c17d0da";
-          hash = "sha256-7u/+DHdipch2oG5geMXxvkwjTNu0HOlN4Oc7aRmSIFM=";
-        };
-      })
-
-      (pkgs.vimUtils.buildVimPlugin {
         name = "snacks-nvim";
         src = pkgs.fetchFromGitHub {
           owner = "folke";
@@ -140,7 +130,6 @@
       noremap <Leader>a <cmd>tab split<CR>
       noremap <Leader>g <cmd>Git<CR>
       noremap <Leader>G <cmd>DiffviewOpen<CR>
-      noremap <Leader>r <cmd>ArenaToggle<CR>
 
       " terminal shortcuts
       autocmd TermOpen * startinsert
@@ -155,30 +144,6 @@
     '';
     extraLuaConfig = ''
       require("marks").setup()
-
-      require("arena").setup({
-        max_items = 10,
-      })
-      -- Seems to not be coded properly in setup
-      require("arena.config").always_context = {
-          "mod.rs",
-          "init.lua",
-          "__init__.py",
-          "__test__.py",
-          "index.js",
-          "index.ts",
-          "index.coffee",
-          "default.nix",
-      }
-      -- custom keybinds to quickly switch to a buffer
-      for i = 1, 9 do
-          require("arena").window.keymaps[tostring(i)] = function(win)
-              local target = win:get(i + 1)
-              local info = vim.fn.getbufinfo(target.bufnr)[1]
-              vim.api.nvim_set_current_buf(target.bufnr)
-              vim.fn.cursor(info.lnum, 0)
-          end
-      end
 
       vim.keymap.set('n', '<Leader>s', '<Plug>(leap)')
       vim.keymap.set('n', '<Leader>S', '<Plug>(leap-from-window)')
