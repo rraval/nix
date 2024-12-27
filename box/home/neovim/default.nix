@@ -88,17 +88,13 @@
       set shiftwidth=4
       set expandtab
       set nobackup
-      set backupcopy=yes
       set nowrap
       set mouse=
       set tw=0
-      set bg=dark
       set scrolloff=5
       set scrolljump=5
       set sidescroll=10
-      set showmatch
       set showmode
-      set cinoptions=>4,+8,(8,u0
       set number
       set relativenumber
       set signcolumn=auto:3
@@ -107,19 +103,12 @@
 
       " stop autoindenting things as I type
       autocmd FileType python setlocal indentkeys-=<:>
-      " align with black code formatting style
-      let g:pyindent_open_paren = 'shiftwidth()'
-      let g:pyindent_nested_paren = 'shiftwidth()'
-      let g:pyindent_continue = 'shiftwidth()'
 
       autocmd FileType ledger setlocal foldmethod=marker
       autocmd FileType git setlocal foldmethod=syntax
 
       " refresh files on navigation
       autocmd BufEnter,FocusGained,FocusLost,WinLeave * checktime
-
-      " because Y being yy is stupid
-      map Y y$
 
       " editing commands
       " Ctrl+D for inserting the current buffer's directory for optin relative editing
@@ -159,11 +148,6 @@
 
       " scrollbind
       nnoremap <Leader>d :set scb!<CR>:echo 'scb=' . &scb
-
-      " makeprg
-      if !empty($NEOVIM_MAKEPRG)
-        set makeprg=$NEOVIM_MAKEPRG
-      endif
 
       " fugitive
       " buffers for `G diff` are important!
