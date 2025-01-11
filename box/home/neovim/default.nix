@@ -23,7 +23,6 @@
       nvim-bqf
       nvim-lspconfig
       oil-nvim
-      scope-nvim
       smart-open-nvim
       substitute-nvim
       telescope-fzf-native-nvim
@@ -204,11 +203,8 @@
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("smart_open")
 
-      require("scope").setup({})
-      require("telescope").load_extension("scope")
-
       vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
-      vim.keymap.set("n", "<Leader>t", "<cmd>Telescope smart_open<CR>", { desc = "Smart Open" })
+      vim.keymap.set("n", "<Leader>r", "<cmd>Telescope buffers<CR>", { desc = "Find buffers" })
       vim.keymap.set("n", "<Leader>t", function()
         require("telescope").extensions.smart_open.smart_open({
           cwd_only = true,
@@ -217,8 +213,6 @@
       end, { noremap = true, silent = true, desc = "Smart Open" })
       vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope live_grep<CR>", { desc = "Find in files" })
       vim.keymap.set("n", "<Leader>fg", "<cmd>Telescope git_branches<CR>", { desc = "Find git branches" })
-      vim.keymap.set("n", "<Leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers in current tab" })
-      vim.keymap.set("n", "<Leader>fB", "<cmd>Telescope scope buffers<CR>", { desc = "Find buffers in all tabs" })
       vim.keymap.set("n", "<Leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
 
       -- jump to tab by number
