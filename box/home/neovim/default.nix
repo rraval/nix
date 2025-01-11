@@ -230,37 +230,57 @@
         },
       })
 
-      local function openTerminal(openCmd)
+      local function currentBufDir()
           local bufnr = vim.api.nvim_get_current_buf()
           local buftype = vim.bo[bufnr].buftype
           local filetype = vim.bo[bufnr].filetype
 
           local bufDir
           if filetype == 'oil' then
-              bufDir = oil.get_current_dir(bufnr)
+              return oil.get_current_dir(bufnr)
           elseif filetype == 'fugitive' then
-              bufDir = vim.fn.fnamemodify(vim.b.git_dir, ':h')
+              return vim.fn.fnamemodify(vim.b.git_dir, ':h')
           elseif buftype == 'terminal' then
               _, _, bufDir = string.find(vim.fn.expand('%:p:h'), "term://(.*)//")
+              return bufDir
           else
-              bufDir = vim.fn.expand('%:p:h')
+              return vim.fn.expand('%:p:h')
+          end
+      end
+
+      local function findProjectDirUpwards(startDir)
+        local curDir = startDir
+
+        while curDir ~= '/' do
+          if vim.fn.isdirectory(curDir .. '/.git') == 1 then
+            return curDir
           end
 
-          local shell = os.getenv('SHELL')
+          if vim.fn.filereadable(curDir .. '/justfile') == 1 then
+            return curDir
+          end
 
-          vim.api.nvim_command(string.format('%s term://%s//%s', openCmd, bufDir, shell))
+          curDir = vim.fn.fnamemodify(curDir, ':h')
+        end
+
+        return '/'
+      end
+
+      local function openTerminal(openCmd, dir)
+          local shell = os.getenv('SHELL')
+          vim.api.nvim_command(string.format('%s term://%s//%s', openCmd, dir, shell))
       end
 
       vim.api.nvim_set_keymap('n', '<Leader>w', "", {
         noremap = true,
-        callback = function() openTerminal("vsplit") end,
+        callback = function() openTerminal("vsplit", currentBufDir()) end,
         desc = "Open terminal in current buffer's directory",
       })
 
       vim.api.nvim_set_keymap('n', '<Leader>W', "", {
         noremap = true,
-        callback = function() openTerminal("tabe") end,
-        desc = "Open terminal in current buffer's directory",
+        callback = function() openTerminal("tabe", findProjectDirUpwards(currentBufDir())) end,
+        desc = "Open terminal in current buffer's project directory",
       })
 
       -- firenvim, firefox integration
