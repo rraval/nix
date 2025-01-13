@@ -62,8 +62,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "folke";
           repo = "snacks.nvim";
-          rev = "98df370703b3c47a297988f3e55ce99628639590";
-          hash = "sha256-Gvd2QfAgrpRxJvZ41LAOPRrDGwVdeZUb8BGrzzcpcHU=";
+          rev = "1b7a57a0b14b37a708330a346a767865954ce448";
+          hash = "sha256-I/UKCtsLEfRdVWw4Mm+7wq8ESCc38h4ePtsTt7r7/+Q=";
         };
       })
     ];
@@ -304,8 +304,17 @@
 
       require("snacks").setup({
         scratch = {
+          ft = function()
+            -- \\ opens a global markdown scratch
+            -- everything else uses a count-specific filetype-specific scratch
+            if vim.v.count1 ~= 1 and vim.bo.buftype == "" and vim.bo.filetype ~= "" then
+              return vim.bo.filetype
+            end
+
+            return "markdown"
+          end,
           filekey = {
-            cwd = true,
+            cwd = false,
             branch = false,
             count = true,
           },
