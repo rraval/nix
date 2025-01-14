@@ -390,6 +390,18 @@
       vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
       vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
       vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
+
+      vim.api.nvim_create_autocmd({ 'TermRequest' }, {
+        desc = 'Set `path` based on terminal cwd',
+        callback = function(ev)
+          if string.sub(vim.v.termrequest, 1, 4) == '\x1b]7;' then
+            local dir = string.gsub(vim.v.termrequest, '\x1b]7;file://[^/]*', "")
+            if vim.fn.isdirectory(dir) then
+              vim.bo.path = dir
+            end
+          end
+        end
+      })
     '';
   };
 }
