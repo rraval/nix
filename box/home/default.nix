@@ -67,6 +67,7 @@ in
           libfaketime
           libreoffice
           musescore
+          nix-inspect
           nodejs
           obsidian
           okular
