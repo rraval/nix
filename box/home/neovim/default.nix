@@ -402,6 +402,10 @@
           end
         end
       })
+
+      vim.api.nvim_set_keymap('n', '<C-g>', "<C-W>F", {
+        desc = "Goto file line under cursor in split",
+      })
     '';
   };
 }
