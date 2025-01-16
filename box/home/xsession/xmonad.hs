@@ -71,6 +71,7 @@ keys' (XConfig {modMask = modm, terminal = terminal}) = M.fromList $
     , ((modm .|. shiftMask, xK_w), spawn "systemctl suspend")
     , ((modm .|. shiftMask, xK_Return), spawn terminal)
     , ((modm, xK_space), sendMessage NextLayout)
+    , ((modm, xK_o), spawn "zeal")
     , ((modm, xK_p), spawn "rofi -show drun")
     , ((modm, xK_i), spawn "rofi -show ssh")
     , ((modm, xK_u), spawn "rofimoji --files all --copy-only")

@@ -33,6 +33,7 @@
       vim-ledger
       vim-matchup
       vim-nix
+      zeavim-vim
 
       (nvim-treesitter.withPlugins (
         p: with p; [
@@ -122,8 +123,6 @@
       autocmd FileType qf wincmd J
       nnoremap <C-J> :cn<CR>
       nnoremap <C-K> :cp<CR>
-      " load quickfix from system clipboard
-      noremap <Leader>z :cexpr getreg('+')<CR>
 
       " file navigation / version control
       noremap <Leader>a <cmd>tab split<CR>
@@ -406,6 +405,12 @@
       vim.api.nvim_set_keymap('n', '<C-g>', "<C-W>F", {
         desc = "Goto file line under cursor in split",
       })
+
+      vim.g.zv_file_types = {
+        help = 'vim',
+        javascript = 'javascript,nodejs',
+        python = 'python_3',
+      }
     '';
   };
 }

@@ -100,6 +100,7 @@ in
           xclip
           yubikey-manager
           zbar
+          zeal
           zoom-us
         ];
       };
