@@ -30,6 +30,7 @@
       trouble-nvim
       typescript-vim
       vim-eunuch
+      vim-lastplace
       vim-ledger
       vim-matchup
       vim-nix
@@ -111,9 +112,6 @@
 
       " kill any trailing whitespace on save
       autocmd BufWritePre * %s/\s\+$//e
-
-      " Jump to last cursor position, see :help last-position-jump
-      autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
       " camel case motion
       call camelcasemotion#CreateMotionMappings(',')
