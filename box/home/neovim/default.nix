@@ -1,11 +1,12 @@
 { pkgs, ... }:
 {
-  home.packages = [
+  home.packages = with pkgs; [
     # used by nvim-lspconfig
-    pkgs.pyright
-    pkgs.rust-analyzer
+    pyright
+    rust-analyzer
+    lua-language-server
     # used by telescope-nvim
-    pkgs.ripgrep
+    ripgrep
   ];
 
   programs.neovim = {
@@ -139,6 +140,16 @@
       autocmd User FugitivePager setlocal bufhidden= buflisted
     '';
     extraLuaConfig = ''
+      -- use 2 space indents for specific filetypes
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {"lua", "nix", "yaml"},
+        callback = function()
+          vim.bo.tabstop = 2
+          vim.bo.softtabstop = 2
+          vim.bo.shiftwidth = 2
+        end,
+      })
+
       require("marks").setup()
 
       vim.keymap.set('n', '<Leader>s', '<Plug>(leap)')
@@ -355,6 +366,35 @@
 
       lspconfig.rust_analyzer.setup({})
 
+      lspconfig.lua_ls.setup({
+        on_init = function(client)
+          if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+              return
+            end
+          end
+
+          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+              -- Tell the language server which version of Lua you're using
+              -- (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT'
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME
+              }
+            }
+          })
+        end,
+        settings = {
+          Lua = {}
+        }
+      })
+
       require("trouble").setup()
       vim.api.nvim_set_keymap('n', '<Leader>x', "<cmd>Trouble diagnostics toggle<cr>", {
         noremap = true,
@@ -404,11 +444,26 @@
         desc = "Goto file line under cursor in split",
       })
 
+      -- zeal
       vim.g.zv_file_types = {
         help = 'vim',
         javascript = 'javascript,nodejs',
         python = 'python_3',
       }
+
+      -- Check if an adjacent file exists and load it
+      local function load_adjacent_file(file_name)
+        local full_path = vim.fn.stdpath("config") .. "/" .. file_name
+        local file_exists = vim.loop.fs_stat(full_path) ~= nil
+
+        if file_exists then
+          vim.notify("Loading " .. file_name, vim.log.levels.INFO)
+          dofile(full_path)
+        end
+      end
+
+      -- Attempt to load an adjacent configuration file
+      load_adjacent_file("local.lua")
     '';
   };
 }
