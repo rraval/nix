@@ -2,9 +2,10 @@
 {
   home.packages = with pkgs; [
     # used by nvim-lspconfig
+    lua-language-server
     pyright
     rust-analyzer
-    lua-language-server
+    typescript-language-server
     # used by telescope-nvim
     ripgrep
   ];
@@ -395,6 +396,8 @@
           Lua = {}
         }
       })
+
+      lspconfig.ts_ls.setup({})
 
       require("trouble").setup()
       vim.api.nvim_set_keymap('n', '<Leader>x', "<cmd>Trouble diagnostics toggle<cr>", {
