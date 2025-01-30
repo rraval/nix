@@ -26,6 +26,7 @@
       nvim-lspconfig
       oil-nvim
       smart-open-nvim
+      snacks-nvim
       substitute-nvim
       telescope-fzf-native-nvim
       telescope-nvim
@@ -60,16 +61,6 @@
           p.xml
         ]
       ))
-
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "snacks-nvim";
-        src = pkgs.fetchFromGitHub {
-          owner = "folke";
-          repo = "snacks.nvim";
-          rev = "1b7a57a0b14b37a708330a346a767865954ce448";
-          hash = "sha256-I/UKCtsLEfRdVWw4Mm+7wq8ESCc38h4ePtsTt7r7/+Q=";
-        };
-      })
     ];
     extraConfig = ''
       syntax enable

@@ -39,13 +39,9 @@ in
           calibre
           chromium
           corefonts
-          # Broken with Python 3.12 default
-          # https://discourse.nixos.org/t/issue-building-nixos-due-to-sip-package/48702/3
-          # cura
           darktable
           dig
           discord
-          diskonaut
           flameshot
           fx
           fzf
@@ -82,8 +78,6 @@ in
           rpi-imager
           screenkey
           simple-scan
-          # broken with compile error in sfnt.cpp
-          # scribusUnstable
           skypeforlinux
           slack
           spotify
