@@ -14,6 +14,7 @@
     enable = true;
     plugins = with pkgs.vimPlugins; [
       camelcasemotion
+      codecompanion-nvim
       coffee-script
       copilot-vim
       diffview-nvim
@@ -134,9 +135,6 @@
       " terminal shortcuts
       autocmd TermOpen * startinsert
       tnoremap <Esc> <C-\><C-n>
-
-      " scrollbind
-      nnoremap <Leader>d :set scb!<CR>:echo 'scb=' . &scb
 
       " fugitive
       " buffers for `G diff` are important!
@@ -474,6 +472,20 @@
           dofile(full_path)
         end
       end
+
+      -- codecompanion
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "copilot",
+          },
+          inline = {
+            adapter = "copilot",
+          },
+        },
+      })
+      vim.keymap.set({ "n", "v" }, "<Leader>d", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+      vim.keymap.set("v", "<Leader>D", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
       -- Attempt to load an adjacent configuration file
       load_adjacent_file("local.lua")
