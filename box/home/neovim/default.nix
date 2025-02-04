@@ -13,6 +13,7 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      blink-cmp
       camelcasemotion
       codecompanion-nvim
       coffee-script
@@ -109,11 +110,6 @@
       " editing commands
       " Ctrl+D for inserting the current buffer's directory for optin relative editing
       cnoremap <expr> <C-d> expand('%:h/') . '/'
-
-      " % takes too many hands to type for a common motion
-      nnoremap <C-e> %
-      vnoremap <C-e> %
-      onoremap <C-e> %
 
       " kill any trailing whitespace on save
       autocmd BufWritePre * %s/\s\+$//e
@@ -486,6 +482,21 @@
       })
       vim.keymap.set({ "n", "v" }, "<Leader>d", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
       vim.keymap.set("v", "<Leader>D", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
+      -- blink
+      require("blink.cmp").setup({
+        keymap = { preset = 'enter' },
+        sources = {
+          per_filetype = {
+            codecompanion = { "codecompanion" },
+          }
+        },
+        completion = {
+          menu = {
+            auto_show = function(ctx) return ctx.mode ~= 'cmdline' end,
+          },
+        }
+      })
 
       -- Attempt to load an adjacent configuration file
       load_adjacent_file("local.lua")
