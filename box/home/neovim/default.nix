@@ -39,6 +39,17 @@
       vim-nix
       zeavim-vim
 
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "buffer_manager.nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "j-morano";
+          repo = "buffer_manager.nvim";
+          rev = "03df0142e60cdf3827d270f01ccb36999d5a4e08";
+          hash = "sha256-sIkz5jkt+VkZNbiHRB7E+ttcm9XNtDiI/2sTyyYd1gg=";
+        };
+        doCheck = false; # tests broken under nix build
+      })
+
       (nvim-treesitter.withPlugins (
         p: with p; [
           p.css
@@ -175,6 +186,12 @@
         }
       end
 
+      require("buffer_manager").setup({
+        order_buffers = "fullpath",
+        show_indicators = true,
+        short_term_names = true,
+      })
+
       require("telescope").setup({
         defaults = {
           mappings = {
@@ -205,6 +222,7 @@
 
       vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
       vim.keymap.set("n", "<Leader>r", "<cmd>Telescope buffers<CR>", { desc = "Find buffers" })
+      vim.keymap.set("n", "<Leader>R", function() require("buffer_manager.ui").toggle_quick_menu() end, { desc = "Manage buffers" })
       vim.keymap.set("n", "<Leader>t", function()
         require("telescope").extensions.smart_open.smart_open({
           cwd_only = true,
