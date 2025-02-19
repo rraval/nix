@@ -107,6 +107,7 @@ in
       cached = "diff --cached";
       stat = "diff --stat";
       graph = "log --graph --oneline --all --decorate";
+      l = "log --oneline --decorate -100";
       g = "!git log --branches --graph --decorate --oneline --not $(git show-ref --heads --hash | xargs git merge-base --octopus)";
 
       ri = "rebase --interactive";
