@@ -4,7 +4,7 @@
     # used by nvim-lspconfig
     lua-language-server
     pyright
-    rust-analyzer
+    rustup
     typescript-language-server
     # used by telescope-nvim
     ripgrep

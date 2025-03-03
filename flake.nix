@@ -79,21 +79,13 @@
             {
               imports = [ encircle.nixosModules.default ];
 
-              encircle = {
-                env.enable = true;
-                hosts.enable = true;
-                vanta.enable = true;
-                postgresql.enable = true;
-                vpn.enable = true;
-                minikube.enable = true;
-              };
-
               home-manager.users.rraval = {
-                imports = [ encircle.homeManagerModules.default ];
-                encircle.direnv = {
-                  enable = true;
-                  devShellFlakeUrl = "path:/home/rraval/encircle-nix-configs";
-                };
+                imports = [ encircle.modules.homeManager.default ];
+
+                encircle.android.enable = true;
+                encircle.infrastructure.enable = true;
+                encircle.python.enable = true;
+                encircle.rust.enable = true;
               };
             }
           ];

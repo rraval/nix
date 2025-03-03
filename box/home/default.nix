@@ -33,7 +33,6 @@ in
         };
 
         packages = with pkgs; [
-          android-studio
           audacity
           bruno
           calibre
