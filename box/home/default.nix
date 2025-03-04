@@ -89,6 +89,7 @@ in
           unzip
           vistafonts
           vlc
+          vscode-fhs
           wireshark
           xclip
           yubikey-manager
