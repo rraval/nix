@@ -32,7 +32,7 @@
     let
       boxModule = {
         imports = [
-          homeManager.nixosModule
+          homeManager.nixosModules.home-manager
           ./box
         ];
       };

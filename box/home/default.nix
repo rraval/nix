@@ -46,7 +46,6 @@ in
           fzf
           gh
           gh-markdown-preview
-          ghostwriter
           gimp
           git-nomad
           hexyl
@@ -56,7 +55,7 @@ in
           iotop
           jaq
           jnv
-          kdenlive
+          kdePackages.kdenlive
           lens
           libation
           libfaketime
@@ -65,7 +64,7 @@ in
           nix-inspect
           nodejs
           obsidian
-          okular
+          kdePackages.okular
           pdftk
           pgformatter
           playerctl
