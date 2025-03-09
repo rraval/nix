@@ -101,3 +101,7 @@ vim.api.nvim_set_keymap('n', 'gF', "<C-W>gF", {
 
 vim.keymap.set({ "n", "v" }, "<Leader>d", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
 vim.keymap.set("v", "<Leader>D", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
+vim.keymap.set({ "n", "v" }, "<Leader>c", '"+y', { noremap = true, silent = true, desc = "Copy to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<Leader>p", '"+p', { noremap = true, silent = true, desc = "Paste from system clipboard" })
+vim.keymap.set({ "n", "v" }, "<Leader>P", '"+P', { noremap = true, silent = true, desc = "Paste from system clipboard" })
