@@ -12,6 +12,7 @@ vim.keymap.set("n", "<Leader>t", function()
     filename_first = false,
   })
 end, { noremap = true, silent = true, desc = "Smart Open" })
+vim.keymap.set({"n", "v"}, "<Leader>fr", "<cmd>GrugFar<CR>", { desc = "Find & Replace" })
 vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope live_grep<CR>", { desc = "Find in files" })
 vim.keymap.set("n", "<Leader>fg", "<cmd>Telescope git_branches<CR>", { desc = "Find git branches" })
 vim.keymap.set("n", "<Leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })

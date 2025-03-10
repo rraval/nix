@@ -23,6 +23,7 @@
       diffview-nvim
       firenvim
       fugitive
+      grug-far-nvim
       leap-nvim
       marks-nvim
       nightfox-nvim
@@ -143,6 +144,7 @@
       require("oil").setup()
       require("trouble").setup()
       require("substitute").setup()
+      require("grug-far").setup()
     '';
   };
 }
