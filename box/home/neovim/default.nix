@@ -97,7 +97,7 @@
       set showmode
       set number
       set relativenumber
-      set signcolumn=auto:3
+      set signcolumn=number
       set ignorecase
       set smartcase
 
