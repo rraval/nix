@@ -14,38 +14,39 @@ in
     userName = userCfg.realName;
     userEmail = userCfg.email;
     extraConfig = {
-      color = {
-        diff = "auto";
-        status = "auto";
-        branch = "auto";
-      };
-      core = {
-        whitespace = "trailing-space,space-before-tab";
-      };
-      commit = {
-        cleanup = "scissors";
-      };
-      branch = {
-        autoSetupMerge = "simple";
-      };
-      apply = {
-        whitespace = "fix";
-      };
-      push = {
-        default = "current";
-      };
-      pull = {
-        ff = true;
-      };
-      rebase = {
-        autosquash = true;
-        stat = true;
-        missingCommitsCheck = "warn";
-      };
-      merge = {
-        conflictstyle = "diff3";
-        ff = false;
-      };
+      apply.whitespace = "fix";
+      branch.autoSetupMerge = "simple";
+      branch.sort = "-committerdate";
+      color.branch = "auto";
+      color.diff = "auto";
+      color.status = "auto";
+      column.ui = "auto";
+      commit.cleanup = "scissors";
+      core.fsmonitor = true;
+      core.untrackedCache = true;
+      core.whitespace = "trailing-space,space-before-tab";
+      diff.algorithm = "histogram";
+      diff.colorMoved = "plain";
+      diff.mnemonicPrefix = true;
+      diff.renames = true;
+      fetch.all = true;
+      fetch.prune = true;
+      fetch.pruneTags = true;
+      help.autocorrect = "prompt";
+      init.defaultBranch = "main";
+      merge.conflictstyle = "zdiff3";
+      merge.ff = false;
+      pull.ff = true;
+      push.autoSetupRemote = true;
+      push.default = "current";
+      push.followTags = true;
+      rebase.autoStash = true;
+      rebase.autoSquash = true;
+      rebase.missingCommitsCheck = "warn";
+      rebase.stat = true;
+      rerere.autoupdate = true;
+      rerere.enabled = true;
+      tag.sort = "version:refname";
     };
     # Use includes to keep external tool config isolated.
     includes =
@@ -71,7 +72,7 @@ in
                 hyperlinks = true
 
               [merge]
-                conflictstyle = diff3
+                conflictstyle = zdiff3
 
               [diff]
                 colorMoved = default
