@@ -89,13 +89,16 @@
               };
             }
 
-            ({pkgs, ...}: {
-              home-manager.users.rraval = {
-                home.packages = with pkgs; [
-                  vscode-fhs
-                ];
-              };
-            })
+            (
+              { pkgs, ... }:
+              {
+                home-manager.users.rraval = {
+                  home.packages = with pkgs; [
+                    vscode-fhs
+                  ];
+                };
+              }
+            )
           ];
         };
 
