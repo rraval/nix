@@ -1,5 +1,7 @@
 local lspconfig = require("lspconfig")
 
+lspconfig.harper_ls.setup({})
+
 lspconfig.pyright.setup({
   on_new_config = function(new_config, new_root_dir)
     -- poetry integration with local .venv directories

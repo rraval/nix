@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     # used by nvim-lspconfig
+    harper
     lua-language-server
     pyright
     rustup
