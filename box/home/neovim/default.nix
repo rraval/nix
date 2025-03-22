@@ -16,6 +16,7 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      actions-preview-nvim
       blink-cmp
       camelcasemotion
       codecompanion-nvim
