@@ -5,6 +5,7 @@
     harper
     lua-language-server
     pyright
+    ruff
     rustup
     typescript-language-server
     # used by telescope-nvim

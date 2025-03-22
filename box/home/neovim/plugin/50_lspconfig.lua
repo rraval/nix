@@ -12,6 +12,8 @@ lspconfig.pyright.setup({
   end,
 })
 
+lspconfig.ruff.setup({})
+
 lspconfig.rust_analyzer.setup({})
 
 lspconfig.lua_ls.setup({
