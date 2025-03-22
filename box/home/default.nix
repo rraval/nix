@@ -36,7 +36,7 @@ in
           audacity
           bruno
           calibre
-          chromium
+          (chromium.override { enableWideVine = true; })
           corefonts
           darktable
           dig
