@@ -13,6 +13,7 @@
   ];
 
   xdg.configFile."nvim/plugin".source = ./plugin;
+  xdg.configFile."nvim/after/plugin/fugitive.lua".source = ./after_plugins/fugitive.lua;
 
   programs.neovim = {
     enable = true;
