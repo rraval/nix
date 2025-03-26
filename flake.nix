@@ -82,9 +82,9 @@
               home-manager.users.rraval = {
                 imports = [ encircle.modules.homeManager.default ];
 
+                encircle.ai.enable = true;
                 encircle.android.enable = true;
                 encircle.infrastructure.enable = true;
-                encircle.promptflow.enable = true;
                 encircle.python.enable = true;
                 encircle.rust.enable = true;
               };
