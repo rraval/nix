@@ -4,7 +4,6 @@ import Data.Monoid
 import System.Exit(ExitCode(ExitSuccess), exitWith)
 import XMonad
 import XMonad.Actions.CycleWS(nextScreen, swapNextScreen)
-import XMonad.Actions.EasyMotion(selectWindow, EasyMotionConfig(..), ChordKeys(..))
 import XMonad.Actions.Navigation2D
 import XMonad.Config.Desktop
 import XMonad.Hooks.InsertPosition
@@ -79,7 +78,7 @@ keys' (XConfig {modMask = modm, terminal = terminal}) = M.fromList $
     , ((modm, xK_w), nextScreen)
     , ((modm, xK_e), swapNextScreen)
     -- window navigation
-    , ((modm, xK_Tab), tabOrEasyMotion)
+    , ((modm, xK_Tab), windows W.focusDown)
     , ((modm, xK_h), windowGo L True)
     , ((modm, xK_j), windowGo D True)
     , ((modm, xK_k), windowGo U True)
@@ -100,14 +99,3 @@ keys' (XConfig {modMask = modm, terminal = terminal}) = M.fromList $
     [((modm .|. modifier, key), windows $ action name)
         | (name, key) <- workspaces'
         , (action, modifier) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-
-tabOrEasyMotion = do
-    -- https://stackoverflow.com/a/62075879
-    numWindows <- length . W.index . windowset <$> get
-    if numWindows <= 2 then tab else easymotion
-  where
-    tab = windows W.focusDown
-    easymotion = selectWindow cfg >>= (`whenJust` windows . W.focusWindow)
-    cfg = def {
-        sKeys = AnyKeys [xK_a, xK_s, xK_d, xK_f, xK_h, xK_j, xK_k, xK_l]
-    }
