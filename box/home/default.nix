@@ -55,6 +55,7 @@ in
           iotop
           jaq
           jnv
+          jq
           kdePackages.kdenlive
           lens
           libation
