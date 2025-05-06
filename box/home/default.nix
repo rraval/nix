@@ -57,6 +57,7 @@ in
           jnv
           jq
           kdePackages.kdenlive
+          kdePackages.okular
           lens
           libation
           libfaketime
@@ -65,7 +66,6 @@ in
           nix-inspect
           nodejs
           obsidian
-          kdePackages.okular
           pdftk
           pgformatter
           playerctl
@@ -91,6 +91,7 @@ in
           vlc
           wireshark
           xclip
+          xmlstarlet
           yubikey-manager
           zbar
           zeal
