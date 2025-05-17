@@ -77,7 +77,6 @@ in
           rpi-imager
           screenkey
           simple-scan
-          skypeforlinux
           slack
           spotify
           stremio
