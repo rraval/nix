@@ -26,6 +26,7 @@
       copilot-vim
       diffview-nvim
       firenvim
+      flatten-nvim
       fugitive
       grug-far-nvim
       leap-nvim
