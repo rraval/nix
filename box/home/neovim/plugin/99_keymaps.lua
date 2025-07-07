@@ -109,3 +109,12 @@ vim.keymap.set("v", "<Leader>D", "<cmd>CodeCompanionChat Add<cr>", { noremap = t
 vim.keymap.set({ "n", "v" }, "<Leader>c", '"+y', { noremap = true, silent = true, desc = "Copy to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<Leader>p", '"+p', { noremap = true, silent = true, desc = "Paste from system clipboard" })
 vim.keymap.set({ "n", "v" }, "<Leader>P", '"+P', { noremap = true, silent = true, desc = "Paste from system clipboard" })
+
+vim.keymap.set('', '*', '<Plug>(asterisk-*)', {})
+vim.keymap.set('', '#', '<Plug>(asterisk-#)', {})
+vim.keymap.set('', 'g*', '<Plug>(asterisk-g*)', {})
+vim.keymap.set('', 'g#', '<Plug>(asterisk-g#)', {})
+vim.keymap.set('', 'z*', '<Plug>(asterisk-z*)', {})
+vim.keymap.set('', 'gz*', '<Plug>(asterisk-gz*)', {})
+vim.keymap.set('', 'z#', '<Plug>(asterisk-z#)', {})
+vim.keymap.set('', 'gz#', '<Plug>(asterisk-gz#)', {})

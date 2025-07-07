@@ -42,6 +42,7 @@
       telescope-nvim
       trouble-nvim
       typescript-vim
+      vim-asterisk
       vim-eunuch
       vim-lastplace
       vim-ledger
