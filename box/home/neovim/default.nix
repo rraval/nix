@@ -23,7 +23,7 @@
       camelcasemotion
       codecompanion-nvim
       coffee-script
-      copilot-vim
+      copilot-lua
       diffview-nvim
       firenvim
       flatten-nvim
