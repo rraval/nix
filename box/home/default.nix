@@ -38,7 +38,8 @@ in
           calibre
           (chromium.override { enableWideVine = true; })
           corefonts
-          darktable
+          # https://github.com/NixOS/nixpkgs/issues/429268
+          # darktable
           dig
           discord
           flameshot
