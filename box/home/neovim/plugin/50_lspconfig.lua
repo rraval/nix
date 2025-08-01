@@ -1,8 +1,21 @@
 local lspconfig = require("lspconfig")
+local util = require('lspconfig.util')
 
 lspconfig.harper_ls.setup({})
 
 lspconfig.pyright.setup({
+  root_dir = util.root_pattern(
+    -- my additions
+    'justfile',
+    -- original
+    'pyproject.toml',
+    'setup.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    'pyrightconfig.json',
+    '.git'
+  ),
   on_new_config = function(new_config, new_root_dir)
     -- poetry integration with local .venv directories
     local pythonPath = new_root_dir .. "/.venv/bin/python"
