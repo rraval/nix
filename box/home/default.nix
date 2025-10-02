@@ -47,6 +47,7 @@ in
           fzf
           gh
           gh-markdown-preview
+          gh-poi
           gimp
           git-nomad
           hexyl
