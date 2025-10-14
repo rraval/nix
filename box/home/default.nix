@@ -88,6 +88,7 @@ in
           transmission_4-gtk
           trippy
           unzip
+          usbutils
           vistafonts
           vlc
           wireshark

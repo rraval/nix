@@ -92,6 +92,7 @@ in
     ./nix.nix
     ./printer.nix
     ./scanner.nix
+    ./supernote.nix
     ./users.nix
     ./yubikey.nix
   ];
