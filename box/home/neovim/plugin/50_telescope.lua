@@ -34,6 +34,19 @@ require("telescope").setup({
         ["<C-f>"] = leapPick,
       },
     },
+    vimgrep_arguments = {
+      -- defaults, see :h telescope.defaults.vimgrep_arguments
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      -- my additions
+      "--glob", "!.git/**",
+      "--hidden",
+    },
   },
   pickers = {
     find_files = {

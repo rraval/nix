@@ -18,7 +18,7 @@ vim.keymap.set("n", "<Leader>ff", "<cmd>Telescope live_grep<CR>", { desc = "Find
 vim.keymap.set("n", "<Leader>fg", "<cmd>Telescope git_branches<CR>", { desc = "Find git branches" })
 vim.keymap.set("n", "<Leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
 
-vim.keymap.set("n", "<C-CR>", require("actions-preview").code_actions, { desc = "LSP code action" })
+vim.keymap.set("n", "<C-CR>", function() require("actions-preview").code_actions() end, { desc = "LSP code action" })
 
 -- jump to tab by number
 for i = 1, 9 do
