@@ -37,6 +37,7 @@ in
           bruno
           calibre
           (chromium.override { enableWideVine = true; })
+          claude-code
           corefonts
           # https://github.com/NixOS/nixpkgs/issues/429268
           # darktable
