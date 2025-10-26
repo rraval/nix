@@ -2,9 +2,9 @@
 {
   home.packages = with pkgs; [
     # used by nvim-lspconfig
+    basedpyright
     harper
     lua-language-server
-    pyright
     ruff
     rustup
     typescript-language-server
