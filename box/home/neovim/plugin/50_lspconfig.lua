@@ -3,7 +3,17 @@ local util = require('lspconfig.util')
 
 lspconfig.harper_ls.setup({})
 
-lspconfig.basedpyright.setup({})
+lspconfig.basedpyright.setup({
+  settings = {
+    basedpyright = {
+      analysis = {
+        diagnosticSeverityOverrides = {
+          reportUnannotatedClassAttribute = false,
+        },
+      }
+    }
+  },
+})
 
 lspconfig.ruff.setup({})
 
