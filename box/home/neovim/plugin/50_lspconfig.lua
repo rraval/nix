@@ -9,6 +9,7 @@ lspconfig.basedpyright.setup({
       analysis = {
         diagnosticSeverityOverrides = {
           reportUnannotatedClassAttribute = false,
+          reportAny = false,
         },
       }
     }
