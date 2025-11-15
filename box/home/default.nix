@@ -66,7 +66,7 @@ in
           musescore
           nix-inspect
           nodejs
-          #obsidian
+          obsidian
           pdftk
           pgformatter
           playerctl

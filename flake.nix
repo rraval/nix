@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgsClaudeCodeAcp.url = "github:NixOS/nixpkgs/6e0d51b96438921ceda97eba8f7a9c428c7931d2";
+    nixpkgsObsidian.url = "github:NixOS/nixpkgs/933d435464d61189a5762785f0dc375b8402bdcf";
     rravalNixPrivate = {
       url = "github:rraval/nix-private";
     };
@@ -26,6 +27,7 @@
       self,
       nixpkgs,
       nixpkgsClaudeCodeAcp,
+      nixpkgsObsidian,
       rravalNixPrivate,
       homeManager,
       gitNomad,
@@ -52,6 +54,7 @@
                 nixpkgs.overlays = [
                   (final: prev: {
                     claude-code-acp = nixpkgsClaudeCodeAcp.legacyPackages.${pkgs.system}.claude-code-acp;
+                    obsidian = (import nixpkgsObsidian { system = "x86_64-linux"; config.allowUnfree = true; }).obsidian;
                   })
                 ];
               }

@@ -210,6 +210,22 @@
         "type": "github"
       }
     },
+    "nixpkgsObsidian": {
+      "locked": {
+        "lastModified": 1762364741,
+        "narHash": "sha256-q6QiG625yxBYB+9HKzoDGu8jDNw12IstePbmxbZsI3k=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "933d435464d61189a5762785f0dc375b8402bdcf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "933d435464d61189a5762785f0dc375b8402bdcf",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "encircle": "encircle",
@@ -217,6 +233,7 @@
         "homeManager": "homeManager",
         "nixpkgs": "nixpkgs",
         "nixpkgsClaudeCodeAcp": "nixpkgsClaudeCodeAcp",
+        "nixpkgsObsidian": "nixpkgsObsidian",
         "rravalNixPrivate": "rravalNixPrivate"
       }
     },
