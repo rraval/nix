@@ -1,4 +1,15 @@
 require("codecompanion").setup({
+  strategies = {
+    chat = {
+      adapter = "claude_code",
+    },
+    inline = {
+      adapter = "copilot",
+    },
+    cmd = {
+      adapter = "copilot",
+    }
+  },
   adapters = {
     acp = {
       claude_code = function()
