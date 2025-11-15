@@ -4,5 +4,4 @@ let
 in
 {
   users.users.${user}.extraGroups = [ "adbusers" ];
-  services.udev.packages = [ pkgs.android-udev-rules ];
 }

@@ -34,10 +34,8 @@ in
 
         packages = with pkgs; [
           audacity
-          bruno
           calibre
-          (chromium.override { enableWideVine = true; })
-          claude-code
+          #chromium
           corefonts
           # https://github.com/NixOS/nixpkgs/issues/429268
           # darktable
@@ -68,21 +66,18 @@ in
           musescore
           nix-inspect
           nodejs
-          obsidian
+          #obsidian
           pdftk
           pgformatter
           playerctl
           pv
           qrencode
-          rehex
           ripgrep
           rofimoji
-          rpi-imager
           screenkey
           simple-scan
           slack
           spotify
-          stremio
           subsurface
           tig
           tmux
@@ -90,7 +85,7 @@ in
           trippy
           unzip
           usbutils
-          vistafonts
+          vista-fonts
           vlc
           wireshark
           xclip

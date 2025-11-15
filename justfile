@@ -1,14 +1,17 @@
 _default:
     just --list
 
-build:
-    nixos-rebuild build --use-remote-sudo --flake 'path:{{justfile_directory()}}'
+dry-build *args="":
+    nixos-rebuild dry-build --sudo --flake 'path:{{justfile_directory()}}' {{args}}
+
+build *args="":
+    nixos-rebuild build --sudo --flake 'path:{{justfile_directory()}}' {{args}}
 
 switch:
-    nixos-rebuild switch --use-remote-sudo --flake 'path:{{justfile_directory()}}'
+    nixos-rebuild switch --sudo --flake 'path:{{justfile_directory()}}'
 
 switch_override:
-    nixos-rebuild switch --use-remote-sudo --flake 'path:{{justfile_directory()}}' --override-input encircle 'path:{{justfile_directory()}}/../encircle-nix-configs'
+    nixos-rebuild switch --sudo --flake 'path:{{justfile_directory()}}' --override-input encircle 'path:{{justfile_directory()}}/../encircle-nix-configs'
 
 fmt:
     nix fmt .

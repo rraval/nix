@@ -2,8 +2,12 @@
 {
   programs.ssh = {
     enable = true;
-    userKnownHostsFile = "${config.home.homeDirectory}/.ssh/known_hosts ${./known_hosts}";
-    serverAliveInterval = 60;
+    matchBlocks = {
+      "*" = {
+        userKnownHostsFile = "${config.home.homeDirectory}/.ssh/known_hosts ${./known_hosts}";
+        serverAliveInterval = 60;
+      };
+    };
   };
 
   # Automatically generate (user + node) specific SSH keys.

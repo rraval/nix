@@ -10,6 +10,9 @@
     typescript-language-server
     # used by telescope-nvim
     ripgrep
+    # used by codecompanion
+    claude-code
+    claude-code-acp
   ];
 
   xdg.configFile."nvim/plugin".source = ./plugin;
@@ -133,7 +136,7 @@
       nnoremap <C-K> :cp<CR>
 
       " file navigation / version control
-      noremap <Leader>a <cmd>tab split<CR>
+      noremap <Leader>d <cmd>tab split<CR>
       noremap <Leader>g <cmd>Git<CR>
       noremap <Leader>G <cmd>DiffviewOpen<CR>
 

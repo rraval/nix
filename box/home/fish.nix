@@ -6,11 +6,16 @@
     plugins = [
       {
         name = "fzf-fish";
-        src = pkgs.runCommand "fzf-fish" { } ''
-          mkdir -p $out
-          cp ${pkgs.fzf}/share/fish/vendor_functions.d/fzf_key_bindings.fish $out/key_bindings.fish
-          cp ${pkgs.fzf}/share/fish/vendor_conf.d/load-fzf-key-bindings.fish $out/init.fish
-        '';
+        src = pkgs.writeTextFile {
+          name = "fzf-fish";
+          destination = "/init.fish";
+          text = ''
+            if command -s fzf-share >/dev/null
+              source (fzf-share)/key-bindings.fish
+              fzf_key_bindings
+            end
+          '';
+        };
       }
 
       {

@@ -103,8 +103,10 @@ vim.api.nvim_set_keymap('n', 'gF', "<C-W>gF", {
   desc = "Goto file line under cursor in tab",
 })
 
-vim.keymap.set({ "n", "v" }, "<Leader>d", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-vim.keymap.set("v", "<Leader>D", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+vim.cmd([[cab cc CodeCompanion]]) -- Expand 'cc' into 'CodeCompanion' in the command line
 
 vim.keymap.set({ "n", "v" }, "<Leader>c", '"+y', { noremap = true, silent = true, desc = "Copy to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<Leader>p", '"+p', { noremap = true, silent = true, desc = "Paste from system clipboard" })

@@ -18,7 +18,7 @@
     in
     {
       enable = true;
-      pinentryPackage = pkgs.pinentry-gtk2;
+      pinentry.package = pkgs.pinentry-gtk2;
       enableSshSupport = true;
       enableExtraSocket = true;
       defaultCacheTtl = hour_in_seconds;
