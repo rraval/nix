@@ -1,9 +1,4 @@
-local lspconfig = require("lspconfig")
-local util = require('lspconfig.util')
-
-lspconfig.harper_ls.setup({})
-
-lspconfig.basedpyright.setup({
+vim.lsp.config("basedpyright", {
   settings = {
     basedpyright = {
       analysis = {
@@ -16,11 +11,7 @@ lspconfig.basedpyright.setup({
   },
 })
 
-lspconfig.ruff.setup({})
-
-lspconfig.rust_analyzer.setup({})
-
-lspconfig.lua_ls.setup({
+vim.lsp.config("lua_ls", {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -50,4 +41,9 @@ lspconfig.lua_ls.setup({
   }
 })
 
-lspconfig.ts_ls.setup({})
+vim.lsp.enable("harper_ls")
+vim.lsp.enable("basedpyright")
+vim.lsp.enable("ruff")
+vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("ts_ls")
