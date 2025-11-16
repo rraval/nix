@@ -30,6 +30,6 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {"git"},
   callback = function()
     vim.keymap.set("n", "gf", function() openFile("split") end, { buffer = true })
-    vim.keymap.set("n", "gF", function() openFile("tabedit") end, { buffer = true })
+    vim.keymap.set("n", "gF", function() openFile("$tabedit") end, { buffer = true })
   end
 })

@@ -146,7 +146,7 @@
       nnoremap <C-K> :cp<CR>
 
       " file navigation / version control
-      noremap <Leader>d <cmd>tab split<CR>
+      noremap <Leader>d <cmd>$tab split<CR>
       noremap <Leader>g <cmd>Git<CR>
       noremap <Leader>G <cmd>DiffviewOpen<CR>
 

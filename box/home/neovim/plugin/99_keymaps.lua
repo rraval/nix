@@ -76,7 +76,7 @@ vim.api.nvim_set_keymap('n', '<Leader>w', "", {
 
 vim.api.nvim_set_keymap('n', '<Leader>W', "", {
   noremap = true,
-  callback = function() openTerminal("tabe", findProjectDirUpwards(currentBufDir())) end,
+  callback = function() openTerminal("$tabe", findProjectDirUpwards(currentBufDir())) end,
   desc = "Open terminal in current buffer's project directory",
 })
 
