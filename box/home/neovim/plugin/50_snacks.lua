@@ -33,4 +33,6 @@ require("snacks").setup({
   scope = {
     enabled = true,
   },
+  notifier = {
+  },
 })

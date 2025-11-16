@@ -21,4 +21,12 @@ require("codecompanion").setup({
       end,
     },
   },
+  extensions = {
+    spinner = {
+      enabled = true,
+      opts = {
+        style = "snacks",
+      },
+    },
+  },
 })
