@@ -7,6 +7,9 @@ dry-build *args="":
 build *args="":
     nixos-rebuild build --sudo --flake 'path:{{justfile_directory()}}' {{args}}
 
+no-warning-build *args="":
+    nixos-rebuild build --sudo --flake 'path:{{justfile_directory()}}' --option abort-on-warn true --show-trace {{args}}
+
 switch:
     nixos-rebuild switch --sudo --flake 'path:{{justfile_directory()}}'
 
