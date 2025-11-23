@@ -35,7 +35,7 @@ in
         packages = with pkgs; [
           audacity
           calibre
-          #chromium
+          (chromium.override { enableWideVine = true; })
           corefonts
           # https://github.com/NixOS/nixpkgs/issues/429268
           # darktable
