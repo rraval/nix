@@ -60,7 +60,7 @@
               { pkgs, ... }:
               {
                 # FIXME: it would be nice for gitNomad to provide an overlay
-                nixpkgs.overlays = [ (final: prev: { git-nomad = gitNomad.packages.${pkgs.system}.default; }) ];
+                nixpkgs.overlays = [ (final: prev: { git-nomad = gitNomad.packages.${pkgs.stdenv.hostPlatform.system}.default; }) ];
               }
             )
 
