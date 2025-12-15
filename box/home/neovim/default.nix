@@ -119,6 +119,8 @@
       set signcolumn=number
       set ignorecase
       set smartcase
+      set splitbelow
+      set splitright
 
       " stop autoindenting things as I type
       autocmd FileType python setlocal indentkeys-=<:>
